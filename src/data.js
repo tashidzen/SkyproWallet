@@ -1,0 +1,44 @@
+export const temporaryData = [
+    {
+        description: "Пятерочка",
+        category: "Еда",
+        date: "03.07.2024",
+        sum: "3500",
+    },
+    {
+        description: "Яндекс Такси",
+        category: "Транспорт",
+        date: "03.07.2024",
+        sum: "730",
+    },
+    {
+        description: "Аптека Вита",
+        category: "Другое",
+        date: "03.07.2024",
+        sum: "1200",
+    },
+    {
+        description: "Бургер Кинг",
+        category: "Еда",
+        date: "03.07.2024",
+        sum: "950",
+    },
+    {
+        description: "Деливери",
+        category: "Еда",
+        date: "02.07.2024",
+        sum: "1320",
+    },
+    {
+        description: "Кофейня №1",
+        category: "Еда",
+        date: "02.07.2024",
+        sum: "400",
+    },
+    {
+        description: "Бильярд",
+        category: "Развлечения",
+        date: "29.06.2024",
+        sum: "600",
+    },
+];

@@ -1,4 +1,3 @@
-import "../App.css";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import FirstPage from "../pages/MyExpences";
@@ -14,9 +13,8 @@ function AppRoutes() {
     return (
         <Routes>
             <Route element={<PrivateRoute isAuth={isAuth} />}>
-                <Route path="/" element={<FirstPage />}>
-                    <Route path="analysis" element={<SecondPage />}></Route>
-                </Route>
+                <Route path="/" element={<FirstPage />}></Route>
+                <Route path="/analysis" element={<SecondPage />}></Route>
             </Route>
             <Route
                 path="/login"
