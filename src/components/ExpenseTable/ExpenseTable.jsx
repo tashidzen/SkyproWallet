@@ -1,20 +1,25 @@
 import { temporaryData } from "../../data.js";
-import { SheaderTable } from "./ExpenseTable.styled.js";
+import {
+    SheaderTable,
+    SnameColumn,
+    Stable,
+    StBody,
+} from "./ExpenseTable.styled.js";
 
 function ExpenseTable({ currency = "₽" }) {
     return (
-        <table>
+        <Stable>
             <thead>
                 <SheaderTable colSpan="5">Таблица расходов</SheaderTable>
-                <tr>
+                <SnameColumn>
                     <td>Описание</td>
                     <td>Категория</td>
                     <td>Дата</td>
                     <td>Сумма</td>
                     <td></td>
-                </tr>
+                </SnameColumn>
             </thead>
-            <tbody>
+            <StBody>
                 {temporaryData.map((item) => (
                     <tr>
                         <td>{item.description}</td>
@@ -43,8 +48,8 @@ function ExpenseTable({ currency = "₽" }) {
                         </td>
                     </tr>
                 ))}
-            </tbody>
-        </table>
+            </StBody>
+        </Stable>
     );
 }
 

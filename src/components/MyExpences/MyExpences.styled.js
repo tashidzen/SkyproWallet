@@ -13,5 +13,7 @@ export const Stitle = styled.h1`
     font-size: 32px;
     font-weight: 700;
     line-height: 150%;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
+    margin-top: 36px;
+    margin-left: 120px;
 `;
