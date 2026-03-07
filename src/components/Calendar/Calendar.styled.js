@@ -52,6 +52,11 @@ const ScalendarMounths = styled.div`
     padding: 24px 25px;
     overflow-y: auto;
     scrollbar-gutter: stable both-edges;
+    @supports (-moz-appearance: none) {
+        scrollbar-width: thin;
+        scrollbar-color: #d9d9d9 transparent;
+        padding: 24px 31px;
+    }
     &::-webkit-scrollbar {
         width: 6px;
     }
@@ -59,7 +64,7 @@ const ScalendarMounths = styled.div`
     &::-webkit-scrollbar-thumb {
         background: #d9d9d9;
         border-radius: 30px;
-        min-height: 100px;
+        /* min-height: 100px; */
     }
 `;
 
