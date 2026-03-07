@@ -49,9 +49,18 @@ const ScalendarMounths = styled.div`
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding: 24px 16px;
+    padding: 24px 25px;
     overflow-y: auto;
     scrollbar-gutter: stable both-edges;
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d9d9d9;
+        border-radius: 30px;
+        min-height: 100px;
+    }
 `;
 
 const ScalendarMounth = styled.div`
