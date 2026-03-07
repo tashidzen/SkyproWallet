@@ -15,6 +15,9 @@ const SDiagramSection = styled.section`
 `;
 
 const SDiagramHeader = styled.header`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     height: 56px;
     h2 {
         font-weight: 700;
@@ -41,8 +44,12 @@ const SDiagramContent = styled.div`
 
 const SDiagramElement = styled.div`
     display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     gap: 12px;
     align-items: center;
+    height: 100%;
+    width: 100%;
 `;
 const SDiagramElValue = styled.h3`
     font-weight: 600;
@@ -53,8 +60,8 @@ const SDiagramElValue = styled.h3`
 
 const SDiagramElBlock = styled.div`
     width: 100%;
-    height: ${(props) => props.value === 0 ? "4px" : `${props.value}%`};
-    background-color: ${(props) => props.color};
+    height: ${(props) => props.$value === 0 ? "4px" : `${props.$value}%`};
+    background-color: ${(props) => props.$color};
     border-radius: 12px;
 `;
 
