@@ -1,16 +1,14 @@
-# React + Vite
+# Skypro.Wallet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Удобный и функциональный кошелек для учета расходов.
+В проекте реализована следующая функциональность:
+1) Вход и авторизация;
+2) Добавление нового расхода авторизованным пользователем с возможностью выбора категории;
+3) Отображение расходов в сводной таблице;
+4) Удаление расхода текущим пользователем;
+5) Страница с анализом расходов за определенный период (календарь и диаграмма);
+6) В календаре есть возможность выбора периода за несколько дней и недель;
+7) Построение диаграммы выполняется в разрезе категорий расходов за период, указанный в календаре.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Технологии
+В проекте использованы технологии: JavaScript, HTML, React + Vite, Git, REST API.
