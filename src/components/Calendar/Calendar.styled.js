@@ -97,6 +97,7 @@ const ScalendarMounthDay = styled.div`
     color: #000;
     background-color: #f5f6f7;
     border-radius: 50%;
+    opacity: ${(props) => (props.$isOtherMonth ? 0 : 1)};
 `;
 
 export {
