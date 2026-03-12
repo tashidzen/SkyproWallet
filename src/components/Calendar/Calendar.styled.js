@@ -94,10 +94,11 @@ const ScalendarMounthDay = styled.div`
     align-items: center;
     font-weight: 400;
     font-size: 12px;
-    color: #000;
-    background-color: #f5f6f7;
+    color: ${(props) => (props.$isActive ? "#7334ea" : "#000")};
+    background-color: ${(props) => (props.$isActive ? "#f1ebfd" : "#f4f5f6")};
     border-radius: 50%;
     opacity: ${(props) => (props.$isOtherMonth ? 0 : 1)};
+    cursor: pointer;
 `;
 
 export {

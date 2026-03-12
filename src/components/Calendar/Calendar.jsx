@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
     ScalendarDayName,
     ScalendarDayNames,
@@ -10,10 +11,15 @@ import {
     ScalendarTitle,
     Ssection,
 } from "./Calendar.styled";
-import { temporaryData } from "../../data";
-import { isSameMonth } from "date-fns";
+import {
+    endOfMonth,
+    endOfWeek,
+    isSameMonth,
+    startOfMonth,
+    startOfWeek,
+} from "date-fns";
 
-const Calendar = () => {
+const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon }) => {
     const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
     const monthsName = [
         "Январь",
@@ -29,71 +35,61 @@ const Calendar = () => {
         "Ноябрь",
         "Декабрь",
     ];
-    let earlyRecord = new Date(temporaryData[0].date); //будет на входе в календарь
-    temporaryData.forEach((item) => {
-        let currentDate = new Date(item.date);
-        if (currentDate < earlyRecord) {
-            earlyRecord = currentDate;
+
+    let draftStartDate = startDate;
+    let draftEndDate = endDate;
+
+    const handleDayClick = (date) => {
+        if (draftEndDate) {
+            draftEndDate = null;
+            draftStartDate = date;
+        } else {
+            draftEndDate = date;
+            setDiapazon(draftStartDate, draftEndDate);
         }
-    });
-    const getMonths = (startDate) => {
-        const months = [];
-        const currentDate = new Date();
+    };
+
+    const getDays = (month) => {
+        const newDays = [];
+        const startDay = startOfWeek(month, { weekStartsOn: 1 });
+        const endDay = endOfWeek(endOfMonth(month), { weekStartsOn: 1 });
+        for (
+            let date = new Date(startDay);
+            date <= endDay;
+            date.setDate(date.getDate() + 1)
+        ) {
+            newDays.push({
+                date: new Date(date),
+                isOtherMonth: !isSameMonth(date, month),
+            });
+        }
+        return newDays;
+    };
+
+    const months = useMemo(() => {
+        const result = [];
+        const lastMonth = startOfMonth(new Date());
         let currentMonth = new Date(
-            startDate.getFullYear(),
-            startDate.getMonth(),
+            earlyRecord.getFullYear(),
+            earlyRecord.getMonth(),
             1,
         );
-        while (currentMonth <= currentDate) {
-            months.push(currentMonth);
+        while (currentMonth <= lastMonth) {
+            result.push({
+                month: new Date(currentMonth),
+                days: getDays(currentMonth),
+            });
             currentMonth = new Date(
                 currentMonth.getFullYear(),
                 currentMonth.getMonth() + 1,
                 1,
             );
         }
-        return months;
-    };
+        return result;
+    }, [earlyRecord]);
 
-    const getLastMonday = (month) => {
-        const lastMonday = new Date(month.getFullYear(), month.getMonth());
-        const shift = lastMonday.getDay() == 0 ? 7 : lastMonday.getDay();
-        lastMonday.setDate(lastMonday.getDate() - (shift - 1));
-        return lastMonday;
-    };
-
-    const getFirstSunday = (month) => {
-        const nextSunday = new Date(month.getFullYear(), month.getMonth() + 1);
-        const shift =
-            nextSunday.getDay() == 0
-                ? 7
-                : nextSunday.getDay() == 1
-                  ? 8
-                  : nextSunday.getDay();
-        nextSunday.setDate(nextSunday.getDate() + (7 - shift));
-        return nextSunday;
-    };
-
-    const getDays = (month) => {
-        const newDays = [];
-        const startDate = getLastMonday(month);
-        const endDate = getFirstSunday(month);
-        for (
-            let date = new Date(startDate);
-            date <= endDate;
-            date.setDate(date.getDate() + 1)
-        ) {
-            newDays.push({
-                day: date.getDate(),
-                date: new Date(date),
-                isOtherMonth: !isSameMonth(date, month),
-                isActive: false, // добавлю выбор после добавления функционала выбора диапазона дат
-            });
-        }
-        return newDays;
-    };
-
-    const months = getMonths(earlyRecord);
+    const startTs = draftStartDate?.getTime();
+    const endTs = draftEndDate?.getTime();
 
     return (
         <Ssection>
@@ -107,20 +103,24 @@ const Calendar = () => {
             </ScalendarHeader>
             <ScalendarMounths>
                 {months.map((month) => (
-                    <ScalendarMounth key={month}>
+                    <ScalendarMounth key={month.month.getTime()}>
                         <ScalendarMounthTitle>
-                            {monthsName[month.getMonth()] +
+                            {monthsName[month.month.getMonth()] +
                                 " " +
-                                month.getFullYear()}
+                                month.month.getFullYear()}
                         </ScalendarMounthTitle>
                         <ScalendarMounthDays>
-                            {getDays(month).map((day) => (
+                            {month.days.map((day) => (
                                 <ScalendarMounthDay
-                                    key={`${day.isOtherMonth ? "other" : "current"}-${day.day}`}
+                                    key={day.date.getTime()}
                                     $isOtherMonth={day.isOtherMonth}
-                                    $isActive={day.isActive}
+                                    $isActive={
+                                        day.date.getTime() >= startTs &&
+                                        day.date.getTime() <= endTs
+                                    }
+                                    onClick={() => handleDayClick(day.date)}
                                 >
-                                    {day.day}
+                                    {day.date.getDate()}
                                 </ScalendarMounthDay>
                             ))}
                         </ScalendarMounthDays>
