@@ -4,11 +4,12 @@ import Header from "../Header/Header";
 import { SanalysTitle, Smain, Swrapper } from "./ExpensesAnalysis.styled";
 import { temporaryData } from "../../data";
 import { useState } from "react";
+import { endOfDay, startOfDay } from "date-fns";
 
 const ExpensesAnalysis = () => {
     const [data, setData] = useState(temporaryData); //данные из выбранного диапазона будут по API
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(startOfDay(new Date()));
+    const [endDate, setEndDate] = useState(endOfDay(new Date()));
     const setDiapazon = (date1, date2) => {
         let start = null;
         let end = null;

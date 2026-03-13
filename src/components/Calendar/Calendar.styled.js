@@ -98,7 +98,8 @@ const ScalendarMounthDay = styled.div`
     background-color: ${(props) => (props.$isActive ? "#f1ebfd" : "#f4f5f6")};
     border-radius: 50%;
     opacity: ${(props) => (props.$isOtherMonth ? 0 : 1)};
-    cursor: pointer;
+    cursor: ${(props) => (props.$isOtherMonth ? "default" : "pointer")};
+    pointer-events: ${(props) => (props.$isOtherMonth ? "none" : "auto")};
 `;
 
 export {

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
     ScalendarDayName,
     ScalendarDayNames,
@@ -20,6 +20,7 @@ import {
 } from "date-fns";
 
 const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon }) => {
+    const [hoverDate, setHoverDate] = useState(null);
     const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
     const monthsName = [
         "Январь",
@@ -36,17 +37,31 @@ const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon }) => {
         "Декабрь",
     ];
 
-    let draftStartDate = startDate;
-    let draftEndDate = endDate;
-
+    const [draftStartDate, setDraftStartDate] = useState(startDate);
+    const [draftEndDate, setDraftEndDate] = useState(endDate);
     const handleDayClick = (date) => {
         if (draftEndDate) {
-            draftEndDate = null;
-            draftStartDate = date;
+            setDraftEndDate(null);
+            setDraftStartDate(date);
         } else {
-            draftEndDate = date;
-            setDiapazon(draftStartDate, draftEndDate);
+            setDraftEndDate(date);
+            setHoverDate(null);
+            setDiapazon(draftStartDate, date);
         }
+    };
+
+    useEffect(() => {
+        setDraftStartDate(startDate);
+        setDraftEndDate(endDate);
+    }, [startDate, endDate]);
+
+    const handleDayHover = (date) => {
+        if (draftEndDate == null && hoverDate?.getTime() !== date.getTime())
+            setHoverDate(date);
+    };
+
+    const handleDayHoverOut = () => {
+        setHoverDate(null);
     };
 
     const getDays = (month) => {
@@ -78,6 +93,12 @@ const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon }) => {
             result.push({
                 month: new Date(currentMonth),
                 days: getDays(currentMonth),
+                gridStart: startOfWeek(startOfMonth(currentMonth), {
+                    weekStartsOn: 1,
+                }).getTime(),
+                gridEnd: endOfWeek(endOfMonth(currentMonth), {
+                    weekStartsOn: 1,
+                }).getTime(),
             });
             currentMonth = new Date(
                 currentMonth.getFullYear(),
@@ -90,6 +111,41 @@ const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon }) => {
 
     const startTs = draftStartDate?.getTime();
     const endTs = draftEndDate?.getTime();
+    const hoverTs = hoverDate?.getTime();
+
+    let rangeStart = null;
+    let rangeEnd = null;
+    if (startTs != null && endTs != null) {
+        rangeStart = startTs;
+        rangeEnd = endTs;
+    } else if (startTs != null && hoverTs != null && endTs == null) {
+        rangeStart = Math.min(startTs, hoverTs);
+        rangeEnd = Math.max(startTs, hoverTs);
+    }
+
+    const isInRange = (date) => {
+        const time = date.getTime();
+        if (startTs == null) return false;
+        if (endTs == null && hoverTs == null) {
+            return time === startTs;
+        }
+        return time >= rangeStart && time <= rangeEnd;
+    };
+
+    const isMonthInRange = (month) => {
+        const monthStart = month.gridStart;
+        const monthEnd = month.gridEnd;
+
+        if (startTs == null) return "OUTSIDE";
+        if (endTs == null && hoverTs == null) {
+            if (monthStart <= startTs && monthEnd >= startTs) return "PARTIAL";
+            else return "OUTSIDE";
+        }
+        if (monthEnd < rangeStart || monthStart > rangeEnd) return "OUTSIDE";
+        else if (monthStart >= rangeStart && monthEnd <= rangeEnd)
+            return "INSIDE";
+        else return "PARTIAL";
+    };
 
     return (
         <Ssection>
@@ -101,31 +157,40 @@ const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon }) => {
                     ))}
                 </ScalendarDayNames>
             </ScalendarHeader>
-            <ScalendarMounths>
-                {months.map((month) => (
-                    <ScalendarMounth key={month.month.getTime()}>
-                        <ScalendarMounthTitle>
-                            {monthsName[month.month.getMonth()] +
-                                " " +
-                                month.month.getFullYear()}
-                        </ScalendarMounthTitle>
-                        <ScalendarMounthDays>
-                            {month.days.map((day) => (
-                                <ScalendarMounthDay
-                                    key={day.date.getTime()}
-                                    $isOtherMonth={day.isOtherMonth}
-                                    $isActive={
-                                        day.date.getTime() >= startTs &&
-                                        day.date.getTime() <= endTs
-                                    }
-                                    onClick={() => handleDayClick(day.date)}
-                                >
-                                    {day.date.getDate()}
-                                </ScalendarMounthDay>
-                            ))}
-                        </ScalendarMounthDays>
-                    </ScalendarMounth>
-                ))}
+            <ScalendarMounths onMouseLeave={handleDayHoverOut}>
+                {months.map((month) => {
+                    const monthState = isMonthInRange(month);
+                    return (
+                        <ScalendarMounth key={month.month.getTime()}>
+                            <ScalendarMounthTitle>
+                                {monthsName[month.month.getMonth()] +
+                                    " " +
+                                    month.month.getFullYear()}
+                            </ScalendarMounthTitle>
+                            <ScalendarMounthDays>
+                                {month.days.map((day) => (
+                                    <ScalendarMounthDay
+                                        key={day.date.getTime()}
+                                        $isOtherMonth={day.isOtherMonth}
+                                        $isActive={
+                                            monthState === "PARTIAL"
+                                                ? isInRange(day.date)
+                                                : monthState === "INSIDE"
+                                                  ? true
+                                                  : false
+                                        }
+                                        onClick={() => handleDayClick(day.date)}
+                                        onMouseEnter={() =>
+                                            handleDayHover(day.date)
+                                        }
+                                    >
+                                        {day.date.getDate()}
+                                    </ScalendarMounthDay>
+                                ))}
+                            </ScalendarMounthDays>
+                        </ScalendarMounth>
+                    );
+                })}
             </ScalendarMounths>
         </Ssection>
     );
