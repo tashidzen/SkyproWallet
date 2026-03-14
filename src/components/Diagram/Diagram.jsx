@@ -1,32 +1,83 @@
-import { SDiagramContent, SDiagramElBlock, SDiagramElement, SDiagramElLabel, SDiagramElValue, SDiagramHeader, SDiagramSection } from "./Diagram.styled"
+import { format } from "date-fns";
+import {
+    SDiagramContent,
+    SDiagramElBlock,
+    SDiagramElement,
+    SDiagramElLabel,
+    SDiagramElValue,
+    SDiagramHeader,
+    SDiagramSection,
+} from "./Diagram.styled";
+import { ru } from "date-fns/locale";
 
-const Diagram = () => {
-  const data = [
-      { label: "Еда", value: 3590, color: "#d9b6ff" },
-      { label: "Транспорт", value: 1835, color: "#ffb53d" },
-      { label: "Жильё", value: 0, color: "#6ee4fe" },
-      { label: "Развлечения", value: 1250, color: "#b0aeff" },
-      { label: "Образование", value: 600, color: "#bcec30" },
-      { label: "Другое", value: 2306, color: "#ffb9b8" },
-  ];
-  const maxValue = Math.max(...data.map(item => item.value));
-  const total = data.reduce((sum, item) => sum + item.value, 0);
-  return (
-    <SDiagramSection>
-        <SDiagramHeader>
-            <h2>{total.toLocaleString('ru-RU')} ₽</h2>
-            <p>Расходы за <span>10 июля 2024</span></p>
-        </SDiagramHeader>
-        <SDiagramContent>
-            {data.map((item) => (
-                <SDiagramElement key={item.label}>
-                    <SDiagramElValue>{item.value.toLocaleString('ru-RU')} ₽</SDiagramElValue>
-                    <SDiagramElBlock $value={(item.value / maxValue) * 100} $color={item.color} />
-                    <SDiagramElLabel>{item.label}</SDiagramElLabel>
-                </SDiagramElement>
-            ))}
-        </SDiagramContent>
-    </SDiagramSection>
+const Diagram = ({ data, isLoading, error, period }) => {
+    //Нужно обработать приходящие данные в формат ниже. Т.е. просуммировать по каждой категории данные и положить в определённую структуру.
+    const labels = {
+        food: "Еда",
+        transport: "Транспорт",
+        housing: "Жильё",
+        joy: "Развлечения",
+        education: "Образование",
+        others: "Другое",
+    };
+    const redusedData = [
+        { label: "Еда", value: 0, color: "#d9b6ff" },
+        { label: "Транспорт", value: 0, color: "#ffb53d" },
+        { label: "Жильё", value: 0, color: "#6ee4fe" },
+        { label: "Развлечения", value: 0, color: "#b0aeff" },
+        { label: "Образование", value: 0, color: "#bcec30" },
+        { label: "Другое", value: 0, color: "#ffb9b8" },
+    ];
+    if (data) {
+        data.forEach((item) => {
+            const category = labels[item.category];
+            if (category) {
+                const dataItem = redusedData.find((d) => d.label === category);
+                if (dataItem) {
+                    dataItem.value += item.sum;
+                }
+            } else {
+                const dataItem = redusedData.find((d) => d.label === "Другое");
+                if (dataItem) {
+                    dataItem.value += item.sum;
+                }
+            }
+        });
+    }
+
+    const maxValue = Math.max(...redusedData.map((item) => item.value));
+    const total = redusedData.reduce((sum, item) => sum + item.value, 0);
+    return (
+        <SDiagramSection>
+            <SDiagramHeader>
+                <h2>{total.toLocaleString("ru-RU")} ₽</h2>
+                <p>
+                    Расходы за{" "}
+                    <span>
+                        {format(period.start, "d MMMM yyyy", { locale: ru })} —{" "}
+                        {format(period.end, "d MMMM yyyy", { locale: ru })}
+                    </span>
+                </p>
+            </SDiagramHeader>
+            <SDiagramContent>
+                {redusedData.map((item) => (
+                    <SDiagramElement key={item.label}>
+                        <SDiagramElValue>
+                            {item.value.toLocaleString("ru-RU")} ₽
+                        </SDiagramElValue>
+                        <SDiagramElBlock
+                            $value={
+                                maxValue != 0
+                                    ? (item.value / maxValue) * 100
+                                    : 0
+                            }
+                            $color={item.color}
+                        />
+                        <SDiagramElLabel>{item.label}</SDiagramElLabel>
+                    </SDiagramElement>
+                ))}
+            </SDiagramContent>
+        </SDiagramSection>
     );
 };
 
