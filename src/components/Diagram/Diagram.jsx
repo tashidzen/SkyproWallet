@@ -6,6 +6,10 @@ import {
     SDiagramElLabel,
     SDiagramElValue,
     SDiagramHeader,
+    SDiagramOverlay,
+    SDiagramOverlayError,
+    SDiagramOverlayLoading,
+    SDiagramOverlayLoadingSpan,
     SDiagramSection,
 } from "./Diagram.styled";
 import { ru } from "date-fns/locale";
@@ -49,6 +53,21 @@ const Diagram = ({ data, isLoading, error, period }) => {
     const total = redusedData.reduce((sum, item) => sum + item.value, 0);
     return (
         <SDiagramSection>
+            {isLoading || error ? (
+                <SDiagramOverlay>
+                    {isLoading && (
+                        <SDiagramOverlayLoading>
+                            <SDiagramOverlayLoadingSpan $delay="0s" />
+                            <SDiagramOverlayLoadingSpan $delay="0.15s" />
+                            <SDiagramOverlayLoadingSpan $delay="0.3s" />
+                            <SDiagramOverlayLoadingSpan $delay="0.45s" />
+                        </SDiagramOverlayLoading>
+                    )}
+                    {error && (
+                        <SDiagramOverlayError>{error}</SDiagramOverlayError>
+                    )}
+                </SDiagramOverlay>
+            ) : null}
             <SDiagramHeader>
                 <h2>{total.toLocaleString("ru-RU")} ₽</h2>
                 <p>
