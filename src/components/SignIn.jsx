@@ -1,7 +1,15 @@
-import AuthForm from "./AuthForm";
+import AuthForm from "../components/authForm/AuthForm"; 
+import Header from "../components/Header/Header";
+import { useLocation } from "react-router-dom";
 
 const SignIn = ({ setIsAuth }) => {
-    return <AuthForm setIsAuth={setIsAuth} isSignUp={false} />;
+  const location = useLocation();
+  return (
+    <div>
+      <Header setIsAuth={setIsAuth} location={location} />
+      <AuthForm setIsAuth={setIsAuth} isSignUp={false} />
+    </div>
+  );
 };
 
 export default SignIn;

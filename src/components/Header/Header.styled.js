@@ -8,10 +8,8 @@ export const SHeader = styled.header`
 `
 
 export const SHeaderContainer = styled.div`
-  max-width: 1260px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 30px;
+  max-width: 1200px;
+  margin: 0 120px;
 `
 
 export const SHeaderBlock = styled.div`
@@ -23,7 +21,7 @@ export const SHeaderBlock = styled.div`
   position: relative;
   top: 0;
   left: 0;
-  padding: 0 10px;
+  padding: 0 0;
 `
 
 export const SHeaderLogo = styled.div`

@@ -1,15 +1,25 @@
-import { useState, useEffect } from "react";
-import { PopUser } from "../popups/popUser/PopUser";
-import { SHeader, SHeaderContainer, SHeaderBlock, SHeaderLogo, SHeaderLogoLight, SHeaderNavigation, SHeaderWrapper, SHeaderLogOut, SHeaderLink } from "./Header.styled";
- 
- 
-export function Header() { 
-      const [isPopUserOpen, setIsPopUserOpen] = useState(false);
+import { useNavigate, useLocation } from "react-router-dom";
+import { 
+  SHeader, 
+  SHeaderContainer, 
+  SHeaderBlock, 
+  SHeaderLogo, 
+  SHeaderLogoLight, 
+  SHeaderNavigation, 
+  SHeaderWrapper, 
+  SHeaderLogOut, 
+  SHeaderLink 
+} from "./Header.styled";
 
-  // const handleClick = () => {
-  //   setIsPopUserOpen(!isPopUserOpen);
-  // };
+export function Header({ setIsAuth }) { 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isAuthPage = location.pathname.includes('/login') || location.pathname.includes('/registration');
 
+  const handleLogout = () => {
+    setIsAuth(false);
+    navigate("/login", { replace: true });
+  };
 
   return (
     <SHeader>
@@ -20,21 +30,30 @@ export function Header() {
               <SHeaderLogoLight src="images/logo.svg" alt="logo" />
             </a>
           </SHeaderLogo>  
-          <SHeaderWrapper> 
-            <SHeaderLink href="#">Мои расходы</SHeaderLink> 
-            <SHeaderLink href="#">Анализ расходов</SHeaderLink>
-          </SHeaderWrapper>
-          <SHeaderNavigation>   
-            <SHeaderLogOut href="#">Выйти</SHeaderLogOut>
-            {isPopUserOpen && <PopUser />}
-          </SHeaderNavigation>
+          
+          {!isAuthPage && (
+            <>
+              <SHeaderWrapper> 
+                <SHeaderLink href="#">Мои расходы</SHeaderLink> 
+                <SHeaderLink href="#">Анализ расходов</SHeaderLink>
+              </SHeaderWrapper>
+              <SHeaderNavigation>   
+                <SHeaderLogOut 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLogout();
+                  }}
+                >
+                  Выйти
+                </SHeaderLogOut>
+              </SHeaderNavigation>
+            </>
+          )}
         </SHeaderBlock>
       </SHeaderContainer>
-    </SHeader >
+    </SHeader>
   );
-
 }
 
 export default Header;
- 
-// onclick{handleClick}

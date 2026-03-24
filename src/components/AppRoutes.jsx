@@ -8,22 +8,23 @@ import NotFoundPage from "../pages/NotFound";
 import PrivateRoute from "./PrivateRoute";
 
 function AppRoutes() {
-    const [isAuth, setIsAuth] = useState(true); // Изменить на false после реализации авторизации
+    const [isAuth, setIsAuth] = useState(false); // Изменить на false после реализации авторизации
 
     return (
-        <Routes>
+        <Routes> 
             <Route element={<PrivateRoute isAuth={isAuth} />}>
                 <Route path="/" element={<FirstPage />}></Route>
                 <Route path="/analysis" element={<SecondPage />}></Route>
-            </Route>
+            </Route> 
             <Route
                 path="/login"
                 element={<SignInPage setIsAuth={setIsAuth} />}
             />
             <Route
-                path="/register"
+                path="/registration"
                 element={<SignUpPage setIsAuth={setIsAuth} />}
             />
+            
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );
