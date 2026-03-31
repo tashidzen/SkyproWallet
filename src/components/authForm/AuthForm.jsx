@@ -39,8 +39,9 @@ export const AuthForm = ({ isSignUp, setIsAuth }) => {
           {isSignUp && (
             <SFooterWrapper>
               <SFooterText>
-                Уже есть аккаунт? <SFooterLink to="/login">Войдите здесь</SFooterLink>
-              </SFooterText>
+                Уже есть аккаунт? 
+              </SFooterText> 
+              <SFooterLink to="/login">Войдите здесь</SFooterLink>
             </SFooterWrapper>
           )}
 

@@ -18,7 +18,7 @@ export function Header({ setIsAuth }) {
 
   const handleLogout = () => {
     setIsAuth(false);
-    navigate("/login", { replace: true });
+    navigate("/login", { replace: false });
   };
 
   return (
@@ -38,15 +38,10 @@ export function Header({ setIsAuth }) {
                 <SHeaderLink href="#">Анализ расходов</SHeaderLink>
               </SHeaderWrapper>
               <SHeaderNavigation>   
-                <SHeaderLogOut 
-                  href="#" 
-                  onClick={(e) => {
+                <SHeaderLogOut    onClick={(e) => {
                     e.preventDefault();
                     handleLogout();
-                  }}
-                >
-                  Выйти
-                </SHeaderLogOut>
+                  }}>Выйти</SHeaderLogOut>
               </SHeaderNavigation>
             </>
           )}

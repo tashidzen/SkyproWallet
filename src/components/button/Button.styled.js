@@ -18,7 +18,8 @@ export const SButton = styled.button`
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
-  color: #FFFFFF;
+  color: #FFFFFF; 
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;

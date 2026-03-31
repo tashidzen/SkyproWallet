@@ -8,14 +8,7 @@ import {
   CategoryButton,
   FormButton
 } from './NewExpenseForm.styled.js';
-import {
-  FoodIcon,
-  TransportIcon,
-  HousingIcon,
-  EntertainmentIcon,
-  EducationIcon,
-  OtherIcon
-} from '../../components/Icons.jsx';
+import { EXPENSE_CATEGORIES } from '../../constants/categories.jsx'; // Импорт категорий
 
 const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -48,7 +41,7 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
     if (!formData.date) newErrors.date = true;
     if (formData.amount && isNaN(formData.amount)) newErrors.amount = true;
 
-        setErrors(newErrors);
+    setErrors(newErrors);
     setIsSubmitDisabled(Object.keys(newErrors).length > 0);
     return newErrors;
   };
@@ -82,15 +75,6 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
     if (field === 'amount') return !value || !isNaN(value);
     return false;
   };
-
-  const categories = [
-    { name: 'Еда', icon: <FoodIcon /> },
-    { name: 'Транспорт', icon: <TransportIcon /> },
-    { name: 'Жильё', icon: <HousingIcon /> },
-    { name: 'Развлечения', icon: <EntertainmentIcon /> },
-    { name: 'Образование', icon: <EducationIcon /> },
-    { name: 'Другое', icon: <OtherIcon /> }
-  ];
 
   return (
     <Stable>
@@ -133,7 +117,7 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
               paddingBottom: '24px',
               boxSizing: 'border-box'
             }}>
-              {categories.map((cat) => (
+              {EXPENSE_CATEGORIES.map((cat) => (
                 <CategoryButton
                   key={cat.name}
                   selected={formData.category === cat.name}
@@ -204,7 +188,6 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
 };
 
 export default NewExpenseForm;
-
  
  
   
@@ -236,6 +219,7 @@ export default NewExpenseForm;
 //     amount: ''
 //   });
 //   const [errors, setErrors] = useState({});
+//   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
 //   useEffect(() => {
 //     if (editData) {
@@ -253,22 +237,25 @@ export default NewExpenseForm;
 
 //   const validateForm = () => {
 //     const newErrors = {};
-//     if (!formData.description.trim()) newErrors.description = 'Описание обязательно';
-//     if (!formData.category) newErrors.category = 'Категория обязательна';
-//     if (!formData.date) newErrors.date = 'Дата обязательна';
-//     if (formData.amount && isNaN(formData.amount)) newErrors.amount = 'Сумма должна быть числом';
+//     if (!formData.description.trim()) newErrors.description = true;
+//     if (!formData.category) newErrors.category = true;
+//     if (!formData.date) newErrors.date = true;
+//     if (formData.amount && isNaN(formData.amount)) newErrors.amount = true;
+
+//         setErrors(newErrors);
+//     setIsSubmitDisabled(Object.keys(newErrors).length > 0);
 //     return newErrors;
 //   };
 
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
 //     setFormData({ ...formData, [name]: value });
-//     setErrors({ ...errors, [name]: '' });
+//     validateForm();
 //   };
 
 //   const handleCategorySelect = (category) => {
 //     setFormData({ ...formData, category });
-//     setErrors({ ...errors, category: '' });
+//     validateForm();
 //   };
 
 //   const handleSubmit = (e) => {
@@ -280,8 +267,6 @@ export default NewExpenseForm;
 //         amount: formData.amount ? parseFloat(formData.amount) : 0,
 //         date: new Date(formData.date).toISOString()
 //       });
-//     } else {
-//       setErrors(newErrors);
 //     }
 //   };
 
@@ -313,25 +298,26 @@ export default NewExpenseForm;
 //       <tbody>
 //         <tr>
 //           <td colSpan="2">
-//             <FieldLabel>Описание</FieldLabel>
+//             <FieldLabel>
+//               Описание
+//               {errors.description && <span style={{ color: '#cc0000', marginLeft: '4px' }}>(*)</span>}
+//             </FieldLabel>
 //             <FormInput
 //               name="description"
 //               value={formData.description}
 //               onChange={handleChange}
 //               placeholder="Введите описание"
 //               valid={isValidInput(formData.description, 'description')}
-//               editing={!!editData}
+//               error={!!errors.description}
 //             />
-//             {errors.description && (
-//               <p style={{ color: '#ff4444', fontSize: '11px', marginTop: '-8px', marginBottom: '8px', marginLeft: '20px' }}>
-//                 {errors.description}
-//               </p>
-//             )}
 //           </td>
 //         </tr>
 //         <tr>
 //           <td colSpan="2">
-//             <FieldLabel>Категории</FieldLabel>
+//             <FieldLabel>
+//               Категории
+//               {errors.category && <span style={{ color: '#cc0000', marginLeft: '4px' }}>(*)</span>}
+//             </FieldLabel>
 //             <div style={{
 //               display: 'flex',
 //               flexWrap: 'wrap',
@@ -352,16 +338,14 @@ export default NewExpenseForm;
 //                 </CategoryButton>
 //               ))}
 //             </div>
-//             {errors.category && (
-//               <p style={{ color: '#ff4444', fontSize: '11px', marginTop: '5px', marginBottom: '8px', marginLeft: '20px' }}>
-//                 {errors.category}
-//               </p>
-//             )}
 //           </td>
 //         </tr>
 //         <tr>
 //           <td colSpan="2">
-//             <FieldLabel>Дата</FieldLabel>
+//             <FieldLabel>
+//               Дата
+//               {errors.date && <span style={{ color: '#cc0000', marginLeft: '4px' }}>(*)</span>}
+//             </FieldLabel>
 //             <DateInput
 //               type="date"
 //               name="date"
@@ -369,36 +353,33 @@ export default NewExpenseForm;
 //               onChange={handleChange}
 //               placeholder="Введите дату"
 //               valid={isValidInput(formData.date, 'date')}
-//               editing={!!editData}
+//               error={!!errors.date}
 //             />
-//             {errors.date && (
-//               <p style={{ color: '#ff4444', fontSize: '11px', marginTop: '-8px', marginBottom: '8px', marginLeft: '32px' }}>
-//                 {errors.date}
-//               </p>
-//             )}
 //           </td>
 //         </tr>
 //         <tr>
 //           <td colSpan="2">
-//             <FieldLabel>Сумма</FieldLabel>
+//             <FieldLabel>
+//               Сумма
+//               {errors.amount && <span style={{ color: '#cc0000', marginLeft: '4px' }}>(*)</span>}
+//             </FieldLabel>
 //             <FormInput
 //               name="amount"
 //               value={formData.amount}
 //               onChange={handleChange}
 //               placeholder="Введите сумму"
 //               valid={isValidInput(formData.amount, 'amount')}
-//               editing={!!editData}
+//               error={!!errors.amount}
 //             />
-//             {errors.amount && (
-//               <p style={{ color: '#ff4444', fontSize: '11px', marginTop: '-8px', marginBottom: '8px', marginLeft: '20px' }}>
-//                 {errors.amount}
-//               </p>
-//             )}
 //           </td>
 //         </tr>
 //         <tr>
 //           <td colSpan="2" style={{ textAlign: 'center' }}>
-//             <FormButton type="submit" onClick={handleSubmit}>
+//             <FormButton
+//               type="submit"
+//               onClick={handleSubmit}
+//               disabled={isSubmitDisabled}
+//             >
 //               {editData ? 'Сохранить редактирование' : 'Добавить новый расход'}
 //             </FormButton>
 //             {editData && (

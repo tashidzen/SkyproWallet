@@ -4,16 +4,15 @@ import { Link } from "react-router-dom";
 
 export const SPageBackground = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 736px;
     background-color: #F4F5F6;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     `;
 
 export const SWrapper = styled.div`
   width: 379px;
-  /* height: 334px; */
   background-color: #FFFFFF;
   border: 0.7px solid #D4DBE5;
   border-radius: 30px;

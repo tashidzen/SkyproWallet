@@ -76,6 +76,7 @@ export const SHeaderLogOut = styled.a`
   color: #000000; 
   font-weight: 600; 
   text-decoration: none; 
+  cursor: pointer; 
   &:hover {
     color: #7334EA;
   }
