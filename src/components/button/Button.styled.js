@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const colors = {
   primary: "#565EEF",
   secondary: "#FFFFFF",
@@ -18,30 +17,37 @@ export const SButton = styled.button`
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
-  color: #FFFFFF; 
-  cursor: pointer;
+  color: #FFFFFF;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ $type }) => colors[$type]};
-  ${({ $type }) => ($type === "secondary" ? "color: #565EEF" : "")}
+  background-color: ${({ $type, disabled }) =>
+    disabled ? '#CCCCCC' : colors[$type]
+  };
+  transition: background-color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: #7334EA;
+  }
 `;
 
 export const PrimaryButton = styled(SButton)`
-  background-color: #7334EA;
+  background-color: ${({ disabled }) => disabled ? '#CCCCCC' : '#565EEF'};
   width: ${({ width }) => width};
-  &:hover {
+
+  &:hover:not(:disabled) {
     background-color: #7334EA;
   }
 `;
 
 export const SecondaryButton = styled(SButton)`
-  /* background-color: #FFFFFF; */
-  background-color: transparent;
-  color: #565EEF;
-  border: 0.7px solid #565EEF;
+  background-color: ${({ disabled }) => disabled ? 'transparent' : 'transparent'};
+  color: ${({ disabled }) => disabled ? '#94A6BE' : '#565EEF'};
+  border: ${({ disabled }) => disabled ? '0.7px solid #94A6BE' : '0.7px solid #565EEF'};
   width: ${({ width }) => width};
-  &:hover {
+
+  &:hover:not(:disabled) {
     background-color: #33399b;
     color: #FFFFFF;
   }

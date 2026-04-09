@@ -90,7 +90,7 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
           <td colSpan="2">
             <FieldLabel>
               Описание
-              {errors.description && <span style={{ color: '#cc0000', marginLeft: '4px' }}>(*)</span>}
+              {errors.description && <span style={{ color: '#cc0000', marginLeft: '4px' }}>*</span>}
             </FieldLabel>
             <FormInput
               name="description"
@@ -106,7 +106,7 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
           <td colSpan="2">
             <FieldLabel>
               Категории
-              {errors.category && <span style={{ color: '#cc0000', marginLeft: '4px' }}>(*)</span>}
+              {errors.category && <span style={{ color: '#cc0000', marginLeft: '4px' }}>*</span>}
             </FieldLabel>
             <div style={{
               display: 'flex',
@@ -134,7 +134,7 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
           <td colSpan="2">
             <FieldLabel>
               Дата
-              {errors.date && <span style={{ color: '#cc0000', marginLeft: '4px' }}>(*)</span>}
+              {errors.date && <span style={{ color: '#cc0000', marginLeft: '4px' }}>*</span>}
             </FieldLabel>
             <DateInput
               type="date"
@@ -151,7 +151,7 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
           <td colSpan="2">
             <FieldLabel>
               Сумма
-              {errors.amount && <span style={{ color: '#cc0000', marginLeft: '4px' }}>(*)</span>}
+              {errors.amount && <span style={{ color: '#cc0000', marginLeft: '4px' }}>*</span>}
             </FieldLabel>
             <FormInput
               name="amount"
