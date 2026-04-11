@@ -59,4 +59,4 @@ export async function editTransaction({ token, id, transaction }) {
     } catch (error) {
         throw new Error(error.message);
     }
-}
+} 

@@ -1,14 +1,36 @@
 import { useState, useEffect } from 'react';
-import { signIn, signUp, logout } from '../services/auth.js';
+import { signIn, signUp, logout } from '../services/auth';
 
 export const useAuth = () => {
-  const storedUser = JSON.parse(localStorage.getItem('user')) || null;
-  const storedToken = localStorage.getItem('tokenAuth') || null;
+  // Безопасное чтение из localStorage
+  let storedUser = null;
+  let storedToken = null;
+
+  try {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      storedUser = JSON.parse(userData);
+    }
+    storedToken = localStorage.getItem('tokenAuth');
+  } catch (error) {
+    console.error('Ошибка чтения из localStorage:', error);
+    localStorage.removeItem('user');
+    localStorage.removeItem('tokenAuth');
+  }
 
   const [token, setToken] = useState(storedToken);
   const [user, setUser] = useState(storedUser);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Даём время на чтение данных из localStorage
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (token && user) {
@@ -25,15 +47,17 @@ export const useAuth = () => {
     setError(null);
     try {
       const data = await signIn(userData);
-      console.log('login data:', data);
       setToken(data.token);
       setUser({
         name: data.name,
         email: data.email || data.login || null,
         token: data.token,
       });
+      return data;
     } catch (err) {
+      console.error('Ошибка входа в useAuth:', err.message);
       setError(err.message);
+      throw err;
     } finally {
       setIsLoading(false);
     }
@@ -44,15 +68,17 @@ export const useAuth = () => {
     setError(null);
     try {
       const data = await signUp({ name, login, password });
-      console.log('register data:', data);
       setToken(data.token);
       setUser({
         name: data.name || name,
-        email: data.email || data.login || login || null,
+        email: data.email || login || null,
         token: data.token,
       });
+      return data;
     } catch (err) {
+      console.error('Ошибка регистрации в useAuth:', err.message);
       setError(err.message);
+      throw err;
     } finally {
       setIsLoading(false);
     }

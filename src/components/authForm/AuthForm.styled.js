@@ -7,7 +7,7 @@ export const SPageBackground = styled.div`
   background-color: #F4F5F6;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 `;
 
 export const SWrapper = styled.div`
@@ -15,7 +15,7 @@ export const SWrapper = styled.div`
   background-color: #FFFFFF;
   border: 0.7px solid #D4DBE5;
   border-radius: 30px;
-  padding: 32px; /* внутренние отступы 32 px со всех сторон */
+  padding: 32px; /* внутренние отступы 32px со всех сторон */
   box-shadow: 0px 4px 67px -12px #00000021;
   display: flex;
   justify-content: center;
