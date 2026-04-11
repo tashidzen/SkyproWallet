@@ -1,12 +1,40 @@
-import { temporaryData } from "../../data.js";
 import {
     SheaderTable,
     SnameColumn,
     Stable,
     StBody,
 } from "./ExpenseTable.styled.js";
+import { EXPENSE_CATEGORIES } from "../../constants/categories.jsx";
 
-function ExpenseTable({ currency = "₽" }) {
+function ExpenseTable({ transactions = [], onDelete, currency = "₽" }) {
+    const formatDate = (date) => {
+        if (!date) return "";
+        if (date.includes(".")) {
+            let cleanDate = date.split("T")[0];
+            const parts = cleanDate.split(".");
+            if (parts.length === 3) {
+                const [month, year, day] = parts;
+                return `${day}.${month}.${year}`;
+            }
+        }
+
+        const parsedDate = new Date(date);
+        if (isNaN(parsedDate.getTime())) return String(date);
+
+        const day = parsedDate.getDate().toString().padStart(2, "0");
+        const month = (parsedDate.getMonth() + 1).toString().padStart(2, "0");
+        const year = parsedDate.getFullYear();
+
+        return `${day}.${month}.${year}`;
+    };
+
+    const getCategoryName = (categoryTrans) => {
+        const category = EXPENSE_CATEGORIES.find(
+            (cat) => cat.nameEn === categoryTrans,
+        );
+        return category ? category.name : categoryTrans; // если не найдено, вернуть как есть
+    };
+
     return (
         <Stable>
             <thead>
@@ -20,11 +48,11 @@ function ExpenseTable({ currency = "₽" }) {
                 </SnameColumn>
             </thead>
             <StBody>
-                {temporaryData.map((item) => (
+                {transactions.map((item) => (
                     <tr>
                         <td>{item.description}</td>
-                        <td>{item.category}</td>
-                        <td>{item.date}</td>
+                        <td>{getCategoryName(item.category)}</td>
+                        <td>{formatDate(item.date)}</td>
                         <td>
                             {item.sum} {currency}
                         </td>
