@@ -2,14 +2,17 @@ import Calendar from "../Calendar/Calendar";
 import Diagram from "../Diagram/Diagram";
 import Header from "../Header/Header";
 import { SanalysTitle, Smain, Swrapper } from "./ExpensesAnalysis.styled";
-import { temporaryData } from "../../data";
+// import { temporaryData } from "../../data";
 import { useEffect, useState } from "react";
 import { endOfDay, format, startOfDay } from "date-fns";
-import { getTransactionsInPeriod } from "../../services/api";
+import { getTransactionsInPeriod, fetchTransactions } from "../../services/api";
 
 const ExpensesAnalysis = () => {
-    const [data, setData] = useState(temporaryData); //данные полные будут на входе, наверное из контекста. Либо будет даваться просто начальная дата, т.к. эти данные нужны только для определения размера календаря
+    const getToken = () => localStorage.getItem("token");
+    const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false); //статус загрузки данных из API
+    const [isCalendarPrepaired, setIsCalendarPrepaired] = useState(false); //статус готовности календаря
+    const [isCalendarError, setIsCalendarError] = useState(""); //статус ошибки при загрузке данных из API для календаря
     const [error, setError] = useState(null); //статус ошибки при загрузке данных из API
     const [partialData, setPartialData] = useState(null); // данные за пределённый период, полученные по запросу из API
     const [startDate, setStartDate] = useState(startOfDay(new Date()));
@@ -30,7 +33,25 @@ const ExpensesAnalysis = () => {
         setEndDate(end);
     };
 
-    let earlyRecord = new Date(data[0].date); //ранняя запись должна быть из полных данных, логичнее по контексту на основе полных данных, а не из API
+    //получение данных и определение ранней записи для календаря при загрузке страницы
+    useEffect(() => {
+        const fetchData = fetchTransactions({ token: getToken() });
+        fetchData
+            .then((response) => {
+                setData(response);
+                setIsCalendarPrepaired(true);
+            })
+            .catch((e) => {
+                setIsCalendarError("Ошибка при загрузке данных для календаря");
+                if (e.response && e.response.data && e.response.data.error) {
+                    setError(e.response.data.error);
+                } else {
+                    setError(e.message);
+                }
+            });
+    }, []);
+
+    let earlyRecord = new Date(data[0].date); //определение ранней записи для календаря, чтобы пользователь не мог выбрать дату раньше, чем есть в данных, полученных из API
     data.forEach((item) => {
         let currentDate = new Date(item.date);
         if (currentDate < earlyRecord) {
@@ -43,7 +64,7 @@ const ExpensesAnalysis = () => {
             setIsLoading(true);
             setError(null);
             const newData = await getTransactionsInPeriod({
-                token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
+                token: getToken(),
                 period,
             });
             setPartialData(newData);
@@ -77,6 +98,8 @@ const ExpensesAnalysis = () => {
                     startDate={startDate}
                     endDate={endDate}
                     setDiapazon={setDiapazon}
+                    isPrepaired={isCalendarPrepaired}
+                    error={isCalendarError}
                 />
                 <Diagram
                     data={partialData}

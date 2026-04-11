@@ -15,7 +15,6 @@ import {
 import { ru } from "date-fns/locale";
 
 const Diagram = ({ data, isLoading, error, period }) => {
-    //Нужно обработать приходящие данные в формат ниже. Т.е. просуммировать по каждой категории данные и положить в определённую структуру.
     const labels = {
         food: "Еда",
         transport: "Транспорт",

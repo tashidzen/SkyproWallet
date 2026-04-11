@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Ssection = styled.section`
     border-radius: 30px;
@@ -10,6 +10,50 @@ const Ssection = styled.section`
     display: flex;
     flex-direction: column;
     overflow: clip;
+    position: relative;
+`;
+
+const SCalendarOverlay = styled.div`
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    z-index: 1;
+    height: stretch;
+    width: stretch;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+`;
+
+const SCalendarOverlayError = styled.p`
+    font-weight: 400;
+    font-size: 14px;
+    color: #ff0000;
+`;
+
+const grow = keyframes`
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.8);
+    }
+    `;
+
+const SCalendarOverlayLoading = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+`;
+
+const SCalendarOverlayLoadingSpan = styled.span`
+    display: inline-block;
+    width: 5px;
+    height: 20px;
+    background-color: #999999;
+    animation: ${grow} 1s ease-in-out ${(props) => props.$delay || ""} infinite;
 `;
 
 const ScalendarHeader = styled.div`
@@ -113,4 +157,8 @@ export {
     ScalendarMounthTitle,
     ScalendarMounthDays,
     ScalendarMounthDay,
+    SCalendarOverlay,
+    SCalendarOverlayError,
+    SCalendarOverlayLoading,
+    SCalendarOverlayLoadingSpan,
 };

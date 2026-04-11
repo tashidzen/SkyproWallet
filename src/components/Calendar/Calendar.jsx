@@ -19,7 +19,7 @@ import {
     startOfWeek,
 } from "date-fns";
 
-const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon }) => {
+const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon, isPrepaired, error }) => {
     const [hoverDate, setHoverDate] = useState(null);
     const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
     const monthsName = [
@@ -149,6 +149,21 @@ const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon }) => {
 
     return (
         <Ssection>
+            {isPrepaired || error ? (
+                <SCalendarOverlay>
+                    {isPrepaired && (
+                        <SCalendarOverlayLoading>
+                            <SCalendarOverlayLoadingSpan $delay="0s" />
+                            <SCalendarOverlayLoadingSpan $delay="0.15s" />
+                            <SCalendarOverlayLoadingSpan $delay="0.3s" />
+                            <SCalendarOverlayLoadingSpan $delay="0.45s" />
+                        </SCalendarOverlayLoading>
+                    )}
+                    {error && (
+                        <SCalendarOverlayError>{error}</SCalendarOverlayError>
+                    )}
+                </SCalendarOverlay>
+            ) : null}
             <ScalendarHeader>
                 <ScalendarTitle>Период</ScalendarTitle>
                 <ScalendarDayNames>
