@@ -15,7 +15,9 @@ function MyExpences() {
     const [loading, setLoading] = useState(false);
     const [isAdding, setIsAdding] = useState(false);
 
-    const getToken = () => localStorage.getItem("token");
+    console.log(localStorage.getItem("user")); // проверить, что передаётся в user,
+    //  если потребуется заменить tokenAuth на token после слития API авторизации
+    const getToken = () => localStorage.getItem("tokenAuth");
 
     // Получение списка транзакций
     const getAllTransactions = async () => {
@@ -24,14 +26,6 @@ function MyExpences() {
             const allTransactions = await fetchTransactions({
                 token: getToken(),
             });
-
-            // console.log("Что приходит:", allTransactions);
-            // console.log("Ответ fetchTransactions:", allTransactions);
-            // console.log(
-            //     "allTransactions.transactions:",
-            //     allTransactions.transactions,
-            // );
-
             setTransactions(allTransactions);
         } catch (error) {
             console.error("Ошибка при загрузке задач:", error);
