@@ -43,31 +43,33 @@ function ExpenseTable({
     return (
         <Stable>
             <thead>
-                <SheaderTable colSpan="5">Таблица расходов</SheaderTable>
+                <tr>
+                    <SheaderTable colSpan="5">Таблица расходов</SheaderTable>
+                </tr>
                 <SnameColumn>
-                    <td>Описание</td>
-                    <td>Категория</td>
-                    <td>Дата</td>
-                    <td>Сумма</td>
-                    <td></td>
+                    <th>Описание</th>
+                    <th>Категория</th>
+                    <th>Дата</th>
+                    <th>Сумма</th>
+                    <th></th>
                 </SnameColumn>
             </thead>
             <StBody>
                 {loading ? (
-                    <tr>
+                    <tr key="loading">
                         <td colSpan="5" style={{ textAlign: "center" }}>
                             Загрузка транзакций...
                         </td>
                     </tr>
                 ) : transactions.length === 0 ? (
-                    <tr>
+                    <tr key="empty">
                         <td colSpan="5" style={{ textAlign: "center" }}>
                             Нет транзакций
                         </td>
                     </tr>
                 ) : (
                     transactions.map((item) => (
-                        <tr>
+                        <tr key={item._id}>
                             <td>{item.description}</td>
                             <td>{getCategoryName(item.category)}</td>
                             <td>{formatDate(item.date)}</td>
