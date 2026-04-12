@@ -46,7 +46,8 @@ export async function deleteTransaction({ token, id }) {
     }
 }
 
-// Изменить задачу
+// Раскомментировать на случай добавления кнопки редактирования.
+// Изменить транзакцию. 
 // export async function editTransaction({ token, id, transaction }) {
 //     try {
 //         const response = await axios.patch(`${API_URL}/${id}`, transaction, {

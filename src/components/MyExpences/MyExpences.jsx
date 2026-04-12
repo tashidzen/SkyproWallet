@@ -13,6 +13,7 @@ import { EXPENSE_CATEGORIES } from "../../constants/categories";
 function MyExpences() {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
 
     const getToken = () => localStorage.getItem("token");
 
@@ -23,7 +24,15 @@ function MyExpences() {
             const allTransactions = await fetchTransactions({
                 token: getToken(),
             });
-            setTransactions(allTransactions.transactions);
+
+            // console.log("Что приходит:", allTransactions);
+            // console.log("Ответ fetchTransactions:", allTransactions);
+            // console.log(
+            //     "allTransactions.transactions:",
+            //     allTransactions.transactions,
+            // );
+
+            setTransactions(allTransactions);
         } catch (error) {
             console.error("Ошибка при загрузке задач:", error);
             alert("Ошибка при загрузке задач");
@@ -38,6 +47,7 @@ function MyExpences() {
 
     // Добавление новой задачи
     const addTransaction = async (transactionData) => {
+        setIsAdding(true);
         try {
             // Преобразуем выбранную дату в формат для API
             let dateForApi = new Date();
@@ -75,6 +85,8 @@ function MyExpences() {
         } catch (error) {
             console.error("Ошибка при добавлении транзакции:", error);
             alert("Ошибка при добавлении транзакции");
+        } finally {
+            setIsAdding(false);
         }
     };
 
@@ -133,13 +145,38 @@ function MyExpences() {
         await addTransaction(transactionData);
     };
 
+    //Удаление транзакции
+    const delTransaction = async (id) => {
+        try {
+            await deleteTransaction({
+                token: getToken(),
+                id: id,
+            });
+
+            const newTransactions = transactions.filter(
+                (trans) => trans._id !== id,
+            );
+            setTransactions(newTransactions);
+        } catch (error) {
+            console.error("Ошибка при удалении транзакции:", error);
+            alert("Ошибка при удалении транзакции");
+        }
+    };
+
     return (
         <Swrapper>
             <Header />
             <Stitle>Мои расходы</Stitle>
             <TablesContainer>
-                <ExpenseTable transactions={transactions} />
-                <NewExpenseForm onSubmit={onAddTransaction} />
+                <ExpenseTable
+                    transactions={transactions}
+                    onDelete={delTransaction}
+                    loading={loading}
+                />
+                <NewExpenseForm
+                    onSubmit={onAddTransaction}
+                    isSubmitting={isAdding}
+                />
             </TablesContainer>
         </Swrapper>
     );

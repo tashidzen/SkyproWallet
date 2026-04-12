@@ -25,7 +25,7 @@ export const EXPENSE_CATEGORIES = [
     },
     {
         name: "Развлечения",
-        nameEn: "entertainment",
+        nameEn: "joy",
         icon: <EntertainmentIcon />,
     },
     {
