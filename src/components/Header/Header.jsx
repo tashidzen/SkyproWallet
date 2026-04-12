@@ -38,16 +38,16 @@ export default function Header() {
       <SHeaderContainer>
         <SHeaderBlock>
           <SHeaderLogo>
-            <a href="/" target="_self">
+            <SHeaderLink to="/">
               <SHeaderLogoLight src="images/logo.svg" alt="logo" />
-            </a>
+            </SHeaderLink>
           </SHeaderLogo>
 
           {token && (
             <>
               <SHeaderWrapper>
-                <SHeaderLink href="/">Мои расходы</SHeaderLink>
-                <SHeaderLink href="/analysis">Анализ расходов</SHeaderLink>
+                <SHeaderLink to="/">Мои расходы</SHeaderLink>
+                <SHeaderLink to="/analysis">Анализ расходов</SHeaderLink>
               </SHeaderWrapper>
               <SHeaderNavigation>
                 <SHeaderLogOut onClick={handleLogout}>Выйти</SHeaderLogOut>
