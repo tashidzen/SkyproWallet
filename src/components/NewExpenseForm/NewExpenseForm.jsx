@@ -8,7 +8,7 @@ import {
   CategoryButton,
   FormButton
 } from './NewExpenseForm.styled.js';
-import { EXPENSE_CATEGORIES } from '../../constants/categories.jsx'; // Импорт категорий
+import { EXPENSE_CATEGORIES } from '../../constants/categories.jsx';
 
 const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -97,8 +97,8 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
               value={formData.description}
               onChange={handleChange}
               placeholder="Введите описание"
-              valid={isValidInput(formData.description, 'description')}
-              error={!!errors.description}
+              $valid={isValidInput(formData.description, 'description')}
+              $error={!!errors.description}
             />
           </td>
         </tr>
@@ -142,8 +142,8 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
               value={formData.date ? new Date(formData.date).toISOString().split('T')[0] : ''}
               onChange={handleChange}
               placeholder="Введите дату"
-              valid={isValidInput(formData.date, 'date')}
-              error={!!errors.date}
+              $valid={isValidInput(formData.date, 'date')}
+              $error={!!errors.date}
             />
           </td>
         </tr>
@@ -158,8 +158,8 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel }) => {
               value={formData.amount}
               onChange={handleChange}
               placeholder="Введите сумму"
-              valid={isValidInput(formData.amount, 'amount')}
-              error={!!errors.amount}
+              $valid={isValidInput(formData.amount, 'amount')}
+              $error={!!errors.amount}
             />
           </td>
         </tr>
