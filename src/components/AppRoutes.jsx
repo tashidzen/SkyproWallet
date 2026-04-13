@@ -2,13 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import FirstPage from "../pages/MyExpences";
 import SecondPage from "../pages/ExpensesAnalysis";
-import SignInPage from "../pages/SignIn";
-import SignUpPage from "../pages/SignUp";
+import SignInPage from "../pages/SignInPage";
+import SignUpPage from "../pages/SignUpPage";
 import NotFoundPage from "../pages/NotFound";
 import PrivateRoute from "./PrivateRoute";
 
 function AppRoutes() {
-    const [isAuth, setIsAuth] = useState(false); // Изменить на false после реализации авторизации
+    const [isAuth, setIsAuth] = useState(false); 
 
     return (
         <Routes> 

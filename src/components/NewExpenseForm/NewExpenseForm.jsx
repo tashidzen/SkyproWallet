@@ -86,6 +86,115 @@ const NewExpenseForm = ({
         return false;
     };
 
+  return (
+    <Stable>
+      <thead>
+        <tr>
+          <th colSpan="2">
+            <FormTitle>{editData ? 'Редактирование' : 'Новый расход'}</FormTitle>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colSpan="2">
+            <FieldLabel>
+              Описание
+              {errors.description && <span style={{ color: '#cc0000', marginLeft: '4px' }}>*</span>}
+            </FieldLabel>
+            <FormInput
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Введите описание"
+              valid={isValidInput(formData.description, 'description')}
+              error={!!errors.description}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colSpan="2">
+            <FieldLabel>
+              Категории
+              {errors.category && <span style={{ color: '#cc0000', marginLeft: '4px' }}>*</span>}
+            </FieldLabel>
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              marginLeft: '-5px',
+              maxWidth: 'calc(100% - 40px)',
+              overflowX: 'auto',
+              paddingBottom: '24px',
+              boxSizing: 'border-box'
+            }}>
+              {EXPENSE_CATEGORIES.map((cat) => (
+                <CategoryButton
+                  key={cat.name}
+                  selected={formData.category === cat.name}
+                  onClick={() => handleCategorySelect(cat.name)}
+                >
+                  {cat.icon}
+                  {cat.name}
+                </CategoryButton>
+              ))}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colSpan="2">
+            <FieldLabel>
+              Дата
+              {errors.date && <span style={{ color: '#cc0000', marginLeft: '4px' }}>*</span>}
+            </FieldLabel>
+            <DateInput
+              type="date"
+              name="date"
+              value={formData.date ? new Date(formData.date).toISOString().split('T')[0] : ''}
+              onChange={handleChange}
+              placeholder="Введите дату"
+              valid={isValidInput(formData.date, 'date')}
+              error={!!errors.date}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colSpan="2">
+            <FieldLabel>
+              Сумма
+              {errors.amount && <span style={{ color: '#cc0000', marginLeft: '4px' }}>*</span>}
+            </FieldLabel>
+            <FormInput
+              name="amount"
+              value={formData.amount}
+              onChange={handleChange}
+              placeholder="Введите сумму"
+              valid={isValidInput(formData.amount, 'amount')}
+              error={!!errors.amount}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colSpan="2" style={{ textAlign: 'center' }}>
+            <FormButton
+              type="submit"
+              onClick={handleSubmit}
+              disabled={isSubmitDisabled}
+            >
+              {editData ? 'Сохранить редактирование' : 'Добавить новый расход'}
+            </FormButton>
+            {editData && (
+              <FormButton
+                onClick={onCancel}
+                style={{ background: '#fff', color: '#333', border: '0.5px solid #999999' }}
+              >
+                Отмена
+              </FormButton>
+            )}
+          </td>
+        </tr>
+      </tbody>
+    </Stable>
+  );
     return (
         <Stable>
             <thead>
