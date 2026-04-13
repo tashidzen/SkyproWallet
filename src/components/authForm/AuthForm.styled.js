@@ -15,14 +15,14 @@ export const SWrapper = styled.div`
   background-color: #FFFFFF;
   border: 0.7px solid #D4DBE5;
   border-radius: 30px;
-  padding: 32px; /* внутренние отступы 32px со всех сторон */
+  padding: 32px;
   box-shadow: 0px 4px 67px -12px #00000021;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   gap: 20px 0px;
-  min-height: fit-content; /* высота автоматически подстраивается под содержимое */
+  min-height: fit-content;
 `;
 
 export const STitle = styled.p`
@@ -30,16 +30,49 @@ export const STitle = styled.p`
   font-weight: 700;
 `;
 
-export const SForm = styled.form`
-  /* font-size: 12px;
-  font-weight: 400; */
-`;
+export const SForm = styled.form``;
 
 export const SInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 7px;
   margin-bottom: 20px;
+`;
+
+// Обновлённый InputWrapper с поддержкой ошибки
+export const InputWrapper = styled.div`
+  position: relative;
+  ${props => props.$hasError && `
+    background-color: #ffe6e6; /* светло‑красный фон */
+    border: 1px solid #cc0000; /* тёмно‑красная обводка */
+    border-radius: 8px;
+    padding: 4px;
+  `}
+`;
+
+// Обновлённый SInput с поддержкой ошибки
+export const SInput = styled.input`
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: transparent;
+
+  /* Стиль для состояния ошибки */
+  ${props => props.$hasError && `
+    background-color: transparent;
+    color: #333;
+  `}
+
+  &:focus {
+    ${props => !props.$hasError && `
+      background-color: #f9f9f9;
+      border: 1px solid #7334EA;
+    `}
+  }
 `;
 
 export const SFooterWrapper = styled.div`  
@@ -69,13 +102,13 @@ export const SFooterLink = styled(Link)`
 export const SErrorMessageText = styled.p`
   font-size: 12px;
   font-weight: 400;
-  color: #cc0000; /* цвет текста — тёмно‑красный */
-  text-align: center; /* центрирование текста */
-  line-height: 150%; /* межстрочный интервал */
-  margin: 0; /* убираем стандартные отступы параграфа */
-  padding: 0; /* убираем внутренние отступы */
-  background: none; /* убираем фон */
-  border: none; /* убираем границу */
-  max-width: 315px; /* ограничиваем ширину текста для лучшей читаемости */
-  word-wrap: break-word; /* обеспечиваем перенос длинных слов */
+  color: #cc0000;
+  text-align: center;
+  line-height: 150%;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  max-width: 315px;
+  word-wrap: break-word;
 `;
