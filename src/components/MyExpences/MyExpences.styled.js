@@ -5,7 +5,7 @@ export const Swrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  position: relative;
+  position: relative; 
 `;
 
 export const Stitle = styled.h1`

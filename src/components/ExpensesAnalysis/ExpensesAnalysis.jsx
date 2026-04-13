@@ -1,6 +1,5 @@
 import Calendar from "../Calendar/Calendar";
 import Diagram from "../Diagram/Diagram";
-import Header from "../Header/Header";
 import { SanalysTitle, Smain, Swrapper } from "./ExpensesAnalysis.styled";
 // import { temporaryData } from "../../data";
 import { useEffect, useState } from "react";
@@ -90,7 +89,6 @@ const ExpensesAnalysis = () => {
 
     return (
         <Swrapper>
-            <Header />
             <Smain>
                 <SanalysTitle>Анализ расходов</SanalysTitle>
                 <Calendar
