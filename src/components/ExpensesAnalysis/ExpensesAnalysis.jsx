@@ -8,7 +8,7 @@ import { endOfDay, format, startOfDay } from "date-fns";
 import { getTransactionsInPeriod, fetchTransactions } from "../../services/api";
 
 const ExpensesAnalysis = () => {
-    const getToken = () => localStorage.getItem("token");
+    const getToken = () => localStorage.getItem("tokenAuth");
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false); //статус загрузки данных из API
     const [isCalendarPrepaired, setIsCalendarPrepaired] = useState(false); //статус готовности календаря
