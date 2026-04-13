@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-    ScalendarDayName,
-    ScalendarDayNames,
-    ScalendarHeader,
-    ScalendarMounth,
-    ScalendarMounthDay,
-    ScalendarMounthDays,
-    ScalendarMounths,
-    ScalendarMounthTitle,
-    ScalendarTitle,
-    Ssection,
+    SCalendarDayName,
+    SCalendarDayNames,
+    SCalendarHeader,
+    SCalendarMonth,
+    SCalendarMonthDay,
+    SCalendarMonthDays,
+    SCalendarMonths,
+    SCalendarMonthTitle,
+    SCalendarTitle,
+    SSection,
 } from "./Calendar.styled";
 import {
     endOfMonth,
@@ -19,7 +19,14 @@ import {
     startOfWeek,
 } from "date-fns";
 
-const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon, isPrepaired, error }) => {
+const Calendar = ({
+    earlyRecord,
+    startDate,
+    endDate,
+    setDiapazon,
+    isPrepaired,
+    error,
+}) => {
     const [hoverDate, setHoverDate] = useState(null);
     const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
     const monthsName = [
@@ -148,7 +155,7 @@ const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon, isPrepaired, e
     };
 
     return (
-        <Ssection>
+        <SSection>
             {isPrepaired || error ? (
                 <SCalendarOverlay>
                     {isPrepaired && (
@@ -164,27 +171,27 @@ const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon, isPrepaired, e
                     )}
                 </SCalendarOverlay>
             ) : null}
-            <ScalendarHeader>
-                <ScalendarTitle>Период</ScalendarTitle>
-                <ScalendarDayNames>
+            <SCalendarHeader>
+                <SCalendarTitle>Период</SCalendarTitle>
+                <SCalendarDayNames>
                     {dayNames.map((day) => (
-                        <ScalendarDayName key={day}>{day}</ScalendarDayName>
+                        <SCalendarDayName key={day}>{day}</SCalendarDayName>
                     ))}
-                </ScalendarDayNames>
-            </ScalendarHeader>
-            <ScalendarMounths onMouseLeave={handleDayHoverOut}>
+                </SCalendarDayNames>
+            </SCalendarHeader>
+            <SCalendarMonths onMouseLeave={handleDayHoverOut}>
                 {months.map((month) => {
                     const monthState = isMonthInRange(month);
                     return (
-                        <ScalendarMounth key={month.month.getTime()}>
-                            <ScalendarMounthTitle>
+                        <SCalendarMonth key={month.month.getTime()}>
+                            <SCalendarMonthTitle>
                                 {monthsName[month.month.getMonth()] +
                                     " " +
                                     month.month.getFullYear()}
-                            </ScalendarMounthTitle>
-                            <ScalendarMounthDays>
+                            </SCalendarMonthTitle>
+                            <SCalendarMonthDays>
                                 {month.days.map((day) => (
-                                    <ScalendarMounthDay
+                                    <SCalendarMonthDay
                                         key={day.date.getTime()}
                                         $isOtherMonth={day.isOtherMonth}
                                         $isActive={
@@ -200,14 +207,14 @@ const Calendar = ({ earlyRecord, startDate, endDate, setDiapazon, isPrepaired, e
                                         }
                                     >
                                         {day.date.getDate()}
-                                    </ScalendarMounthDay>
+                                    </SCalendarMonthDay>
                                 ))}
-                            </ScalendarMounthDays>
-                        </ScalendarMounth>
+                            </SCalendarMonthDays>
+                        </SCalendarMonth>
                     );
                 })}
-            </ScalendarMounths>
-        </Ssection>
+            </SCalendarMonths>
+        </SSection>
     );
 };
 

@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
-const Ssection = styled.section`
+const SSection = styled.section`
     border-radius: 30px;
     max-height: calc(100vh - 260px);
     box-shadow: 0 20px 67px -12px rgba(0, 0, 0, 0.13);
@@ -56,7 +56,7 @@ const SCalendarOverlayLoadingSpan = styled.span`
     animation: ${grow} 1s ease-in-out ${(props) => props.$delay || ""} infinite;
 `;
 
-const ScalendarHeader = styled.div`
+const SCalendarHeader = styled.div`
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     height: 113px;
@@ -65,19 +65,19 @@ const ScalendarHeader = styled.div`
     padding: 32px 32px 0px 32px;
 `;
 
-const ScalendarTitle = styled.h2`
+const SCalendarTitle = styled.h2`
     font-weight: 700;
     font-size: 24px;
     color: #000;
 `;
 
-const ScalendarDayNames = styled.div`
+const SCalendarDayNames = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 24px;
 `;
 
-const ScalendarDayName = styled.div`
+const SCalendarDayName = styled.div`
     width: 40px;
     height: 27px;
     color: #999;
@@ -88,7 +88,7 @@ const ScalendarDayName = styled.div`
     align-items: center;
 `;
 
-const ScalendarMounths = styled.div`
+const SCalendarMonths = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -112,25 +112,25 @@ const ScalendarMounths = styled.div`
     }
 `;
 
-const ScalendarMounth = styled.div`
+const SCalendarMonth = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
 `;
 
-const ScalendarMounthTitle = styled.h3`
+const SCalendarMonthTitle = styled.h3`
     font-weight: 600;
     font-size: 16px;
 `;
 
-const ScalendarMounthDays = styled.div`
+const SCalendarMonthDays = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 6px;
 `;
 
-const ScalendarMounthDay = styled.div`
+const SCalendarMonthDay = styled.div`
     width: 40px;
     height: 40px;
     display: flex;
@@ -147,16 +147,16 @@ const ScalendarMounthDay = styled.div`
 `;
 
 export {
-    Ssection,
-    ScalendarHeader,
-    ScalendarTitle,
-    ScalendarDayNames,
-    ScalendarDayName,
-    ScalendarMounths,
-    ScalendarMounth,
-    ScalendarMounthTitle,
-    ScalendarMounthDays,
-    ScalendarMounthDay,
+    SSection,
+    SCalendarHeader,
+    SCalendarTitle,
+    SCalendarDayNames,
+    SCalendarDayName,
+    SCalendarMonths,
+    SCalendarMonth,
+    SCalendarMonthTitle,
+    SCalendarMonthDays,
+    SCalendarMonthDay,
     SCalendarOverlay,
     SCalendarOverlayError,
     SCalendarOverlayLoading,

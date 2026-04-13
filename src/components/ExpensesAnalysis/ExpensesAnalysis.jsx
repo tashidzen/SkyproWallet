@@ -51,7 +51,7 @@ const ExpensesAnalysis = () => {
             });
     }, []);
 
-    let earlyRecord = new Date(data[0].date); //определение ранней записи для календаря, чтобы пользователь не мог выбрать дату раньше, чем есть в данных, полученных из API
+    let earlyRecord = new Date(data[0]?.date); //определение ранней записи для календаря, чтобы пользователь не мог выбрать дату раньше, чем есть в данных, полученных из API
     data.forEach((item) => {
         let currentDate = new Date(item.date);
         if (currentDate < earlyRecord) {

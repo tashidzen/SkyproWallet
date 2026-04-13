@@ -85,7 +85,7 @@ const Diagram = ({ data, isLoading, error, period }) => {
                         </SDiagramElValue>
                         <SDiagramElBlock
                             $value={
-                                maxValue != 0
+                                maxValue !== 0
                                     ? (item.value / maxValue) * 100
                                     : 0
                             }
