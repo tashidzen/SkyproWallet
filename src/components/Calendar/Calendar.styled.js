@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const Ssection = styled.section`
+const SSection = styled.section`
     border-radius: 30px;
     max-height: calc(100vh - 260px);
     box-shadow: 0 20px 67px -12px rgba(0, 0, 0, 0.13);
@@ -10,9 +10,53 @@ const Ssection = styled.section`
     display: flex;
     flex-direction: column;
     overflow: clip;
+    position: relative;
 `;
 
-const ScalendarHeader = styled.div`
+const SCalendarOverlay = styled.div`
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    z-index: 1;
+    height: stretch;
+    width: stretch;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+`;
+
+const SCalendarOverlayError = styled.p`
+    font-weight: 400;
+    font-size: 14px;
+    color: #ff0000;
+`;
+
+const grow = keyframes`
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.8);
+    }
+    `;
+
+const SCalendarOverlayLoading = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+`;
+
+const SCalendarOverlayLoadingSpan = styled.span`
+    display: inline-block;
+    width: 5px;
+    height: 20px;
+    background-color: #999999;
+    animation: ${grow} 1s ease-in-out ${(props) => props.$delay || ""} infinite;
+`;
+
+const SCalendarHeader = styled.div`
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     height: 113px;
@@ -21,19 +65,19 @@ const ScalendarHeader = styled.div`
     padding: 32px 32px 0px 32px;
 `;
 
-const ScalendarTitle = styled.h2`
+const SCalendarTitle = styled.h2`
     font-weight: 700;
     font-size: 24px;
     color: #000;
 `;
 
-const ScalendarDayNames = styled.div`
+const SCalendarDayNames = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 24px;
 `;
 
-const ScalendarDayName = styled.div`
+const SCalendarDayName = styled.div`
     width: 40px;
     height: 27px;
     color: #999;
@@ -44,7 +88,7 @@ const ScalendarDayName = styled.div`
     align-items: center;
 `;
 
-const ScalendarMounths = styled.div`
+const SCalendarMonths = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -68,25 +112,25 @@ const ScalendarMounths = styled.div`
     }
 `;
 
-const ScalendarMounth = styled.div`
+const SCalendarMonth = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
 `;
 
-const ScalendarMounthTitle = styled.h3`
+const SCalendarMonthTitle = styled.h3`
     font-weight: 600;
     font-size: 16px;
 `;
 
-const ScalendarMounthDays = styled.div`
+const SCalendarMonthDays = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 6px;
 `;
 
-const ScalendarMounthDay = styled.div`
+const SCalendarMonthDay = styled.div`
     width: 40px;
     height: 40px;
     display: flex;
@@ -94,20 +138,27 @@ const ScalendarMounthDay = styled.div`
     align-items: center;
     font-weight: 400;
     font-size: 12px;
-    color: #000;
-    background-color: #f5f6f7;
+    color: ${(props) => (props.$isActive ? "#7334ea" : "#000")};
+    background-color: ${(props) => (props.$isActive ? "#f1ebfd" : "#f4f5f6")};
     border-radius: 50%;
+    opacity: ${(props) => (props.$isOtherMonth ? 0 : 1)};
+    cursor: ${(props) => (props.$isOtherMonth ? "default" : "pointer")};
+    pointer-events: ${(props) => (props.$isOtherMonth ? "none" : "auto")};
 `;
 
 export {
-    Ssection,
-    ScalendarHeader,
-    ScalendarTitle,
-    ScalendarDayNames,
-    ScalendarDayName,
-    ScalendarMounths,
-    ScalendarMounth,
-    ScalendarMounthTitle,
-    ScalendarMounthDays,
-    ScalendarMounthDay,
+    SSection,
+    SCalendarHeader,
+    SCalendarTitle,
+    SCalendarDayNames,
+    SCalendarDayName,
+    SCalendarMonths,
+    SCalendarMonth,
+    SCalendarMonthTitle,
+    SCalendarMonthDays,
+    SCalendarMonthDay,
+    SCalendarOverlay,
+    SCalendarOverlayError,
+    SCalendarOverlayLoading,
+    SCalendarOverlayLoadingSpan,
 };
