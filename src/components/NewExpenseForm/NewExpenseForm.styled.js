@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Stable = styled.table`
-  width: 379px; /* Фиксированная ширина */
-  height: 618px; /* Фиксированная высота */
+  width: 379px;
+  height: 618px;
   max-width: 379px;
   max-height: 618px;
   font-size: 12px;
@@ -11,8 +11,8 @@ export const Stable = styled.table`
   display: block;
   word-wrap: break-word;
   table-layout: fixed;
-  padding: 32px; /* Отступ 32 px от краёв таблицы */
-  overflow: visible; /* Отключаем скролл */
+  padding: 32px;
+  overflow: visible;
 
   thead th {
     padding: 0;
@@ -59,11 +59,11 @@ export const FormInput = styled.input`
   outline: none;
 
   &:focus {
-    background: ${props => props.valid ? '#F1EBFD' : '#fff'};
-    border-color: ${props => props.valid ? '#F1EBFD' : '#999999'};
+    background: ${props => props.$valid ? '#F1EBFD' : '#fff'};
+    border-color: ${props => props.$valid ? '#F1EBFD' : '#999999'};
   }
 
-  ${props => props.error && `
+  ${props => props.$error && `
     background-color: #ffe6e6;
     border-color: #cc0000;
     &:focus {
@@ -90,11 +90,11 @@ export const DateInput = styled.input`
   outline: none;
 
   &:focus {
-    background: ${props => props.valid ? '#F1EBFD' : '#fff'};
-    border-color: ${props => props.valid ? '#F1EBFD' : '#999999'};
+    background: ${props => props.$valid ? '#F1EBFD' : '#fff'};
+    border-color: ${props => props.$valid ? '#F1EBFD' : '#999999'};
   }
 
-  ${props => props.error && `
+  ${props => props.$error && `
     background-color: #ffe6e6;
     border-color: #cc0000;
     &:focus {

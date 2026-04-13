@@ -107,8 +107,8 @@ const NewExpenseForm = ({
               value={formData.description}
               onChange={handleChange}
               placeholder="Введите описание"
-              valid={isValidInput(formData.description, 'description')}
-              error={!!errors.description}
+              $valid={isValidInput(formData.description, 'description')}
+              $error={!!errors.description}
             />
           </td>
         </tr>
@@ -152,8 +152,8 @@ const NewExpenseForm = ({
               value={formData.date ? new Date(formData.date).toISOString().split('T')[0] : ''}
               onChange={handleChange}
               placeholder="Введите дату"
-              valid={isValidInput(formData.date, 'date')}
-              error={!!errors.date}
+              $valid={isValidInput(formData.date, 'date')}
+              $error={!!errors.date}
             />
           </td>
         </tr>
@@ -168,8 +168,8 @@ const NewExpenseForm = ({
               value={formData.amount}
               onChange={handleChange}
               placeholder="Введите сумму"
-              valid={isValidInput(formData.amount, 'amount')}
-              error={!!errors.amount}
+              $valid={isValidInput(formData.amount, 'amount')}
+              $error={!!errors.amount}
             />
           </td>
         </tr>

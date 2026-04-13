@@ -19,6 +19,7 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
   const navigate = useNavigate();
   const { login, register, error: authError, isLoading } = useAuth();
 
+
   const [formData, setFormData] = useState({
     name: '',
     login: '',
@@ -49,7 +50,7 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
     return newErrors;
   };
 
-    const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -99,35 +100,32 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
         <SForm id="form" onSubmit={handleSubmit}>
           <SInputWrapper>
             {isSignUp && (
-              <InputWrapper hasError={!!validationErrors.name && hasSubmitted}>
+              <InputWrapper $hasError={!!validationErrors.name && hasSubmitted}>
                 <SInput
                   type="text"
                   placeholder="Имя"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  hasError={!!validationErrors.name && hasSubmitted}
                 />
               </InputWrapper>
             )}
-            <InputWrapper hasError={!!validationErrors.login && hasSubmitted}>
+            <InputWrapper $hasError={!!validationErrors.login && hasSubmitted}>
               <SInput
                 type="text"
                 placeholder="Эл. почта"
                 name="login"
                 value={formData.login}
                 onChange={handleChange}
-                hasError={!!validationErrors.login && hasSubmitted}
               />
             </InputWrapper>
-            <InputWrapper hasError={!!validationErrors.password && hasSubmitted}>
+            <InputWrapper $hasError={!!validationErrors.password && hasSubmitted}>
               <SInput
                 type="password"
                 placeholder="Пароль"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                hasError={!!validationErrors.password && hasSubmitted}
               />
             </InputWrapper>
           </SInputWrapper>
