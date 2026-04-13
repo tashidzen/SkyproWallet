@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   SPageBackground,
   SWrapper,
@@ -11,10 +13,10 @@ import {
 } from "./AuthForm.styled";
 import { InputWrapper, SInput } from "../Input/Input.styled";
 import { Button } from "../button/Button";
-import { useAuth } from '../../hooks/useAuth.js';
-import { useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 
 export const AuthForm = ({ isSignUp, onSuccess }) => {
+  const navigate = useNavigate();
   const { login, register, error: authError, isLoading } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -47,13 +49,12 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
     return newErrors;
   };
 
-  const handleChange = (e) => {
+    const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-    // Сброс общей ошибки при изменении любого поля
     if (showGeneralError) {
       setShowGeneralError(false);
     }
@@ -65,23 +66,29 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
     const validationErrors = validate();
 
     if (Object.keys(validationErrors).length > 0) {
-      setShowGeneralError(true); // показываем общую ошибку
+      setShowGeneralError(true);
       return;
     }
+
+    console.log('Отправляем данные формы:', formData);
 
     try {
       if (isSignUp) {
         await register(formData);
+        console.log('Регистрация успешна, перенаправляем на /login');
+        navigate('/login', { replace: true });
       } else {
         await login(formData);
+        console.log('Вход успешен, перенаправляем на / (Мои расходы)');
+        navigate('/', { replace: true }); // РЕДИРЕКТ НА ГЛАВНУЮ СТРАНИЦУ
       }
       onSuccess?.();
     } catch (err) {
-      // Ошибки из useAuth уже попадают в authError
+      console.error('Ошибка в handleSubmit:', err.message);
+      setShowGeneralError(true);
     }
   };
 
-  // Определяем, есть ли ошибки валидации для стилизации полей
   const validationErrors = validate();
   const hasValidationErrors = Object.keys(validationErrors).length > 0;
 
@@ -125,23 +132,22 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
             </InputWrapper>
           </SInputWrapper>
 
-          {/* Текст ошибки без контейнера */}
-          {showGeneralError && (
+          {(showGeneralError || authError) && (
             <SErrorMessageText
               style={{
                 marginTop: '12px',
                 marginBottom: '24px'
               }}
             >
-              Упс! Введённые вами данные некорректны.
-              Введите данные корректно и повторите попытку.
+              {authError || "Упс! Введённые вами данные некорректны. Введите данные корректно и повторите попытку."}
             </SErrorMessageText>
           )}
 
           <Button
             text={isSignUp ? "Зарегистрироваться" : "Войти"}
             type="primary"
-            disabled={showGeneralError} // изменено: кнопка блокируется только при showGeneralError = true
+            disabled={isLoading || showGeneralError}
+            isLoading={isLoading}
           />
 
           {!isSignUp && (
@@ -155,9 +161,7 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
 
           {isSignUp && (
             <SFooterWrapper>
-              <SFooterText>
-                Уже есть аккаунт?
-              </SFooterText>
+              <SFooterText>Уже есть аккаунт?</SFooterText>
               <SFooterLink to="/login">Войдите здесь</SFooterLink>
             </SFooterWrapper>
           )}

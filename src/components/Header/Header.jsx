@@ -1,24 +1,36 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import { 
-  SHeader, 
-  SHeaderContainer, 
-  SHeaderBlock, 
-  SHeaderLogo, 
-  SHeaderLogoLight, 
-  SHeaderNavigation, 
-  SHeaderWrapper, 
-  SHeaderLogOut, 
-  SHeaderLink 
-} from "./Header.styled";
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import {
+  SHeader,
+  SHeaderContainer,
+  SHeaderBlock,
+  SHeaderLogo,
+  SHeaderLogoLight,
+  SHeaderNavigation,
+  SHeaderWrapper,
+  SHeaderLogOut,
+  SHeaderLink
+} from './Header.styled';
 
-export function Header({ setIsAuth }) { 
+export default function Header() {
+  const { token, isLoading, clearAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const isAuthPage = location.pathname.includes('/login') || location.pathname.includes('/registration');
+
+  if (isLoading) {
+    return null;
+  }
+
+  const isAuthPage = ['/login', '/registration'].includes(location.pathname);
+
+  // Не отображаем полноценный Header на страницах авторизации
+  if (isAuthPage) {
+    return null;
+  }
 
   const handleLogout = () => {
-    setIsAuth(false);
-    navigate("/login", { replace: false });
+    clearAuth();
+    navigate('/login', { replace: true });
   };
 
   return (
@@ -26,22 +38,19 @@ export function Header({ setIsAuth }) {
       <SHeaderContainer>
         <SHeaderBlock>
           <SHeaderLogo>
-            <a href="" target="_self">
+            <a href="/" target="_self">
               <SHeaderLogoLight src="images/logo.svg" alt="logo" />
             </a>
-          </SHeaderLogo>  
-          
-          {!isAuthPage && (
+          </SHeaderLogo>
+
+          {token && (
             <>
-              <SHeaderWrapper> 
-                <SHeaderLink href="#">Мои расходы</SHeaderLink> 
-                <SHeaderLink href="#">Анализ расходов</SHeaderLink>
+              <SHeaderWrapper>
+                <SHeaderLink href="/">Мои расходы</SHeaderLink>
+                <SHeaderLink href="/analysis">Анализ расходов</SHeaderLink>
               </SHeaderWrapper>
-              <SHeaderNavigation>   
-                <SHeaderLogOut    onClick={(e) => {
-                    e.preventDefault();
-                    handleLogout();
-                  }}>Выйти</SHeaderLogOut>
+              <SHeaderNavigation>
+                <SHeaderLogOut onClick={handleLogout}>Выйти</SHeaderLogOut>
               </SHeaderNavigation>
             </>
           )}
@@ -50,5 +59,3 @@ export function Header({ setIsAuth }) {
     </SHeader>
   );
 }
-
-export default Header;
