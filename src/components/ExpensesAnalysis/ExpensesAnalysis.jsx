@@ -47,6 +47,9 @@ const ExpensesAnalysis = () => {
                 } else {
                     setError(e.message);
                 }
+            })
+            .finally(() => {
+                setIsCalendarPrepaired(false);
             });
     }, []);
 

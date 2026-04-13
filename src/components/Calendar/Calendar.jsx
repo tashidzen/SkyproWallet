@@ -8,6 +8,9 @@ import {
     SCalendarMonthDays,
     SCalendarMonths,
     SCalendarMonthTitle,
+    SCalendarOverlay,
+    SCalendarOverlayLoading,
+    SCalendarOverlayLoadingSpan,
     SCalendarTitle,
     SSection,
 } from "./Calendar.styled";
