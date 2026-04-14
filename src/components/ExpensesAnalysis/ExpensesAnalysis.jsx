@@ -10,7 +10,7 @@ const ExpensesAnalysis = () => {
     const getToken = () => localStorage.getItem("tokenAuth");
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false); //статус загрузки данных из API
-    const [isCalendarPrepaired, setIsCalendarPrepaired] = useState(false); //статус готовности календаря
+    const [isCalendarLoading, setIsCalendarLoading] = useState(true); //статус загрузки данных из API для календаря, т.е. готовности календаря к отображению
     const [isCalendarError, setIsCalendarError] = useState(""); //статус ошибки при загрузке данных из API для календаря
     const [error, setError] = useState(null); //статус ошибки при загрузке данных из API
     const [partialData, setPartialData] = useState(null); // данные за пределённый период, полученные по запросу из API
@@ -34,32 +34,32 @@ const ExpensesAnalysis = () => {
 
     //получение данных и определение ранней записи для календаря при загрузке страницы
     useEffect(() => {
+        setIsCalendarLoading(true);
         const fetchData = fetchTransactions({ token: getToken() });
         fetchData
             .then((response) => {
                 setData(response);
-                setIsCalendarPrepaired(true);
             })
             .catch((e) => {
-                setIsCalendarError("Ошибка при загрузке данных для календаря");
                 if (e.response && e.response.data && e.response.data.error) {
-                    setError(e.response.data.error);
+                    setIsCalendarError(e.response.data.error);
                 } else {
-                    setError(e.message);
-                } 
-            }) 
-            .finally(() => { 
-                setIsCalendarPrepaired(false);
+                    setIsCalendarError(e.message);
+                }
+            })
+            .finally(() => {
+                setIsCalendarLoading(false);
             });
     }, []);
 
-    let earlyRecord = new Date(data[0]?.date); //определение ранней записи для календаря, чтобы пользователь не мог выбрать дату раньше, чем есть в данных, полученных из API
-    data.forEach((item) => {
-        let currentDate = new Date(item.date);
-        if (currentDate < earlyRecord) {
-            earlyRecord = currentDate;
-        }
-    });
+    //определение ранней записи для календаря, чтобы пользователь не мог выбрать дату раньше, чем есть в данных, полученных из API  earlyRecord = currentDate;
+    const earlyRecord =
+        data.length > 0
+            ? data.reduce((earliest, current) => {
+                  const currentDate = new Date(current.date);
+                  return currentDate < earliest ? currentDate : earliest;
+              }, new Date(data[0].date))
+            : new Date();
 
     const fetchData = async (period) => {
         try {
@@ -99,7 +99,7 @@ const ExpensesAnalysis = () => {
                     startDate={startDate}
                     endDate={endDate}
                     setDiapazon={setDiapazon}
-                    isPrepaired={isCalendarPrepaired}
+                    isLoading={isCalendarLoading}
                     error={isCalendarError}
                 />
                 <Diagram

@@ -20,12 +20,9 @@ const SDiagramOverlay = styled.div`
     background-color: rgba(255, 255, 255, 0.8);
     display: flex;
     z-index: 1;
-    height: stretch;
-    width: stretch;
     justify-content: center;
     align-items: center;
-    left: 0;
-    top: 0;
+    inset: 0;
 `;
 
 const SDiagramOverlayError = styled.p`

@@ -1,19 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-  SCalendarDayName,
-  SCalendarDayNames,
-  SCalendarHeader,
-  SCalendarMonth,
-  SCalendarMonthDay,
-  SCalendarMonthDays,
-  SCalendarMonths,
-  SCalendarMonthTitle,
-  SCalendarTitle,
-  SSection,
-  SCalendarOverlay,
-  SCalendarOverlayLoading,
-  SCalendarOverlayLoadingSpan,
-  SCalendarOverlayError
+    SCalendarDayName,
+    SCalendarDayNames,
+    SCalendarHeader,
+    SCalendarMonth,
+    SCalendarMonthDay,
+    SCalendarMonthDays,
+    SCalendarMonths,
+    SCalendarMonthTitle,
+    SCalendarOverlay,
+    SCalendarOverlayError,
+    SCalendarOverlayLoading,
+    SCalendarOverlayLoadingSpan,
+    SCalendarTitle,
+    SSection,
 } from "./Calendar.styled";
 import {
   endOfMonth,
@@ -24,12 +24,13 @@ import {
 } from "date-fns";
 
 const Calendar = ({
-  earlyRecord,
-  startDate,
-  endDate,
-  setDiapazon,
+    earlyRecord,
+    startDate,
+    endDate,
+    setDiapazon,
+    isLoading,
+    error,
   isPrepaired,
-  error,
 }) => {
   const [hoverDate, setHoverDate] = useState(null);
   const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
@@ -93,6 +94,91 @@ const Calendar = ({
     return newDays;
   };
 
+    const isInRange = (date) => {
+        const time = date.getTime();
+        if (startTs == null) return false;
+        if (endTs == null && hoverTs == null) {
+            return time === startTs;
+        }
+        return time >= rangeStart && time <= rangeEnd;
+    };
+
+    const isMonthInRange = (month) => {
+        const monthStart = month.gridStart;
+        const monthEnd = month.gridEnd;
+
+        if (startTs == null) return "OUTSIDE";
+        if (endTs == null && hoverTs == null) {
+            if (monthStart <= startTs && monthEnd >= startTs) return "PARTIAL";
+            else return "OUTSIDE";
+        }
+        if (monthEnd < rangeStart || monthStart > rangeEnd) return "OUTSIDE";
+        else if (monthStart >= rangeStart && monthEnd <= rangeEnd)
+            return "INSIDE";
+        else return "PARTIAL";
+    };
+
+    return (
+        <SSection>
+            {isLoading || error ? (
+                <SCalendarOverlay>
+                    {isLoading && (
+                        <SCalendarOverlayLoading>
+                            <SCalendarOverlayLoadingSpan $delay="0s" />
+                            <SCalendarOverlayLoadingSpan $delay="0.15s" />
+                            <SCalendarOverlayLoadingSpan $delay="0.3s" />
+                            <SCalendarOverlayLoadingSpan $delay="0.45s" />
+                        </SCalendarOverlayLoading>
+                    )}
+                    {error && (
+                        <SCalendarOverlayError>{error}</SCalendarOverlayError>
+                    )}
+                </SCalendarOverlay>
+            ) : null}
+            <SCalendarHeader>
+                <SCalendarTitle>Период</SCalendarTitle>
+                <SCalendarDayNames>
+                    {dayNames.map((day) => (
+                        <SCalendarDayName key={day}>{day}</SCalendarDayName>
+                    ))}
+                </SCalendarDayNames>
+            </SCalendarHeader>
+            <SCalendarMonths onMouseLeave={handleDayHoverOut}>
+                {months.map((month) => {
+                    const monthState = isMonthInRange(month);
+                    return (
+                        <SCalendarMonth key={month.month.getTime()}>
+                            <SCalendarMonthTitle>
+                                {monthsName[month.month.getMonth()] +
+                                    " " +
+                                    month.month.getFullYear()}
+                            </SCalendarMonthTitle>
+                            <SCalendarMonthDays>
+                                {month.days.map((day) => (
+                                    <SCalendarMonthDay
+                                        key={day.date.getTime()}
+                                        $isOtherMonth={day.isOtherMonth}
+                                        $isActive={
+                                            monthState === "PARTIAL"
+                                                ? isInRange(day.date)
+                                                : monthState === "INSIDE"
+                                                  ? true
+                                                  : false
+                                        }
+                                        onClick={() => handleDayClick(day.date)}
+                                        onMouseEnter={() =>
+                                            handleDayHover(day.date)
+                                        }
+                                    >
+                                        {day.date.getDate()}
+                                    </SCalendarMonthDay>
+                                ))}
+                            </SCalendarMonthDays>
+                        </SCalendarMonth>
+                    );
+                })}
+            </SCalendarMonths>
+        </SSection>
   const months = useMemo(() => {
     const result = [];
     const lastMonth = startOfMonth(new Date());

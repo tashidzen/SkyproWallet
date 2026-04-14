@@ -19,7 +19,6 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
   const navigate = useNavigate();
   const { login, register, error: authError, isLoading } = useAuth();
 
-
   const [formData, setFormData] = useState({
     name: '',
     login: '',
@@ -81,7 +80,7 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
       } else {
         await login(formData);
         console.log('Вход успешен, перенаправляем на / (Мои расходы)');
-        navigate('/', { replace: true }); // РЕДИРЕКТ НА ГЛАВНУЮ СТРАНИЦУ
+        navigate('/', { replace: true });
       }
       onSuccess?.();
     } catch (err) {
@@ -107,6 +106,7 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
+                  $hasError={!!validationErrors.name && hasSubmitted}
                 />
               </InputWrapper>
             )}
@@ -117,6 +117,7 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
                 name="login"
                 value={formData.login}
                 onChange={handleChange}
+                $hasError={!!validationErrors.login && hasSubmitted}
               />
             </InputWrapper>
             <InputWrapper $hasError={!!validationErrors.password && hasSubmitted}>
@@ -126,6 +127,7 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+                $hasError={!!validationErrors.password && hasSubmitted}
               />
             </InputWrapper>
           </SInputWrapper>

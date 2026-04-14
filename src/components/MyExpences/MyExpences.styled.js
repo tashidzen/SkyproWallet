@@ -9,19 +9,22 @@ export const Swrapper = styled.div`
 `;
 
 export const Stitle = styled.h1`
-  text-align: left;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 150%;
-  margin-bottom: 32px;
-  margin-top: 36px;
-  margin-left: 120px;
+    text-align: left;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 150%;
+    margin-bottom: 32px;
+    margin-top: 36px;
+    margin-left: calc(50% - 600px);
 `;
 
 export const TablesContainer = styled.div`
   display: flex;
   gap: 34px; /* Расстояние между таблицами */
-  padding-left: 120px;
-  padding-right: 120px;
+  /* padding-left: 120px;
+  padding-right: 120px; */
   box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto; /* Центрирование контейнера */
+
 `;

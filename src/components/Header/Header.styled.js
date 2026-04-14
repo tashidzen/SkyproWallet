@@ -9,7 +9,7 @@ export const SHeader = styled.header`
 
 export const SHeaderContainer = styled.div`
   max-width: 1200px;
-  margin: 0 120px;
+  margin: 0 calc(50% - 600px);
 `;
 
 export const SHeaderBlock = styled.div`
