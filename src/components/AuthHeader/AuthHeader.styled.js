@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SAuthHeader = styled.header`
   background: #FFFFFF;
-  padding: 0 120px; 
+  padding: 0 calc(50% - 600px); 
   height: 64px;
   text-align: left; 
   display: flex; 
