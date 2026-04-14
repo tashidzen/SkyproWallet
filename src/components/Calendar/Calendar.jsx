@@ -9,6 +9,7 @@ import {
     SCalendarMonths,
     SCalendarMonthTitle,
     SCalendarOverlay,
+    SCalendarOverlayError,
     SCalendarOverlayLoading,
     SCalendarOverlayLoadingSpan,
     SCalendarTitle,
@@ -27,7 +28,7 @@ const Calendar = ({
     startDate,
     endDate,
     setDiapazon,
-    isPrepaired,
+    isLoading,
     error,
 }) => {
     const [hoverDate, setHoverDate] = useState(null);
@@ -159,9 +160,9 @@ const Calendar = ({
 
     return (
         <SSection>
-            {isPrepaired || error ? (
+            {isLoading || error ? (
                 <SCalendarOverlay>
-                    {isPrepaired && (
+                    {isLoading && (
                         <SCalendarOverlayLoading>
                             <SCalendarOverlayLoadingSpan $delay="0s" />
                             <SCalendarOverlayLoadingSpan $delay="0.15s" />
