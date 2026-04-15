@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Stable,
   FormTitle,
@@ -8,7 +8,7 @@ import {
   CategoryButton,
   FormButton,
 } from "./NewExpenseForm.styled.js";
-import { EXPENSE_CATEGORIES } from "../../constants/categories.jsx"; // Импорт категорий
+import { EXPENSE_CATEGORIES } from "../../constants/categories.jsx";
 
 const NewExpenseForm = ({
   editData,
@@ -46,10 +46,30 @@ const NewExpenseForm = ({
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.description.trim()) newErrors.description = true;
-    if (!formData.category) newErrors.category = true;
-    if (!formData.date) newErrors.date = true;
-    if (formData.amount && isNaN(formData.amount)) newErrors.amount = true;
+
+    // Проверка описания: не пустое и минимум 4 символа
+    if (!formData.description.trim()) {
+      newErrors.description = true;
+    } else if (formData.description.trim().length < 4) {
+      newErrors.description = true;
+    }
+
+    // Проверка категории
+    if (!formData.category) {
+      newErrors.category = true;
+    }
+
+    // Проверка даты
+    if (!formData.date) {
+      newErrors.date = true;
+    }
+
+    // Проверка суммы: не пустая и корректное число
+    if (!formData.amount) {
+      newErrors.amount = true;
+    } else if (isNaN(formData.amount) || parseFloat(formData.amount) <= 0) {
+      newErrors.amount = true;
+    }
 
     setErrors(newErrors);
     setIsSubmitDisabled(Object.keys(newErrors).length > 0);
@@ -58,13 +78,44 @@ const NewExpenseForm = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    validateForm();
+
+    // Обновляем данные формы
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Сбрасываем ошибку для текущего поля при начале ввода
+    if (errors[name]) {
+      const updatedErrors = { ...errors };
+      delete updatedErrors[name];
+      setErrors(updatedErrors);
+      setIsSubmitDisabled(Object.keys(updatedErrors).length > 0);
+    }
   };
 
   const handleCategorySelect = (category) => {
     setFormData({ ...formData, category });
-    validateForm();
+
+    // Сбрасываем ошибку категории при выборе
+    if (errors.category) {
+      const updatedErrors = { ...errors };
+      delete updatedErrors.category;
+      setErrors(updatedErrors);
+      setIsSubmitDisabled(Object.keys(updatedErrors).length > 0);
+    }
+  };
+
+  const handleDateChange = (e) => {
+    handleChange(e);
+
+    // При выборе даты сбрасываем ошибку для поля даты
+    if (e.target.value && errors.date) {
+      const updatedErrors = { ...errors };
+      delete updatedErrors.date;
+      setErrors(updatedErrors);
+      setIsSubmitDisabled(Object.keys(updatedErrors).length > 0);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -74,27 +125,22 @@ const NewExpenseForm = ({
     if (Object.keys(newErrors).length === 0) {
       onSubmit({
         ...formData,
-        amount: formData.amount ? parseFloat(formData.amount) : 0,
+        amount: parseFloat(formData.amount),
         date: new Date(formData.date).toISOString(),
       });
 
-      // Сброс формы после успешного сохранения
-      setFormData({
-        description: "",
-        category: "",
-        date: "",
-        amount: "",
-      });
-      setErrors({});
-      setIsSubmitDisabled(false);
+      // Сброс формы только после успешного сохранения (только для новых записей)
+      if (!editData) {
+        setFormData({
+          description: "",
+          category: "",
+          date: "",
+          amount: "",
+        });
+        setErrors({});
+        setIsSubmitDisabled(false);
+      }
     }
-  };
-
-  const isValidInput = (value, field) => {
-    if (field === "description") return value.trim() !== "";
-    if (field === "date") return value !== "";
-    if (field === "amount") return !value || !isNaN(value);
-    return false;
   };
 
   return (
@@ -117,8 +163,7 @@ const NewExpenseForm = ({
               name="description"
               value={formData.description}
               onChange={handleChange}
-              placeholder="Введите описание"
-              $valid={isValidInput(formData.description, 'description')}
+              placeholder="Введите описание (минимум 4 символа)"
               $error={!!errors.description}
             />
           </td>
@@ -161,9 +206,8 @@ const NewExpenseForm = ({
               type="date"
               name="date"
               value={formData.date ? new Date(formData.date).toISOString().split('T')[0] : ''}
-              onChange={handleChange}
+              onChange={handleDateChange}
               placeholder="Введите дату"
-              $valid={isValidInput(formData.date, 'date')}
               $error={!!errors.date}
             />
           </td>
@@ -179,7 +223,6 @@ const NewExpenseForm = ({
               value={formData.amount}
               onChange={handleChange}
               placeholder="Введите сумму"
-              $valid={isValidInput(formData.amount, 'amount')}
               $error={!!errors.amount}
             />
           </td>
