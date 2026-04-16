@@ -1,6 +1,11 @@
 import Calendar from "../Calendar/Calendar";
 import Diagram from "../Diagram/Diagram";
-import { SanalysTitle, Smain, Swrapper } from "./ExpensesAnalysis.styled";
+import {
+    SanalysTitle,
+    Smain,
+    SsectionWrapper,
+    Swrapper,
+} from "./ExpensesAnalysis.styled";
 // import { temporaryData } from "../../data";
 import { useEffect, useState } from "react";
 import { endOfDay, format, startOfDay } from "date-fns";
@@ -94,20 +99,22 @@ const ExpensesAnalysis = () => {
         <Swrapper>
             <Smain>
                 <SanalysTitle>Анализ расходов</SanalysTitle>
-                <Calendar
-                    earlyRecord={earlyRecord}
-                    startDate={startDate}
-                    endDate={endDate}
-                    setDiapazon={setDiapazon}
-                    isLoading={isCalendarLoading}
-                    error={isCalendarError}
-                />
-                <Diagram
-                    data={partialData}
-                    isLoading={isLoading}
-                    error={error}
-                    period={{ start: startDate, end: endDate }}
-                />
+                <SsectionWrapper>
+                    <Calendar
+                        earlyRecord={earlyRecord}
+                        startDate={startDate}
+                        endDate={endDate}
+                        setDiapazon={setDiapazon}
+                        isLoading={isCalendarLoading}
+                        error={isCalendarError}
+                    />
+                    <Diagram
+                        data={partialData}
+                        isLoading={isLoading}
+                        error={error}
+                        period={{ start: startDate, end: endDate }}
+                    />
+                </SsectionWrapper>
             </Smain>
         </Swrapper>
     );

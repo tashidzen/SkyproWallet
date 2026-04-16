@@ -5,8 +5,8 @@ const SSection = styled.section`
     max-height: calc(100vh - 260px);
     box-shadow: 0 20px 67px -12px rgba(0, 0, 0, 0.13);
     background-color: #fff;
-    grid-column: span 4;
-    width: 100%;
+    flex: 0 0 379px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     overflow: clip;

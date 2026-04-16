@@ -1,11 +1,12 @@
 import styled, { keyframes } from "styled-components";
 
 const SDiagramSection = styled.section`
+    flex: 1 1 0;
+    min-width: 0;
     border-radius: 30px;
     max-height: calc(100vh - 260px);
     box-shadow: 0 20px 67px -12px rgba(0, 0, 0, 0.13);
     background-color: #fff;
-    grid-column: span 8;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -87,10 +88,11 @@ const SDiagramElement = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    flex: 1 1 0;
+    min-width: 0;
     gap: 12px;
     align-items: center;
     height: 100%;
-    width: 100%;
 `;
 const SDiagramElValue = styled.h3`
     font-weight: 600;
@@ -107,9 +109,14 @@ const SDiagramElBlock = styled.div`
 `;
 
 const SDiagramElLabel = styled.p`
+    width: 100%;
+    max-width: 100%;
     font-weight: 400;
     font-size: 12px;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 export {

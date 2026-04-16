@@ -11,10 +11,12 @@ const Swrapper = styled.div`
 const Smain = styled.main`
     padding-inline: calc(50% - 600px);
     height: calc(100vh - 64px);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto 1fr;
-    column-gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    @media (max-width: 1232px) {
+        padding-inline: 16px;
+    }
 `;
 
 const SanalysTitle = styled.h1`
@@ -24,9 +26,12 @@ const SanalysTitle = styled.h1`
     font-size: 32px;
     line-height: 150%;
     color: #000;
-    grid-row: 1;
-    grid-column: 1 / -1;
-    justify-self: stretch;
+    align-self: stretch;
 `;
 
-export { Swrapper, Smain, SanalysTitle };
+const SsectionWrapper = styled.div`
+    display: flex;
+    gap: 32px;
+`;
+
+export { Swrapper, Smain, SanalysTitle, SsectionWrapper };
