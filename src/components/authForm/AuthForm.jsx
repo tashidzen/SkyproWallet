@@ -31,8 +31,8 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
     const newErrors = {};
 
     if (isSignUp && !formData.name.trim()) {
-      newErrors.name = true;
-    }
+      newErrors.name = true; 
+          }
 
     if (!formData.login.trim()) {
       newErrors.login = true;
