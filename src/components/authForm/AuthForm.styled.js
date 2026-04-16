@@ -1,88 +1,121 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
 export const SPageBackground = styled.div`
     width: 100vw;
-    height: 736px;
-    background-color: #F4F5F6;
+    min-height: calc(100vh - 64px);
+    background-color: #f4f5f6;
     display: flex;
     justify-content: center;
-    align-items: center; 
-    `;
+    align-items: center;
+`;
 
 export const SWrapper = styled.div`
-  width: 379px;
-  background-color: #FFFFFF;
-  border: 0.7px solid #D4DBE5;
-  border-radius: 30px;
-  padding: 32px;
-  box-shadow: 0px 4px 67px -12px #00000021;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px 0px; 
-  
-
+    width: 379px;
+    background-color: #ffffff;
+    border: 0.7px solid #d4dbe5;
+    border-radius: 30px;
+    padding: 32px;
+    box-shadow: 0px 4px 67px -12px #00000021;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px 0px;
+    min-height: fit-content;
+    transform: translateY(-32px);
 `;
 
 export const STitle = styled.p`
-  font-size: 24px;
-  font-weight: 700;
+    font-size: 24px;
+    font-weight: 700;
 `;
 
-export const SForm = styled.form`
-  /* font-size: 12px;
-  font-weight: 400; */
-`;
+export const SForm = styled.form``;
 
 export const SInputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
 `;
 
-export const SFooterWrapper = styled.div` 
-  width: 313px;
-  height: 39px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* gap: 7px; */
-  line-height: 150%;
-  margin-top: 20px;
+// Обновлённый InputWrapper с поддержкой ошибки
+export const InputWrapper = styled.div`
+    position: relative;
+    ${(props) =>
+        props.$hasError &&
+        `
+    background-color: #ffe6e6; /* светло‑красный фон */
+    border: 1px solid #cc0000; /* тёмно‑красная обводка */
+    border-radius: 8px;
+    padding: 4px;
+  `}
+`;
+
+// Обновлённый SInput с поддержкой ошибки
+export const SInput = styled.input`
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: transparent;
+
+    /* Стиль для состояния ошибки */
+    ${(props) =>
+        props.$hasError &&
+        `
+    background-color: transparent;
+    color: #333;
+  `}
+
+    &:focus {
+        ${(props) =>
+            !props.$hasError &&
+            `
+      background-color: #f9f9f9;
+      border: 1px solid #7334EA;
+    `}
+    }
+`;
+
+export const SFooterWrapper = styled.div`
+    width: 313px;
+    height: 39px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 150%;
+    margin-top: 24px;
 `;
 
 export const SFooterText = styled.p`
-  font-size: 12px;
-  font-weight: 400;
-  color: #999999; 
+    font-size: 12px;
+    font-weight: 400;
+    color: #999999;
 `;
 
 export const SFooterLink = styled(Link)`
-  font-size: 12px;
-  font-weight: 400;
-  text-decoration: underline;
-  color: #999999;
-  cursor: pointer;
-  /* &:visited {
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: underline;
     color: #999999;
-  } */
-`;
-
-export const SErrorMessageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
+    cursor: pointer;
 `;
 
 export const SErrorMessageText = styled.p`
-  font-size: 12px;
-  font-weight: 400;
-  color: #F84D4D;
-  text-align: center;
-  line-height: 150%;
+    font-size: 12px;
+    font-weight: 400;
+    color: #cc0000;
+    text-align: center;
+    line-height: 150%;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    max-width: 315px;
+    word-wrap: break-word;
 `;

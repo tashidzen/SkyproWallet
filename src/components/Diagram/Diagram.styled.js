@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const SDiagramSection = styled.section`
     border-radius: 30px;
@@ -12,6 +12,47 @@ const SDiagramSection = styled.section`
     overflow: clip;
     gap: 21px;
     padding: 32px;
+    position: relative;
+`;
+
+const SDiagramOverlay = styled.div`
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+`;
+
+const SDiagramOverlayError = styled.p`
+    font-weight: 400;
+    font-size: 14px;
+    color: #ff0000;
+`;
+
+const grow = keyframes`
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.8);
+    }
+    `;
+
+const SDiagramOverlayLoading = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+`;
+
+const SDiagramOverlayLoadingSpan = styled.span`
+    display: inline-block;
+    width: 5px;
+    height: 20px;
+    background-color: #999999;
+    animation: ${grow} 1s ease-in-out ${(props) => props.$delay || ""} infinite;
 `;
 
 const SDiagramHeader = styled.header`
@@ -60,7 +101,7 @@ const SDiagramElValue = styled.h3`
 
 const SDiagramElBlock = styled.div`
     width: 100%;
-    height: ${(props) => props.$value === 0 ? "4px" : `${props.$value}%`};
+    height: ${(props) => (props.$value === 0 ? "4px" : `${props.$value}%`)};
     background-color: ${(props) => props.$color};
     border-radius: 12px;
 `;
@@ -79,4 +120,8 @@ export {
     SDiagramElValue,
     SDiagramElBlock,
     SDiagramElLabel,
+    SDiagramOverlay,
+    SDiagramOverlayError,
+    SDiagramOverlayLoading,
+    SDiagramOverlayLoadingSpan,
 };
