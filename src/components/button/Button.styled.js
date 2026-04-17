@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const colors = {
-  primary: "#565EEF",
+  primary: "#7334EA",
   secondary: "#FFFFFF",
   tertiary: "#94A6BE",
 };
@@ -37,7 +37,7 @@ export const SButton = styled.button`
 `;
 
 export const PrimaryButton = styled(SButton)`
-  background-color: ${({ disabled }) => disabled ? '#CCCCCC' : '#565EEF'};
+  background-color: ${({ disabled }) => disabled ? '#CCCCCC' : '#7334EA'};
   width: ${({ width }) => width};
 
   &:hover:not(:disabled) {
@@ -51,12 +51,12 @@ export const PrimaryButton = styled(SButton)`
 
 export const SecondaryButton = styled(SButton)`
   background-color: ${({ disabled }) => disabled ? 'transparent' : 'transparent'};
-  color: ${({ disabled }) => disabled ? '#94A6BE' : '#565EEF'};
-  border: ${({ disabled }) => disabled ? '0.7px solid #94A6BE' : '0.7px solid #565EEF'};
+  color: ${({ disabled }) => disabled ? '#94A6BE' : '#7334EA'};
+  border: ${({ disabled }) => disabled ? '0.7px solid #94A6BE' : '0.7px solid #7334EA'};
   width: ${({ width }) => width};
 
   &:hover:not(:disabled) {
-    background-color: #33399b;
+    background-color: #7334EA;
     color: #FFFFFF;
   }
 

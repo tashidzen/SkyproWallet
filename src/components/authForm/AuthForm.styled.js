@@ -11,11 +11,11 @@ export const SPageBackground = styled.div`
 
   @media (max-width: 767px) {
     background-color: #FFFFFF; 
-    min-height: 100vh; 
     padding: 0 16px; 
   }
 
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1023px) { 
+    min-height: calc(100vh - 70px);
     padding: 20px;
   }
 
@@ -43,17 +43,18 @@ export const SWrapper = styled.div`
     width: 343px; 
     border: none; 
     box-shadow: none; 
-    transform: none; 
-    padding: 0; 
-    margin-bottom: 470px; 
+    padding: 0;  
+  } 
+     
+  @media (min-width: 768px) and (max-width: 1023px) { 
+    transform: translateY(-32px);
   }
 
-  /* Гарантия центрирования и исходных размеров на десктопе */
   @media (min-width: 1024px) {
     width: 379px;
     padding: 32px;
     transform: translateY(-32px);
-    margin: 0 auto; /* явное центрирование */
+    margin: 0 auto; 
   }
 `;
 
