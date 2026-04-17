@@ -7,12 +7,13 @@ import {
     Swrapper,
 } from "./ExpensesAnalysis.styled";
 // import { temporaryData } from "../../data";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { endOfDay, format, startOfDay } from "date-fns";
 import { getTransactionsInPeriod, fetchTransactions } from "../../services/api";
+import { AuthContext } from "../../context/AuthContext";
 
 const ExpensesAnalysis = () => {
-    const getToken = () => localStorage.getItem("tokenAuth");
+    const { token } = useContext(AuthContext); 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false); //статус загрузки данных из API
     const [isCalendarLoading, setIsCalendarLoading] = useState(true); //статус загрузки данных из API для календаря, т.е. готовности календаря к отображению
@@ -40,7 +41,7 @@ const ExpensesAnalysis = () => {
     //получение данных и определение ранней записи для календаря при загрузке страницы
     useEffect(() => {
         setIsCalendarLoading(true);
-        const fetchData = fetchTransactions({ token: getToken() });
+        const fetchData = fetchTransactions({ token });
         fetchData
             .then((response) => {
                 setData(response);
@@ -71,7 +72,7 @@ const ExpensesAnalysis = () => {
             setIsLoading(true);
             setError(null);
             const newData = await getTransactionsInPeriod({
-                token: getToken(),
+                token,
                 period,
             });
             setPartialData(newData);
