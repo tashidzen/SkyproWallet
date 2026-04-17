@@ -2,7 +2,6 @@ import styled, { keyframes } from "styled-components";
 
 const SSection = styled.section`
     border-radius: 30px;
-    max-height: calc(100vh - 260px);
     box-shadow: 0 20px 67px -12px rgba(0, 0, 0, 0.13);
     background-color: #fff;
     flex: 0 0 379px;
