@@ -19,6 +19,10 @@ const Smain = styled.main`
         padding-inline: 16px;
         padding-bottom: 16px;
     }
+    @media (max-width: 768px) {
+        background-color: #fff;
+        height: calc(100vh - 54px);
+    }
 `;
 
 const SanalysTitle = styled.h1`
@@ -35,7 +39,7 @@ const SanalysTitle = styled.h1`
         margin-top: 28px;
         margin-bottom: 0px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 768px) {
         font-size: 24px;
         margin-top: 24px;
         margin-bottom: 0px;
@@ -49,6 +53,16 @@ const SsectionWrapper = styled.div`
     min-height: 0;
     @media (max-width: 1100px) {
         gap: 16px;
+    }
 `;
 
-export { Swrapper, Smain, SanalysTitle, SsectionWrapper };
+const SbuttonWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    height: 87px;
+    box-shadow: 0 -20px 67px -12px rgba(0, 0, 0, 0.13);
+`;
+
+export { Swrapper, Smain, SanalysTitle, SsectionWrapper, SbuttonWrapper };

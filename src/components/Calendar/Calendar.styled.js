@@ -10,6 +10,12 @@ const SSection = styled.section`
     flex-direction: column;
     overflow: clip;
     position: relative;
+    @media (max-width: 768px) {
+        box-shadow: none;
+        border-radius: 0px;
+        gap: 24px;
+        padding: 0;
+    }
 `;
 
 const SCalendarOverlay = styled.div`
@@ -59,12 +65,24 @@ const SCalendarHeader = styled.div`
     width: 100%;
     border-bottom: 1px solid #999;
     padding: 32px 32px 0px 32px;
+    @media (max-width: 768px) {
+        border-radius: 0px;
+        padding: 0;
+        height: auto;
+    }
 `;
 
 const SCalendarTitle = styled.h2`
     font-weight: 700;
     font-size: 24px;
     color: #000;
+`;
+
+const SCalendarLink = styled.a`
+    margin-top: 24px;
+    font-size: 12px;
+    color: #999999;
+    text-decoration: none;
 `;
 
 const SCalendarDayNames = styled.div`
@@ -157,4 +175,5 @@ export {
     SCalendarOverlayError,
     SCalendarOverlayLoading,
     SCalendarOverlayLoadingSpan,
+    SCalendarLink,
 };

@@ -1,7 +1,9 @@
 import Calendar from "../Calendar/Calendar";
 import Diagram from "../Diagram/Diagram";
+import Button from "../button/Button";
 import {
     SanalysTitle,
+    SbuttonWrapper,
     Smain,
     SsectionWrapper,
     Swrapper,
@@ -13,7 +15,7 @@ import { getTransactionsInPeriod, fetchTransactions } from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
 
 const ExpensesAnalysis = () => {
-    const { token } = useContext(AuthContext); 
+    const { token } = useContext(AuthContext);
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false); //статус загрузки данных из API
     const [isCalendarLoading, setIsCalendarLoading] = useState(true); //статус загрузки данных из API для календаря, т.е. готовности календаря к отображению
@@ -22,6 +24,26 @@ const ExpensesAnalysis = () => {
     const [partialData, setPartialData] = useState(null); // данные за пределённый период, полученные по запросу из API
     const [startDate, setStartDate] = useState(startOfDay(new Date()));
     const [endDate, setEndDate] = useState(endOfDay(new Date()));
+    const [draftStartDate, setDraftStartDate] = useState(
+        startOfDay(new Date()),
+    ); //черновик начальной даты для ручного выбора диапазона дат в календаре
+    const [draftEndDate, setDraftEndDate] = useState(endOfDay(new Date())); //черновик конечной даты для ручного выбора диапазона дат в календаре
+
+    const initialLayout = window.innerWidth < 768 ? "stacked" : "split";
+    const [view, setView] = useState(() =>
+        initialLayout === "stacked" ? "diagram" : "split",
+    );
+    const isSplit = view === "split";
+    const pickDateMode = isSplit ? "auto" : "manual"; //выбор диапазона автоматически после второго клика или вручную по кнопке "Выбрать период"
+
+    const toggleView = () => {
+        if (view === "diagram") {
+            setView("calendar");
+        } else if (view === "calendar") {
+            setView("diagram");
+        }
+    };
+
     const setDiapazon = (date1, date2) => {
         let start = null;
         let end = null;
@@ -36,6 +58,21 @@ const ExpensesAnalysis = () => {
         end.setHours(23, 59, 59, 999);
         setStartDate(start);
         setEndDate(end);
+    };
+
+    const onDraftChange = (date1, date2) => {
+        if (pickDateMode === "auto") {
+            setDiapazon(date1, date2);
+        } else {
+            //в режиме ручного выбора диапазона даты сохраняются в черновике, а при клике на кнопку "Выбрать период" устанавливаются в основной стейт и отправляется запрос на получение данных за этот период
+            setDraftStartDate(date1);
+            setDraftEndDate(date2);
+        }
+    };
+
+    const onClickSetDiapazon = () => {
+        setDiapazon(draftStartDate, draftEndDate);
+        toggleView();
     };
 
     //получение данных и определение ранней записи для календаря при загрузке страницы
@@ -99,23 +136,46 @@ const ExpensesAnalysis = () => {
     return (
         <Swrapper>
             <Smain>
-                <SanalysTitle>Анализ расходов</SanalysTitle>
+                {view === "diagram" && (
+                    <SanalysTitle>Анализ расходов</SanalysTitle>
+                )}
                 <SsectionWrapper>
-                    <Calendar
-                        earlyRecord={earlyRecord}
-                        startDate={startDate}
-                        endDate={endDate}
-                        setDiapazon={setDiapazon}
-                        isLoading={isCalendarLoading}
-                        error={isCalendarError}
-                    />
-                    <Diagram
-                        data={partialData}
-                        isLoading={isLoading}
-                        error={error}
-                        period={{ start: startDate, end: endDate }}
-                    />
+                    {(isSplit || view === "calendar") && (
+                        <Calendar
+                            earlyRecord={earlyRecord}
+                            startDate={startDate}
+                            endDate={endDate}
+                            isLoading={isCalendarLoading}
+                            error={isCalendarError}
+                            isSplit={isSplit}
+                            toggleView={toggleView}
+                            onDraftChange={onDraftChange}
+                        />
+                    )}
+                    {(isSplit || view === "diagram") && (
+                        <Diagram
+                            data={partialData}
+                            isLoading={isLoading}
+                            error={error}
+                            period={{ start: startDate, end: endDate }}
+                        />
+                    )}
                 </SsectionWrapper>
+                {!isSplit && (
+                    <SbuttonWrapper>
+                        {view === "diagram" ? (
+                            <Button
+                                onClick={toggleView}
+                                text="Выбрать другой период"
+                            />
+                        ) : (
+                            <Button
+                                onClick={onClickSetDiapazon}
+                                text="Выбрать период"
+                            />
+                        )}
+                    </SbuttonWrapper>
+                )}
             </Smain>
         </Swrapper>
     );
