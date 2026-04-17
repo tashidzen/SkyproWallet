@@ -30,6 +30,10 @@ export const SButton = styled.button`
   &:hover:not(:disabled) {
     background-color: #7334EA;
   }
+
+  @media (max-width: 767px) {
+    width: 343px;
+  }
 `;
 
 export const PrimaryButton = styled(SButton)`
@@ -38,6 +42,10 @@ export const PrimaryButton = styled(SButton)`
 
   &:hover:not(:disabled) {
     background-color: #7334EA;
+  }
+
+  @media (max-width: 767px) {
+    width: 343px; 
   }
 `;
 
@@ -50,5 +58,9 @@ export const SecondaryButton = styled(SButton)`
   &:hover:not(:disabled) {
     background-color: #33399b;
     color: #FFFFFF;
+  }
+
+  @media (max-width: 767px) {
+    width: 343px;
   }
 `;
