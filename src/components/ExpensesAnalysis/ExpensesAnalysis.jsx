@@ -29,7 +29,7 @@ const ExpensesAnalysis = () => {
     ); //черновик начальной даты для ручного выбора диапазона дат в календаре
     const [draftEndDate, setDraftEndDate] = useState(endOfDay(new Date())); //черновик конечной даты для ручного выбора диапазона дат в календаре
 
-    const initialLayout = window.innerWidth < 768 ? "stacked" : "split";
+    const initialLayout = window.innerWidth < 767 ? "stacked" : "split";
     const [view, setView] = useState(() =>
         initialLayout === "stacked" ? "diagram" : "split",
     );
@@ -136,7 +136,7 @@ const ExpensesAnalysis = () => {
     return (
         <Swrapper>
             <Smain>
-                {view === "diagram" && (
+                {(view === "diagram" || isSplit) && (
                     <SanalysTitle>Анализ расходов</SanalysTitle>
                 )}
                 <SsectionWrapper>

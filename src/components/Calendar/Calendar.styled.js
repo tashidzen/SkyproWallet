@@ -14,7 +14,8 @@ const SSection = styled.section`
         box-shadow: none;
         border-radius: 0px;
         gap: 24px;
-        padding: 0;
+        flex: 0 0 375px;
+        margin: 0 auto;
     }
 `;
 
@@ -67,7 +68,7 @@ const SCalendarHeader = styled.div`
     padding: 32px 32px 0px 32px;
     @media (max-width: 768px) {
         border-radius: 0px;
-        padding: 0;
+        padding: 0 16px;
         height: auto;
     }
 `;
@@ -79,7 +80,9 @@ const SCalendarTitle = styled.h2`
 `;
 
 const SCalendarLink = styled.a`
+    display: inline-block;
     margin-top: 24px;
+    margin-bottom: 12px;
     font-size: 12px;
     color: #999999;
     text-decoration: none;
@@ -89,6 +92,10 @@ const SCalendarDayNames = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 24px;
+    @media (max-width: 768px) {
+        margin-top: 16px;
+        gap: 6px;
+    }
 `;
 
 const SCalendarDayName = styled.div`
@@ -100,6 +107,9 @@ const SCalendarDayName = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 768px) {
+        width: 44px;
+    }
 `;
 
 const SCalendarMonths = styled.div`
@@ -124,6 +134,9 @@ const SCalendarMonths = styled.div`
         border-radius: 30px;
         /* min-height: 100px; */
     }
+    @media (max-width: 768px) {
+        padding: 0 10px;
+    }
 `;
 
 const SCalendarMonth = styled.div`
@@ -142,6 +155,10 @@ const SCalendarMonthDays = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 6px;
+    @media (max-width: 768px) {
+        gap: 5px;
+        justify-content: space-between;
+    }
 `;
 
 const SCalendarMonthDay = styled.div`
@@ -158,6 +175,10 @@ const SCalendarMonthDay = styled.div`
     opacity: ${(props) => (props.$isOtherMonth ? 0 : 1)};
     cursor: ${(props) => (props.$isOtherMonth ? "default" : "pointer")};
     pointer-events: ${(props) => (props.$isOtherMonth ? "none" : "auto")};
+    @media (max-width: 768px) {
+        width: 44px;
+        height: 44px;
+    }
 `;
 
 export {

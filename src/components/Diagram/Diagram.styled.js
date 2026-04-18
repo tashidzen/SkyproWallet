@@ -17,7 +17,7 @@ const SDiagramSection = styled.section`
         box-shadow: none;
         border-radius: 0px;
         gap: 24px;
-        padding: 0;
+        padding: 16px 16px;
     }
 `;
 

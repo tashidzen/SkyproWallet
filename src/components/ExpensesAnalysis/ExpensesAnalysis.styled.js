@@ -22,6 +22,8 @@ const Smain = styled.main`
     @media (max-width: 768px) {
         background-color: #fff;
         height: calc(100vh - 54px);
+        padding: 0;
+        gap: 0px;
     }
 `;
 
@@ -43,6 +45,7 @@ const SanalysTitle = styled.h1`
         font-size: 24px;
         margin-top: 24px;
         margin-bottom: 0px;
+        padding: 0 16px;
     }
 `;
 
@@ -63,6 +66,8 @@ const SbuttonWrapper = styled.div`
     background-color: #fff;
     height: 87px;
     box-shadow: 0 -20px 67px -12px rgba(0, 0, 0, 0.13);
+    position: relative;
+    z-index: 2;
 `;
 
 export { Swrapper, Smain, SanalysTitle, SsectionWrapper, SbuttonWrapper };
