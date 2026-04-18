@@ -9,10 +9,11 @@ import {
     Swrapper,
 } from "./ExpensesAnalysis.styled";
 // import { temporaryData } from "../../data";
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { endOfDay, format, startOfDay } from "date-fns";
 import { getTransactionsInPeriod, fetchTransactions } from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const ExpensesAnalysis = () => {
     const { token } = useContext(AuthContext);
@@ -29,12 +30,21 @@ const ExpensesAnalysis = () => {
     ); //черновик начальной даты для ручного выбора диапазона дат в календаре
     const [draftEndDate, setDraftEndDate] = useState(endOfDay(new Date())); //черновик конечной даты для ручного выбора диапазона дат в календаре
 
-    const initialLayout = window.innerWidth < 767 ? "stacked" : "split";
+    const isMobile = useMediaQuery("(max-width: 767px)");
     const [view, setView] = useState(() =>
-        initialLayout === "stacked" ? "diagram" : "split",
+        isMobile ? "diagram" : "split",
     );
     const isSplit = view === "split";
     const pickDateMode = isSplit ? "auto" : "manual"; //выбор диапазона автоматически после второго клика или вручную по кнопке "Выбрать период"
+
+    useEffect(() => {
+        if (isMobile) {
+            setView("diagram");
+        } else {
+            setView("split");
+        }
+    }, [isMobile]);
+
 
     const toggleView = () => {
         if (view === "diagram") {
