@@ -46,6 +46,7 @@ export const SNewExpenseFormLink = styled.a`
     margin-top: 32px;
     margin-bottom: 25px;
     font-size: 12px;
+    font-weight: 600;
     color: #000000;
     text-decoration: none;
     align-items: center;

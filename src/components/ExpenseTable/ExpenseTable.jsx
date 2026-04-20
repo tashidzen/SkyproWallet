@@ -3,6 +3,7 @@ import {
     SnameColumn,
     Stable,
     StBody,
+    SButtonContainer,
 } from "./ExpenseTable.styled.js";
 import { EXPENSE_CATEGORIES } from "../../constants/categories.jsx";
 import useMediaQuery from "../../hooks/useMediaQuery";
@@ -50,11 +51,13 @@ function ExpenseTable({
         <>
             <Stable>
                 <thead>
-                    <tr>
-                        <SheaderTable colSpan={isMobile ? 4 : 5}>
-                            Таблица расходов
-                        </SheaderTable>
-                    </tr>
+                    {!isMobile && (
+                        <tr>
+                            <SheaderTable colSpan={5}>
+                                Таблица расходов
+                            </SheaderTable>
+                        </tr>
+                    )}
                     <SnameColumn>
                         <th>Описание</th>
                         <th>Категория</th>
@@ -66,13 +69,19 @@ function ExpenseTable({
                 <StBody>
                     {loading ? (
                         <tr key="loading">
-                            <td colSpan="5" style={{ textAlign: "center" }}>
+                            <td
+                                colSpan={isMobile ? 4 : 5}
+                                style={{ textAlign: "center" }}
+                            >
                                 Загрузка транзакций...
                             </td>
                         </tr>
                     ) : transactions.length === 0 ? (
                         <tr key="empty">
-                            <td colSpan="5" style={{ textAlign: "center" }}>
+                            <td
+                                colSpan={isMobile ? 4 : 5}
+                                style={{ textAlign: "center" }}
+                            >
                                 Нет транзакций
                             </td>
                         </tr>
@@ -91,6 +100,10 @@ function ExpenseTable({
                                         isMobile && selectedRow === item._id
                                             ? "#F1EBFD"
                                             : "transparent",
+                                    color:
+                                        isMobile && selectedRow === item._id
+                                            ? "#7334EA"
+                                            : "#000",
                                 }}
                             >
                                 <td>{item.description}</td>
@@ -128,14 +141,24 @@ function ExpenseTable({
                 </StBody>
             </Stable>
             {isMobile && selectedRow && (
-                <Button
-                    onClick={() => {
-                        onDelete(selectedRow);
-                        setSelectedRow(null);
-                    }}
-                >
-                    Удалить расход
-                </Button>
+                <SButtonContainer>
+                    <Button
+                        text="Удалить расход"
+                        width="343px"
+                        style={{
+                            fontSize: "12px",
+                            bottom: "20px",
+                            left: "50%",
+                            margin: "0 auto",
+                            fontWeight: "600",
+                            letterSpacing: "0px",
+                        }}
+                        onClick={() => {
+                            onDelete(selectedRow);
+                            setSelectedRow(null);
+                        }}
+                    />
+                </SButtonContainer>
             )}
         </>
     );

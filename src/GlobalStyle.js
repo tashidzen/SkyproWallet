@@ -12,6 +12,10 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 15px;
         background-color: #f4f5f6;
         color: #000000;
+
+        @media (max-width: 376px) {
+            background-color: #FFFFFF;
+        }
     }
     
     table {

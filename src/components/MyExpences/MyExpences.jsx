@@ -12,17 +12,17 @@ import {
     postTransaction,
     deleteTransaction,
 } from "../../services/api";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { EXPENSE_CATEGORIES } from "../../constants/categories";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import Button from "../button/Button";
+import { AuthContext } from "../../context/AuthContext";
 
 function MyExpences() {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isAdding, setIsAdding] = useState(false);
 
-    const getToken = () => localStorage.getItem("tokenAuth");
+    const { token } = useContext(AuthContext);
 
     const isMobile = useMediaQuery("(max-width: 768px)");
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -33,7 +33,7 @@ function MyExpences() {
         setLoading(true);
         try {
             const allTransactions = await fetchTransactions({
-                token: getToken(),
+                token,
             });
             setTransactions(allTransactions);
         } catch (error) {
@@ -80,7 +80,7 @@ function MyExpences() {
             console.log("Отправляем:", newTransaction);
 
             const updatedTransaction = await postTransaction({
-                token: getToken(),
+                token,
                 transaction: newTransaction,
             });
             console.log("Ответ от сервера:", updatedTransaction);
@@ -152,7 +152,7 @@ function MyExpences() {
     const delTransaction = async (id) => {
         try {
             await deleteTransaction({
-                token: getToken(),
+                token,
                 id: id,
             });
 
