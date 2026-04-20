@@ -11,10 +11,20 @@ const Swrapper = styled.div`
 const Smain = styled.main`
     padding-inline: calc(50% - 600px);
     height: calc(100vh - 64px);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto 1fr;
-    column-gap: 32px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    @media (max-width: 1232px) {
+        padding-inline: 16px;
+        padding-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+        background-color: #fff;
+        height: calc(100vh - 54px);
+        padding: 0;
+        gap: 0px;
+    }
 `;
 
 const SanalysTitle = styled.h1`
@@ -24,9 +34,40 @@ const SanalysTitle = styled.h1`
     font-size: 32px;
     line-height: 150%;
     color: #000;
-    grid-row: 1;
-    grid-column: 1 / -1;
-    justify-self: stretch;
+    align-self: stretch;
+
+    @media (max-width: 1100px) {
+        font-size: 28px;
+        margin-top: 28px;
+        margin-bottom: 0px;
+    }
+    @media (max-width: 768px) {
+        font-size: 24px;
+        margin-top: 24px;
+        margin-bottom: 0px;
+        padding: 0 16px;
+    }
 `;
 
-export { Swrapper, Smain, SanalysTitle };
+const SsectionWrapper = styled.div`
+    display: flex;
+    gap: 32px;
+    flex: 1;
+    min-height: 0;
+    @media (max-width: 1100px) {
+        gap: 16px;
+    }
+`;
+
+const SbuttonWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    height: 87px;
+    box-shadow: 0 -20px 67px -12px rgba(0, 0, 0, 0.13);
+    position: relative;
+    z-index: 2;
+`;
+
+export { Swrapper, Smain, SanalysTitle, SsectionWrapper, SbuttonWrapper };

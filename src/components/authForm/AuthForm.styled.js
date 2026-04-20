@@ -8,6 +8,20 @@ export const SPageBackground = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 767px) {
+        background-color: #ffffff;
+        padding: 0 16px;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        min-height: calc(100vh - 70px);
+        padding: 20px;
+    }
+
+    @media (min-width: 1024px) {
+        padding: 0;
+    }
 `;
 
 export const SWrapper = styled.div`
@@ -24,6 +38,24 @@ export const SWrapper = styled.div`
     gap: 24px 0px;
     min-height: fit-content;
     transform: translateY(-32px);
+
+    @media (max-width: 767px) {
+        width: 343px;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        transform: translateY(-32px);
+    }
+
+    @media (min-width: 1024px) {
+        width: 379px;
+        padding: 32px;
+        transform: translateY(-32px);
+        margin: 0 auto;
+    }
 `;
 
 export const STitle = styled.p`
@@ -38,22 +70,28 @@ export const SInputWrapper = styled.div`
     flex-direction: column;
     gap: 12px;
     margin-bottom: 24px;
+
+    @media (max-width: 767px) {
+        width: 343px;
+    }
 `;
 
-// Обновлённый InputWrapper с поддержкой ошибки
 export const InputWrapper = styled.div`
     position: relative;
     ${(props) =>
         props.$hasError &&
         `
-    background-color: #ffe6e6; /* светло‑красный фон */
-    border: 1px solid #cc0000; /* тёмно‑красная обводка */
+    background-color: #ffe6e6; 
+    border: 1px solid #cc0000; 
     border-radius: 8px;
     padding: 4px;
   `}
+
+    @media (max-width: 767px) {
+        width: 343px;
+    }
 `;
 
-// Обновлённый SInput с поддержкой ошибки
 export const SInput = styled.input`
     width: 100%;
     padding: 12px 16px;
@@ -80,6 +118,10 @@ export const SInput = styled.input`
       border: 1px solid #7334EA;
     `}
     }
+
+    @media (max-width: 767px) {
+        width: 343px;
+    }
 `;
 
 export const SFooterWrapper = styled.div`
@@ -90,6 +132,10 @@ export const SFooterWrapper = styled.div`
     align-items: center;
     line-height: 150%;
     margin-top: 24px;
+
+    @media (max-width: 767px) {
+        width: 343px;
+    }
 `;
 
 export const SFooterText = styled.p`
