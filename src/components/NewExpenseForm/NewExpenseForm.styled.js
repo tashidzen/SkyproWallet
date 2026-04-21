@@ -30,9 +30,9 @@ thead th {
 padding: 0;
 width: 100%; 
  
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
 padding: 0 0 0 18px;
-}
+} */
 }
 
 tbody tr {
@@ -44,7 +44,7 @@ export const FormTitle = styled.h3`
 font-weight: 700;
 font-size: 22px;
 line-height: 100%;
-margin: 0 0 24px 0;
+margin: 12px 0 24px 0;
 color: #333;
 font-family: 'Montserrat', sans-serif;
 text-align: left; 
@@ -58,9 +58,9 @@ margin: 0 0 16px 0;
 color: #333;
 font-family: 'Montserrat', sans-serif; 
  
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
 padding: 0 0 0 18px;
-}
+} */
 `;
 
 export const FormInput = styled.input`
@@ -103,7 +103,7 @@ padding: 8px;
 @media (max-width: 768px) {
 width: 100%;
 max-width: 100%; 
-margin: 0 0 24px 18px;
+margin: 0 0 24px 0px;
 }
 `;
 
@@ -147,7 +147,7 @@ padding: 8px;
 @media (max-width: 768px) {
 width: 100%;
 max-width: 100%; 
-margin: 0 0 24px 18px;
+margin: 0 0 24px 0;
 }
 `;
 
@@ -233,7 +233,7 @@ max-width: none;
 height: 36px;
 padding: 8px 12px;
 font-size: 10px; 
-margin: 0 0 24px 18px;
+margin: 0 0 24px 0;
 }
 `;
 
@@ -255,6 +255,6 @@ padding-bottom: 20px;
 max-width: 100%;
 padding-bottom: 16px;
 justify-content: flex-start; 
-padding-left: 18px;
+padding-left: 0;
 }
 `;

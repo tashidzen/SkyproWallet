@@ -1,82 +1,79 @@
 import styled from "styled-components";
 
 export const Stable = styled.table`
-  max-width: 789px;
-  width: 100%;
-  height: 618px;
-  font-size: 12px;
-  box-shadow: 0px 20px 67px -12px #00000021;
-  margin-right: 0;
-  border-spacing: 32px 14px;
-  position: relative;
-  display: block;
-
-  @media (max-width: 1024px) {
-    max-width: 750px;
-  }
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    border-spacing: 16px 8px;
-
-    thead::after {
-    top: 100px !important; /* Принудительное применение */
-      }
-  }
-
-  thead {
-    position: relative;
     max-width: 789px;
     width: 100%;
-    display: table;
-    margin-bottom: -18px;
+    height: 618px;
+    font-size: 12px;
+    box-shadow: 0px 20px 67px -12px #00000021;
+    margin-right: 0;
+    border-spacing: 32px 14px;
+    position: relative;
+    display: block;
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: 114px;
-      left: 0px;
-      right: 0px;
-      height: 0.5px;
-      background-color: #999999;
+    @media (max-width: 1024px) {
+        max-width: 750px;
+        border-spacing: 24px 14px;
     }
 
-    th {
-      &:nth-child(1) {
-        width: 19.5%;
-      }
-      &:nth-child(2) {
-        width: 19.5%;
-      }
-      &:nth-child(3) {
-        width: 19.14%;
-      }
-      &:nth-child(4) {
-        width: 22.35%;
-      }
-      &:nth-child(5) {
-        width: 1.8%;
-      }
+    @media (max-width: 768px) {
+        max-width: 100%;
+        border-spacing: 16px 12px;
     }
-  }
 
-  td {
-    &:nth-child(1) {
-      width: 23.9%;
+    thead {
+        position: relative;
+        max-width: 789px;
+        width: 100%;
+        display: table;
+        margin-bottom: -18px;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 114px;
+            left: 0px;
+            right: 0px;
+            height: 0.5px;
+            background-color: #999999;
+        }
+
+        th {
+            &:nth-child(1) {
+                width: 19.5%;
+            }
+            &:nth-child(2) {
+                width: 19.5%;
+            }
+            &:nth-child(3) {
+                width: 19.14%;
+            }
+            &:nth-child(4) {
+                width: 22.35%;
+            }
+            &:nth-child(5) {
+                width: 1.8%;
+            }
+        }
     }
-    &:nth-child(2) {
-      width: 23.9%;
+
+    td {
+        &:nth-child(1) {
+            width: 23.9%;
+        }
+        &:nth-child(2) {
+            width: 23.9%;
+        }
+        &:nth-child(3) {
+            width: 24.2%;
+        }
+        &:nth-child(4) {
+            width: 27%;
+        }
+        &:nth-child(5) {
+            width: 1%;
+        }
     }
-    &:nth-child(3) {
-      width: 24.2%;
-    }
-    &:nth-child(4) {
-      width: 27%;
-    }
-    &:nth-child(5) {
-      width: 1%;
-    }
-  }
 `;
 
 export const SheaderTable = styled.th`
