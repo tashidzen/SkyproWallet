@@ -1,3 +1,8 @@
+
+
+  
+  
+    
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
@@ -39,7 +44,8 @@ export const SHeaderBlock = styled.div`
   }
 
   @media (max-width: 767px) {
-    padding: 0; /* Убираем боковые отступы */
+    padding: 0; 
+    height: 54px; /* Убираем боковые отступы */
   }
 `;
 
