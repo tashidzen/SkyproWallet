@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Swrapper,
-  Stitle,
-  SmobileTitle,
+  Stitle, 
+  SNewExpenseFormtitle,
+  SmobileTitle,  
+  SmobileNewExpenseFormTitle,
+  SExpenseTableLink,
   SNewExpenseFormLink,
-  TablesContainer,
+  TablesContainer, 
 } from "./MyExpences.styled";
 import ExpenseTable from "../ExpenseTable/ExpenseTable";
 import NewExpenseForm from "../NewExpenseForm/NewExpenseForm";
@@ -183,10 +186,10 @@ function MyExpences() {
         </>
       ) : isOnNewExpensePage ? (
         <>
-          <SmobileTitle>
-            <Stitle>Новый расход</Stitle>
+          <SmobileNewExpenseFormTitle>
+            <SNewExpenseFormtitle>Новый расход</SNewExpenseFormtitle>
             {/* Кнопка «Мои расходы» — возврат к таблице расходов */}
-            <SNewExpenseFormLink
+            <SExpenseTableLink
               href="#/"
               onClick={(e) => {
                 e.preventDefault();
@@ -206,12 +209,12 @@ function MyExpences() {
                   />
               </svg>
               Мои расходы
-            </SNewExpenseFormLink>
-          </SmobileTitle>
+            </SExpenseTableLink>
+          </SmobileNewExpenseFormTitle>
           <NewExpenseForm
             onSubmit={onAddTransaction}
             isSubmitting={isAdding}
-          />
+          /> 
         </>
       ) : (
         <>
@@ -250,4 +253,4 @@ function MyExpences() {
   );
 }
 
-export default MyExpences;
+export default MyExpences; 

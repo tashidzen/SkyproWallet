@@ -92,7 +92,11 @@ export default function Header() {
 
           {/* Кнопка-гамбургер для мобильных (< 768px) */}
           <SHeaderMenuButton onClick={toggleMobileMenu}>
-            {getCurrentPageTitle()} ▼
+            {getCurrentPageTitle()}  
+            <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.03101 5.25L-8.29875e-05 -9.41288e-08L6.0621 4.35844e-07L3.03101 5.25Z" fill="black"/>
+            </svg>
+
           </SHeaderMenuButton>
 
           {/* Выход — виден на всех устройствах */}

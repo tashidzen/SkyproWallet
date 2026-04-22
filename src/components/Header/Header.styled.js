@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 export const SHeader = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; 
 `;
 
 export const SHeaderContainer = styled.div`
@@ -14,7 +14,7 @@ export const SHeaderContainer = styled.div`
 
    @media (min-width: 1024px) and (max-width: 1439px) {
     max-width: 100%;
-    padding: 0 15px; /* Уменьшаем отступы на больших экранах */
+    padding: 0 16px; /* Уменьшаем отступы на больших экранах */
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
@@ -22,7 +22,8 @@ export const SHeaderContainer = styled.div`
   }
 
   @media (max-width: 767px) {
-    padding: 0 16px; /* Отступы для мобильных */
+    padding: 0 16px; /* Отступы для мобильных */ 
+    background-color: #F4F5F6;
   }
 `;
 
@@ -144,7 +145,8 @@ export const SHeaderMenuButton = styled.button`
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    color: #7334EA;
+    color: #7334EA; 
+    gap: 8px;
     text-decoration: underline;
     text-underline-offset: 4px;
     padding: 12px 20px; /* Корректные отступы вокруг текста */
