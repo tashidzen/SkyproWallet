@@ -1,3 +1,7 @@
+
+  
+  
+   
 import styled from 'styled-components';
 
 export const Stable = styled.table`
@@ -19,12 +23,12 @@ export const Stable = styled.table`
 
   @media (max-width: 767px) {
     width: 100%;
-    padding: 0 16px;
+    padding: 0 16px 87px;
     box-shadow: none;
     border-radius: 0;
     background-color: #FFFFFF;
     height: auto;
-    margin-bottom: 87px; /* Отступ под фиксированную панель */
+   
   }
 
   thead th {
@@ -307,8 +311,8 @@ export const SFixedBottom = styled.div`
   left: 0;
   width: 100%;
   height: 87px;
-  background-color: #ffffff;
-  box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff; 
+  box-shadow: 0px -20px 67px -12px #00000021;
   padding: 12px 16px;
   box-sizing: border-box;
   display: flex;

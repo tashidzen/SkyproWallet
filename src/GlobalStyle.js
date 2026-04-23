@@ -11,7 +11,11 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Montserrat', sans-serif;
         font-size: 15px;
         background-color: #f4f5f6;
-        color: #000000;
+        color: #000000; 
+         
+    @media (max-width: 767px) {
+     background-color: #ffffff;
+    }
     }
     
     table {
