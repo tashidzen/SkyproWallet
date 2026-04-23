@@ -44,7 +44,7 @@ export const SmobileNewExpenseFormTitle = styled.div`
         display: flex;
         flex-wrap: nowrap;
         gap: 58px;
-        flex-direction: row; 
+        flex-direction: row;
     }
 `;
 
@@ -61,7 +61,7 @@ export const Stitle = styled.h1`
         letter-spacing: 0px;
         font-size: 24px;
         line-height: 100%;
-        margin-left: 0;
+        margin-left: 16px;
         margin-bottom: 22px;
         margin-top: 24px;
     }  
