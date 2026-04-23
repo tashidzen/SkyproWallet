@@ -91,17 +91,7 @@ export const SHeaderLink = styled(NavLink)`
     text-decoration: underline;
     font-weight: 600;
   }
-
-export const SHeaderLogOut = styled.a`
-    color: #000000;
-    font-weight: 600;
-  }
-
-  @media (max-width: 1024px) {
-    padding: 6px 10px;
-    font-size: 14px;
-  }
-`;
+  `;
 
 export const SHeaderLogOut = styled.a`
   color: #000000;

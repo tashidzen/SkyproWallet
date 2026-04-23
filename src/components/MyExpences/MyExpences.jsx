@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Swrapper,
@@ -17,7 +17,6 @@ import {
   postTransaction,
   deleteTransaction,
 } from "../../services/api";
-import { useState, useEffect, useContext } from "react";
 import { EXPENSE_CATEGORIES } from "../../constants/categories";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { AuthContext } from "../../context/AuthContext";
