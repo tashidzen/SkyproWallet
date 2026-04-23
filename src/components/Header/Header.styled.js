@@ -122,8 +122,8 @@ export const SHeaderLogOut = styled.a`
     padding: 12px 0;
   }
 
-  @media (max-width: 375px) {
-    font-size: 13px;
+  @media (max-width: 376px) {
+    font-size: 12px;
     padding: 6px 0 6px 0;
   }
 `;
@@ -153,7 +153,7 @@ export const SHeaderMenuButton = styled.button`
     text-overflow: ellipsis;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 376px) {
     padding: 8px;
     font-size: 12px;
   }
