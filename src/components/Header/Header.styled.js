@@ -92,9 +92,8 @@ export const SHeaderLink = styled(NavLink)`
     font-weight: 600;
   }
 
-  &.active {
-    color: #7334EA;
-    text-decoration: underline;
+export const SHeaderLogOut = styled.a`
+    color: #000000;
     font-weight: 600;
   }
 

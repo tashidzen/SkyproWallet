@@ -3,8 +3,12 @@ import {
     SnameColumn,
     Stable,
     StBody,
+    SButtonContainer,
 } from "./ExpenseTable.styled.js";
 import { EXPENSE_CATEGORIES } from "../../constants/categories.jsx";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import { useState } from "react";
+import Button from "../button/Button.jsx";
 
 function ExpenseTable({
     transactions = [],
@@ -12,6 +16,9 @@ function ExpenseTable({
     currency = "₽",
     loading = false,
 }) {
+    const isMobile = useMediaQuery("(max-width: 768px)");
+    const [selectedRow, setSelectedRow] = useState(null);
+
     const formatDate = (date) => {
         if (!date) return "";
         if (date.includes(".")) {
@@ -41,65 +48,119 @@ function ExpenseTable({
     };
 
     return (
-        <Stable>
-            <thead>
-                <tr>
-                    <SheaderTable colSpan="5">Таблица расходов</SheaderTable>
-                </tr>
-                <SnameColumn>
-                    <th>Описание</th>
-                    <th>Категория</th>
-                    <th>Дата</th>
-                    <th>Сумма</th>
-                    <th></th>
-                </SnameColumn>
-            </thead>
-            <StBody>
-                {loading ? (
-                    <tr key="loading">
-                        <td colSpan="5" style={{ textAlign: "center" }}>
-                            Загрузка транзакций...
-                        </td>
-                    </tr>
-                ) : transactions.length === 0 ? (
-                    <tr key="empty">
-                        <td colSpan="5" style={{ textAlign: "center" }}>
-                            Нет транзакций
-                        </td>
-                    </tr>
-                ) : (
-                    transactions.map((item) => (
-                        <tr key={item._id}>
-                            <td>{item.description}</td>
-                            <td>{getCategoryName(item.category)}</td>
-                            <td>{formatDate(item.date)}</td>
-                            <td>
-                                {item.sum} {currency}
-                            </td>
-                            <td onClick={() => onDelete(item._id)} 
-                                style={{ cursor: 'pointer' }}>
-                                <svg
-                                    width="12"
-                                    height="12" 
-                                    viewBox="0 0 12 12"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M9.62 2.79003H9.42L7.73 1.10003C7.595 0.965029 7.375 0.965029 7.235 1.10003C7.1 1.23503 7.1 1.45503 7.235 1.59503L8.43 2.79003H3.57L4.765 1.59503C4.9 1.46003 4.9 1.24003 4.765 1.10003C4.63 0.965029 4.41 0.965029 4.27 1.10003L2.585 2.79003H2.385C1.935 2.79003 1 2.79003 1 4.07003C1 4.55503 1.1 4.87503 1.31 5.08503C1.43 5.21003 1.575 5.27503 1.73 5.31003C1.875 5.34503 2.03 5.35003 2.18 5.35003H9.82C9.975 5.35003 10.12 5.34003 10.26 5.31003C10.68 5.21003 11 4.91003 11 4.07003C11 2.79003 10.065 2.79003 9.62 2.79003Z"
-                                        fill="#999999"
-                                    />
-                                    <path
-                                        d="M9.52502 6H2.43502C2.12502 6 1.89002 6.275 1.94002 6.58L2.36002 9.15C2.50002 10.01 2.87502 11 4.54002 11H7.34502C9.03002 11 9.33002 10.155 9.51002 9.21L10.015 6.595C10.075 6.285 9.84002 6 9.52502 6ZM5.30502 9.225C5.30502 9.42 5.15002 9.575 4.96002 9.575C4.76502 9.575 4.61002 9.42 4.61002 9.225V7.575C4.61002 7.385 4.76502 7.225 4.96002 7.225C5.15002 7.225 5.30502 7.385 5.30502 7.575V9.225ZM7.44502 9.225C7.44502 9.42 7.29002 9.575 7.09502 9.575C6.90502 9.575 6.74502 9.42 6.74502 9.225V7.575C6.74502 7.385 6.90502 7.225 7.09502 7.225C7.29002 7.225 7.44502 7.385 7.44502 7.575V9.225Z"
-                                        fill="#999999"
-                                    />
-                                </svg>
+        <>
+            <Stable>
+                <thead>
+                    {!isMobile && (
+                        <tr>
+                            <SheaderTable colSpan={5}>
+                                Таблица расходов
+                            </SheaderTable>
+                        </tr>
+                    )}
+                    <SnameColumn>
+                        <th>Описание</th>
+                        <th>Категория</th>
+                        <th>Дата</th>
+                        <th>Сумма</th>
+                        {!isMobile && <th></th>}
+                    </SnameColumn>
+                </thead>
+                <StBody>
+                    {loading ? (
+                        <tr key="loading">
+                            <td
+                                colSpan={isMobile ? 4 : 5}
+                                style={{ textAlign: "center" }}
+                            >
+                                Загрузка транзакций...
                             </td>
                         </tr>
-                    ))
-                )}
-            </StBody>
-        </Stable>
+                    ) : transactions.length === 0 ? (
+                        <tr key="empty">
+                            <td
+                                colSpan={isMobile ? 4 : 5}
+                                style={{ textAlign: "center" }}
+                            >
+                                Нет транзакций
+                            </td>
+                        </tr>
+                    ) : (
+                        transactions.map((item) => (
+                            <tr
+                                key={item._id}
+                                onClick={() => {
+                                    if (isMobile) {
+                                        setSelectedRow(item._id);
+                                    }
+                                }}
+                                style={{
+                                    cursor: isMobile ? "pointer" : "default",
+                                    backgroundColor:
+                                        isMobile && selectedRow === item._id
+                                            ? "#F1EBFD"
+                                            : "transparent",
+                                    color:
+                                        isMobile && selectedRow === item._id
+                                            ? "#7334EA"
+                                            : "#000",
+                                }}
+                            >
+                                <td>{item.description}</td>
+                                <td>{getCategoryName(item.category)}</td>
+                                <td>{formatDate(item.date)}</td>
+                                <td>
+                                    {item.sum} {currency}
+                                </td>
+                                {!isMobile && (
+                                    <td
+                                        onClick={() => onDelete(item._id)}
+                                        style={{ cursor: "pointer" }}
+                                    >
+                                        <svg
+                                            width="12"
+                                            height="12"
+                                            viewBox="0 0 12 12"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M9.62 2.79003H9.42L7.73 1.10003C7.595 0.965029 7.375 0.965029 7.235 1.10003C7.1 1.23503 7.1 1.45503 7.235 1.59503L8.43 2.79003H3.57L4.765 1.59503C4.9 1.46003 4.9 1.24003 4.765 1.10003C4.63 0.965029 4.41 0.965029 4.27 1.10003L2.585 2.79003H2.385C1.935 2.79003 1 2.79003 1 4.07003C1 4.55503 1.1 4.87503 1.31 5.08503C1.43 5.21003 1.575 5.27503 1.73 5.31003C1.875 5.34503 2.03 5.35003 2.18 5.35003H9.82C9.975 5.35003 10.12 5.34003 10.26 5.31003C10.68 5.21003 11 4.91003 11 4.07003C11 2.79003 10.065 2.79003 9.62 2.79003Z"
+                                                fill="#999999"
+                                            />
+                                            <path
+                                                d="M9.52502 6H2.43502C2.12502 6 1.89002 6.275 1.94002 6.58L2.36002 9.15C2.50002 10.01 2.87502 11 4.54002 11H7.34502C9.03002 11 9.33002 10.155 9.51002 9.21L10.015 6.595C10.075 6.285 9.84002 6 9.52502 6ZM5.30502 9.225C5.30502 9.42 5.15002 9.575 4.96002 9.575C4.76502 9.575 4.61002 9.42 4.61002 9.225V7.575C4.61002 7.385 4.76502 7.225 4.96002 7.225C5.15002 7.225 5.30502 7.385 5.30502 7.575V9.225ZM7.44502 9.225C7.44502 9.42 7.29002 9.575 7.09502 9.575C6.90502 9.575 6.74502 9.42 6.74502 9.225V7.575C6.74502 7.385 6.90502 7.225 7.09502 7.225C7.29002 7.225 7.44502 7.385 7.44502 7.575V9.225Z"
+                                                fill="#999999"
+                                            />
+                                        </svg>
+                                    </td>
+                                )}
+                            </tr>
+                        ))
+                    )}
+                </StBody>
+            </Stable>
+            {isMobile && selectedRow && (
+                <SButtonContainer>
+                    <Button
+                        text="Удалить расход"
+                        width="343px"
+                        style={{
+                            fontSize: "12px",
+                            bottom: "20px",
+                            left: "50%",
+                            margin: "0 auto",
+                            fontWeight: "600",
+                            letterSpacing: "0px",
+                        }}
+                        onClick={() => {
+                            onDelete(selectedRow);
+                            setSelectedRow(null);
+                        }}
+                    />
+                </SButtonContainer>
+            )}
+        </>
     );
 }
 

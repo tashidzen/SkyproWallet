@@ -1,7 +1,3 @@
-
-  
-  
-   
 import styled from 'styled-components';
 
 export const Stable = styled.table`
@@ -57,13 +53,13 @@ export const Stable = styled.table`
 `;
 
 export const FormTitle = styled.h3`
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 100%;
-  margin: 0 0 24px 0;
-  color: #333;
-  font-family: 'Montserrat', sans-serif;
-  text-align: left;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 100%;
+    margin: 0 0 24px 0;
+    color: #333;
+    font-family: "Montserrat", sans-serif;
+    text-align: left;
 `;
 
 export const FieldLabel = styled.div`
