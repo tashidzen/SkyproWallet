@@ -21,6 +21,10 @@ export const InputWrapper = styled.div`
   display: inline-block;
   width: 313px;
 
+  @media (max-width: 767px) {
+    width: 343px; 
+  }
+
   /* Стили для звёздочки */
   &::after {
     content: "${props => props.$hasError ? '*' : ''}";
@@ -67,5 +71,9 @@ export const SInput = styled.input`
     background-color: #f5f5f5;
     color: #999999;
     cursor: not-allowed;
+  }
+
+  @media (max-width: 767px) {
+    width: 343px; 
   }
 `;
