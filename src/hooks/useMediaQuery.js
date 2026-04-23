@@ -1,5 +1,4 @@
-
- import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 
 const getMatches = (query) => {
     if (typeof window === "undefined") {
