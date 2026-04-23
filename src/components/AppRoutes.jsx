@@ -4,7 +4,7 @@ import MyExpences from '../components/MyExpences/MyExpences';
 import ExpensesAnalysis from '../pages/ExpensesAnalysis';
 import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
-import NotFoundPage from '../pages/NotFound';
+import NotFoundPage from '../pages/NotFound'; 
 
 function AppRoutes() {
   const { token, isLoading } = useAuth();
@@ -18,7 +18,11 @@ function AppRoutes() {
       <Route
         path="/"
         element={token ? <MyExpences /> : <Navigate to="/login" replace />}
-      />
+      />  
+       <Route
+        path="/new-expense"
+        element={token ? <MyExpences /> : <Navigate to="/login" replace />}
+      /> 
       <Route
         path="/analysis"
         element={token ? <ExpensesAnalysis /> : <Navigate to="/login" replace />}
