@@ -19,7 +19,7 @@ const Smain = styled.main`
         padding-inline: 16px;
         padding-bottom: 16px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         background-color: #fff;
         height: calc(100vh - 54px);
         padding: 0;
@@ -41,7 +41,7 @@ const SanalysTitle = styled.h1`
         margin-top: 28px;
         margin-bottom: 0px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         font-size: 24px;
         margin-top: 24px;
         margin-bottom: 0px;

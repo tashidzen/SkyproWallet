@@ -13,7 +13,7 @@ const SDiagramSection = styled.section`
     gap: 21px;
     padding: 32px;
     position: relative;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         box-shadow: none;
         border-radius: 0px;
         gap: 24px;
@@ -80,7 +80,7 @@ const SDiagramHeader = styled.header`
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         height: 51px;
         h2 {
             font-size: 20px;
@@ -126,7 +126,7 @@ const SDiagramElValue = styled.h3`
     @media (max-width: 900px) {
         font-size: 12px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         font-size: 10px;
     }
 `;
@@ -136,7 +136,7 @@ const SDiagramElBlock = styled.div`
     height: ${(props) => (props.$value === 0 ? "4px" : `${props.$value}%`)};
     background-color: ${(props) => props.$color};
     border-radius: 12px;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         border-radius: 6px;
     }
 `;

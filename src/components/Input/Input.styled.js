@@ -21,23 +21,23 @@ export const InputWrapper = styled.div`
     display: inline-block;
     width: 313px;
 
-    @media (max-width: 767px) {
-        width: 343px;
-    }
+  @media (max-width: 767px) {
+    width: 343px; 
+  }
 
-    /* Стили для звёздочки */
-    &::after {
-        content: "${(props) => (props.$hasError ? "*" : "")}";
-        color: ${borderColors.error};
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-weight: bold;
-        font-size: 18px;
-        pointer-events: none;
-        z-index: 2;
-    }
+  /* Стили для звёздочки */
+  &::after {
+    content: "${props => props.$hasError ? '*' : ''}";
+    color: ${borderColors.error};
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 2;
+  }
 `;
 
 export const SInput = styled.input`

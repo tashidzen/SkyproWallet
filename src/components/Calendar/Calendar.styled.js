@@ -10,7 +10,7 @@ const SSection = styled.section`
     flex-direction: column;
     overflow: clip;
     position: relative;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         box-shadow: none;
         border-radius: 0px;
         gap: 24px;
@@ -66,7 +66,7 @@ const SCalendarHeader = styled.div`
     width: 100%;
     border-bottom: 1px solid #999;
     padding: 32px 32px 0px 32px;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         border-radius: 0px;
         padding: 0 16px;
         height: auto;
@@ -92,7 +92,7 @@ const SCalendarDayNames = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 24px;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         margin-top: 16px;
         gap: 6px;
     }
@@ -107,7 +107,7 @@ const SCalendarDayName = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         width: 44px;
     }
 `;
@@ -134,7 +134,7 @@ const SCalendarMonths = styled.div`
         border-radius: 30px;
         /* min-height: 100px; */
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         padding: 0 10px;
     }
 `;
@@ -155,7 +155,7 @@ const SCalendarMonthDays = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 6px;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         gap: 5px;
         justify-content: space-between;
     }
@@ -175,7 +175,7 @@ const SCalendarMonthDay = styled.div`
     opacity: ${(props) => (props.$isOtherMonth ? 0 : 1)};
     cursor: ${(props) => (props.$isOtherMonth ? "default" : "pointer")};
     pointer-events: ${(props) => (props.$isOtherMonth ? "none" : "auto")};
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         width: 44px;
         height: 44px;
     }

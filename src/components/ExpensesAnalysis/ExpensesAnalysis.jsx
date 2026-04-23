@@ -31,7 +31,9 @@ const ExpensesAnalysis = () => {
     const [draftEndDate, setDraftEndDate] = useState(endOfDay(new Date())); //черновик конечной даты для ручного выбора диапазона дат в календаре
 
     const isMobile = useMediaQuery("(max-width: 767px)");
-    const [view, setView] = useState(() => (isMobile ? "diagram" : "split"));
+    const [view, setView] = useState(() =>
+        isMobile ? "diagram" : "split",
+    );
     const isSplit = view === "split";
     const pickDateMode = isSplit ? "auto" : "manual"; //выбор диапазона автоматически после второго клика или вручную по кнопке "Выбрать период"
 
@@ -42,6 +44,7 @@ const ExpensesAnalysis = () => {
             setView("split");
         }
     }, [isMobile]);
+
 
     const toggleView = () => {
         if (view === "diagram") {
