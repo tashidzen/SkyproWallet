@@ -16,7 +16,7 @@ function ExpenseTable({
     currency = "₽",
     loading = false,
 }) {
-    const isMobile = useMediaQuery("(max-width: 768px)");
+    const isMobile = useMediaQuery("(max-width: 767px)");
     const [selectedRow, setSelectedRow] = useState(null);
 
     const formatDate = (date) => {

@@ -18,11 +18,11 @@ export const SHeaderContainer = styled.div`
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
-    padding: 0 10px; /* Средний отступ для планшетов */
+    padding: 0 10px;
   }
 
   @media (max-width: 767px) {
-    padding: 0 16px; /* Отступы для мобильных */ 
+    padding: 0 16px;
     background-color: #F4F5F6;
   }
 `;
@@ -36,12 +36,12 @@ export const SHeaderBlock = styled.div`
   position: relative;
 
   @media (min-width: 768px) and (max-width: 1023px) {
-    padding: 0 12px; /* Чуть меньше отступов для планшетов */
+    padding: 0 12px;
   }
 
   @media (max-width: 767px) {
     padding: 0; 
-    height: 54px; /* Убираем боковые отступы */
+    height: 54px;
   }
 `;
 
@@ -49,9 +49,9 @@ export const SHeaderLogoLight = styled.img`
   width: 143.68px;
   height: auto;
 
-  @media (min-width: 375px) and (max-width: 767px) {
+  @media (min-width: 320px) and (max-width: 767px) {
     width: 109px;
-    margin-right: auto; /* Прижимаем логотип к левому краю */
+    margin-right: auto;
   }
 
   @media (min-width: 768px) and (max-width: 1023px) { 
@@ -65,11 +65,11 @@ export const SHeaderWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 24px; /* Фиксированный отступ между ссылками */
+  gap: 24px;
 
   @media (max-width: 1024px) {
     width: 320px;
-    gap: 16px; /* Уменьшаем отступ на средних экранах */
+    gap: 16px;
   }
 
   @media (max-width: 767px) {
@@ -77,6 +77,7 @@ export const SHeaderWrapper = styled.div`
   }
 `;
 
+// ✅ SHeaderLink — корректно закрыт, без посторонних export
 export const SHeaderLink = styled(NavLink)`
   font-weight: 400;
   text-decoration: none;
@@ -91,8 +92,14 @@ export const SHeaderLink = styled(NavLink)`
     text-decoration: underline;
     font-weight: 600;
   }
-  `;
 
+  @media (max-width: 1024px) {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+`;
+
+// ✅ Единственный SHeaderLogOut — вне других стилей
 export const SHeaderLogOut = styled.a`
   color: #000000;
   font-weight: 600;
@@ -112,12 +119,12 @@ export const SHeaderLogOut = styled.a`
 
   @media (max-width: 768px) {
     font-size: 14px;
-    padding: 12px 0; /* Адаптивные отступы для планшетов */
+    padding: 12px 0;
   }
 
-  @media (max-width: 375px) {
-    font-size: 13px;
-    padding: 6px 10px; /* Компактные отступы для маленьких экранов */
+  @media (max-width: 376px) {
+    font-size: 12px;
+    padding: 6px 0 6px 0;
   }
 `;
 
@@ -138,7 +145,7 @@ export const SHeaderMenuButton = styled.button`
     gap: 8px;
     text-decoration: underline;
     text-underline-offset: 4px;
-    padding: 12px 20px; /* Корректные отступы вокруг текста */
+    padding: 12px 20px;
     text-align: center;
     white-space: nowrap;
     width: auto;
@@ -146,9 +153,9 @@ export const SHeaderMenuButton = styled.button`
     text-overflow: ellipsis;
   }
 
-  @media (max-width: 375px) {
-    padding: 8px 16px; /* Меньше отступов на очень маленьких экранах */
-    font-size: 13px;
+  @media (max-width: 376px) {
+    padding: 8px;
+    font-size: 12px;
   }
 `;
 
@@ -161,7 +168,7 @@ export const SHeaderDropdown = styled.div`
   border: 0.5px solid #999999; 
   box-shadow: 0px 20px 67px -12px #00000021;
   border-radius: 6px;
-  display: none; /* скрыто по умолчанию */
+  display: none;
   flex-direction: column; 
   gap: 6px;
   min-width: 138px; 
@@ -169,12 +176,10 @@ export const SHeaderDropdown = styled.div`
   z-index: 1000;
 
   @media (max-width: 767px) {
-    display: flex; /* показываем только на экранах < 768px */ 
+    display: flex;
   } 
 
   @media (max-width: 375px) { 
-    right: 5px;
-    left: 5px;
     margin: 0;
   } 
 `;

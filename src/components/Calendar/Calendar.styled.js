@@ -80,7 +80,8 @@ const SCalendarTitle = styled.h2`
 `;
 
 const SCalendarLink = styled.a`
-    display: inline-block;
+    display: flex;
+    gap: 6px;
     margin-top: 24px;
     margin-bottom: 12px;
     font-size: 12px;
