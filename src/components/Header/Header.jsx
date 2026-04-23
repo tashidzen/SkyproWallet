@@ -15,7 +15,7 @@ import {
 } from './Header.styled';
 
 export default function Header() {
-  const { token, isLoading, clearAuth } = useAuth();
+  const { isLoading, clearAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);

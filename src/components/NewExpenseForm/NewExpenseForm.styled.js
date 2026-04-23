@@ -239,7 +239,7 @@ export const FormButton = styled.button`
   border: none;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 100%;
   text-align: center;
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};

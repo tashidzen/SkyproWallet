@@ -9,7 +9,7 @@ import {
     Swrapper,
 } from "./ExpensesAnalysis.styled";
 // import { temporaryData } from "../../data";
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { endOfDay, format, startOfDay } from "date-fns";
 import { getTransactionsInPeriod, fetchTransactions } from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
@@ -31,9 +31,7 @@ const ExpensesAnalysis = () => {
     const [draftEndDate, setDraftEndDate] = useState(endOfDay(new Date())); //черновик конечной даты для ручного выбора диапазона дат в календаре
 
     const isMobile = useMediaQuery("(max-width: 767px)");
-    const [view, setView] = useState(() =>
-        isMobile ? "diagram" : "split",
-    );
+    const [view, setView] = useState(() => (isMobile ? "diagram" : "split"));
     const isSplit = view === "split";
     const pickDateMode = isSplit ? "auto" : "manual"; //выбор диапазона автоматически после второго клика или вручную по кнопке "Выбрать период"
 
@@ -44,7 +42,6 @@ const ExpensesAnalysis = () => {
             setView("split");
         }
     }, [isMobile]);
-
 
     const toggleView = () => {
         if (view === "diagram") {
@@ -177,11 +174,29 @@ const ExpensesAnalysis = () => {
                             <Button
                                 onClick={toggleView}
                                 text="Выбрать другой период"
+                                width="343px"
+                                style={{
+                                    fontSize: "12px",
+                                    bottom: "20px",
+                                    left: "50%",
+                                    margin: "0 auto",
+                                    fontWeight: "600",
+                                    letterSpacing: "0px",
+                                }}
                             />
                         ) : (
                             <Button
                                 onClick={onClickSetDiapazon}
                                 text="Выбрать период"
+                                width="343px"
+                                style={{
+                                    fontSize: "12px",
+                                    bottom: "20px",
+                                    left: "50%",
+                                    margin: "0 auto",
+                                    fontWeight: "600",
+                                    letterSpacing: "0px",
+                                }}
                             />
                         )}
                     </SbuttonWrapper>
