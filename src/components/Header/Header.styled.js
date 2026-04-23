@@ -49,7 +49,7 @@ export const SHeaderLogoLight = styled.img`
   width: 143.68px;
   height: auto;
 
-  @media (min-width: 375px) and (max-width: 767px) {
+  @media (min-width: 320px) and (max-width: 767px) {
     width: 109px;
     margin-right: auto;
   }
@@ -124,7 +124,7 @@ export const SHeaderLogOut = styled.a`
 
   @media (max-width: 375px) {
     font-size: 13px;
-    padding: 6px 10px;
+    padding: 6px 0 6px 0;
   }
 `;
 
@@ -154,8 +154,8 @@ export const SHeaderMenuButton = styled.button`
   }
 
   @media (max-width: 375px) {
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 8px;
+    font-size: 12px;
   }
 `;
 
@@ -180,8 +180,6 @@ export const SHeaderDropdown = styled.div`
   } 
 
   @media (max-width: 375px) { 
-    right: 5px;
-    left: 5px;
     margin: 0;
   } 
 `;
