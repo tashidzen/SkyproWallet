@@ -123,7 +123,7 @@ export const SHeaderLogOut = styled.a`
   } 
      
    @media (max-width: 376px) {
-    font-size: 13px;
+    font-size: 12px;
     padding: 18px 0 18px 20px;
   }
 
