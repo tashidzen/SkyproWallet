@@ -120,9 +120,14 @@ export const SHeaderLogOut = styled.a`
   @media (max-width: 768px) {
     font-size: 14px;
     padding: 12px 0;
+  } 
+     
+   @media (max-width: 376px) {
+    font-size: 13px;
+    padding: 18px 0 18px 20px;
   }
 
-  @media (max-width: 376px) {
+  @media (max-width: 320px) {
     font-size: 12px;
     padding: 6px 0 6px 0;
   }
