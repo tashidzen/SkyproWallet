@@ -14,7 +14,7 @@ const SSection = styled.section`
         box-shadow: none;
         border-radius: 0px;
         gap: 24px;
-        flex: 0 0 375px;
+        flex: 0 1 375px;
         margin: 0 auto;
     }
 `;
@@ -152,9 +152,11 @@ const SCalendarMonthTitle = styled.h3`
 `;
 
 const SCalendarMonthDays = styled.div`
-    display: flex;
+    //display: flex;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     justify-content: flex-start;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     gap: 6px;
     @media (max-width: 767px) {
         gap: 5px;
@@ -177,8 +179,9 @@ const SCalendarMonthDay = styled.div`
     cursor: ${(props) => (props.$isOtherMonth ? "default" : "pointer")};
     pointer-events: ${(props) => (props.$isOtherMonth ? "none" : "auto")};
     @media (max-width: 767px) {
-        width: 44px;
-        height: 44px;
+        width: auto;
+        height: auto;
+        aspect-ratio: 1 / 1;
     }
 `;
 
