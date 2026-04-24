@@ -8,7 +8,6 @@ import {
     SsectionWrapper,
     Swrapper,
 } from "./ExpensesAnalysis.styled";
-// import { temporaryData } from "../../data";
 import { useContext, useEffect, useState } from "react";
 import { endOfDay, format, startOfDay } from "date-fns";
 import { getTransactionsInPeriod, fetchTransactions } from "../../services/api";

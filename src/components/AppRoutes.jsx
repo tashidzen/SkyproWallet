@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import MyExpences from '../components/MyExpences/MyExpences';
+import MyExpences from '../pages/MyExpences';
 import ExpensesAnalysis from '../pages/ExpensesAnalysis';
 import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
