@@ -29,7 +29,6 @@ const Smain = styled.main`
 
 const SanalysTitle = styled.h1`
     margin-top: 36px;
-    margin-bottom: 32px;
     font-weight: 700;
     font-size: 32px;
     line-height: 150%;
@@ -39,12 +38,10 @@ const SanalysTitle = styled.h1`
     @media (max-width: 1100px) {
         font-size: 28px;
         margin-top: 28px;
-        margin-bottom: 0px;
     }
     @media (max-width: 767px) {
         font-size: 24px;
         margin-top: 24px;
-        margin-bottom: 0px;
         padding: 0 16px;
     }
 `;
