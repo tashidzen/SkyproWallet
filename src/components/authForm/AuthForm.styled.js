@@ -120,7 +120,7 @@ export const SErrorMessageText = styled.p`
   color: #cc0000;
   text-align: center;
   line-height: 150%;
-  margin: 0 0 24px 0;
+  margin: 12px 0 0 0;
   padding: 0;
   max-width: 315px;
   word-wrap: break-word;
