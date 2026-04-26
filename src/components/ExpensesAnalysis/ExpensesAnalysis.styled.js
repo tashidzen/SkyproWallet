@@ -14,8 +14,8 @@ const Smain = styled.main`
     padding-bottom: 80px;
     display: flex;
     flex-direction: column;
-    gap: 32px; 
-    margin-top: 64px; 
+    gap: 32px;
+    margin-top: 64px;
 
     @media (max-width: 1232px) {
         padding-inline: 16px;
@@ -26,6 +26,7 @@ const Smain = styled.main`
         height: calc(100vh - 54px);
         padding: 0;
         gap: 0px;
+        margin-top: 54px;
     }
 `;
 
