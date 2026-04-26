@@ -77,7 +77,7 @@ export const Stitle = styled.h1`
         margin-top: 24px; 
     }
          
-    @media (min-width: 1024px) and (max-width: 1439px) {
+    @media (min-width: 1024px) and (max-width: 1232px) {
     max-width: 100%; 
     margin-left: 16px;
   }
