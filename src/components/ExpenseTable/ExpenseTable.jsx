@@ -148,14 +148,9 @@ function ExpenseTable({
                 <SButtonContainer>
                     <Button
                         text="Удалить расход"
-                        width="343px"
                         style={{
-                            fontSize: "12px",
-                            bottom: "20px",
-                            left: "50%",
-                            margin: "0 auto",
-                            fontWeight: "600",
-                            letterSpacing: "0px",
+                            width: "100%",
+                            margin: "0 16px 0 16px",
                         }}
                         onClick={() => {
                             onDelete(selectedRow);
