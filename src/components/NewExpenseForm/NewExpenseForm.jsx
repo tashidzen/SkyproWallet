@@ -253,7 +253,7 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel, isSubmitting = false }) 
                 onClick={handleSubmit}
                 disabled={isSubmitDisabled || isSubmitting}
                 isLoading={isSubmitting}
-                style={{ width: "100%", marginBottom: "8px", height: "36px" }}
+                // style={{ width: "100%", marginBottom: "8px", height: "36px" }}
               />
               {editData && (
                 <Button

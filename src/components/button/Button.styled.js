@@ -7,7 +7,7 @@ const colors = {
 };
 
 export const SButton = styled.button`
-  width: 313px;
+  width: 100%;
   height: 39px;
   padding: 12px;
   border: none;

@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const Swrapper = styled.div`
-    max-width: 100%;
-    width: 100vw;
-    min-height: 100vh;
     overflow: hidden;
     position: relative; 
     padding-top: 64px; 
@@ -15,7 +12,6 @@ export const Swrapper = styled.div`
     @media (min-width: 768px) and (max-width: 1023px) {
         overflow: visible; 
         margin: 0 16px; 
-        width: 95vw;
     }
 `;
 
