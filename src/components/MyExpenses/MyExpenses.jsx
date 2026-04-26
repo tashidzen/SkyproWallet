@@ -9,7 +9,7 @@ import {
   SExpenseTableLink,
   SNewExpenseFormLink,
   TablesContainer, 
-} from "./MyExpences.styled";
+} from "./MyExpenses.styled";
 import ExpenseTable from "../ExpenseTable/ExpenseTable";
 import NewExpenseForm from "../NewExpenseForm/NewExpenseForm";
 import {
@@ -21,7 +21,7 @@ import { EXPENSE_CATEGORIES } from "../../constants/categories";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { AuthContext } from "../../context/AuthContext";
 
-function MyExpences() {
+function MyExpenses() {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isAdding, setIsAdding] = useState(false);
@@ -257,4 +257,4 @@ return (
   );
 }
 
-export default MyExpences; 
+export default MyExpenses; 
