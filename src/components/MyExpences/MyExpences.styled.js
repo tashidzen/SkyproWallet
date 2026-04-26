@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Swrapper = styled.div`
-    overflow: hidden;
+export const Swrapper = styled.div` 
+    height: calc(100vh - 64px);
     position: relative; 
     padding-top: 64px; 
      
