@@ -104,6 +104,10 @@ function ExpenseTable({
                                         isMobile && selectedRow === item._id
                                             ? "#7334EA"
                                             : "#000",
+                                    boxShadow:
+                                        isMobile && selectedRow === item._id
+                                            ? "0 7px 0 0 #F1EBFD, 0 -7px 0 0 #F1EBFD"
+                                            : "none",
                                 }}
                             >
                                 <td>{item.description}</td>
@@ -144,14 +148,9 @@ function ExpenseTable({
                 <SButtonContainer>
                     <Button
                         text="Удалить расход"
-                        width="343px"
                         style={{
-                            fontSize: "12px",
-                            bottom: "20px",
-                            left: "50%",
-                            margin: "0 auto",
-                            fontWeight: "600",
-                            letterSpacing: "0px",
+                            width: "100%",
+                            margin: "0 16px 0 16px",
                         }}
                         onClick={() => {
                             onDelete(selectedRow);

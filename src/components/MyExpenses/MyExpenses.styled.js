@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
-export const Swrapper = styled.div`
-    max-width: 100%;
-    width: 100vw;
-    min-height: 100vh;
-    overflow: hidden;
-    position: relative;
+export const Swrapper = styled.div` 
+    height: calc(100vh - 64px);
+    position: relative; 
+    padding-top: 64px; 
+     
+    @media (max-width: 767px) {
+        padding-top: 54px; 
+    }
 
     @media (min-width: 768px) and (max-width: 1023px) {
         overflow: visible; 
         margin: 0 16px; 
-        width: 95vw;
     }
 `;
 
@@ -21,13 +22,14 @@ export const SmobileTitle = styled.div`
         gap: 58px;
         flex-direction: row; 
         background-color: #FFFFFF;
+        justify-content: space-between;
     } 
          
      @media (min-width: 768px) and (max-width: 1023px) {
         display: flex;
         flex-wrap: nowrap;
         gap: 58px;
-        flex-direction: row; 
+        flex-direction: row;
     }
 `; 
  
@@ -75,7 +77,7 @@ export const Stitle = styled.h1`
         margin-top: 24px; 
     }
          
-    @media (min-width: 1024px) and (max-width: 1439px) {
+    @media (min-width: 1024px) and (max-width: 1232px) {
     max-width: 100%; 
     margin-left: 16px;
   }
@@ -118,6 +120,7 @@ export const SNewExpenseFormLink = styled.a`
     display: flex;
     gap: 6px;
     margin-top: 32px;
+    margin-right: 14px;
     margin-bottom: 25px;
     font-size: 12px;
     font-weight: 600;
@@ -132,7 +135,7 @@ export const SExpenseTableLink = styled.a`
     margin-top: 32px;
     margin-bottom: 25px;
     font-size: 12px;
-    color: #000000;
+    color: #999999;
     text-decoration: none;
     align-items: center; 
      
@@ -151,7 +154,7 @@ export const TablesContainer = styled.div`
     max-width: 1200px;
     margin: 0 auto; /* Центрирование контейнера */ 
      
-    @media (min-width: 1024px) and (max-width: 1439px) {
+    @media (min-width: 1024px) and (max-width: 1232px) {
      margin: 0 16px;
     } 
    `;   

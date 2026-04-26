@@ -30,9 +30,16 @@ export const Stable = styled.table`
             right: 0px;
             height: 0.5px;
             background-color: #999999;
+
+            @media (min-width: 769px) and (max-width: 1017px) {
+                top: 125px;
+            }
         }
 
         th {
+            word-break: break-word;
+            white-space: normal;
+
             &:nth-child(1) {
                 width: 19.5%;
             }
@@ -106,6 +113,10 @@ export const Stable = styled.table`
 
             &::after {
                 top: 34px;
+
+                @media (max-width: 341px) {
+                    top: 43px;
+                }
             }
 
             th {

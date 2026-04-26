@@ -15,6 +15,8 @@ const Smain = styled.main`
     display: flex;
     flex-direction: column;
     gap: 32px;
+    margin-top: 64px;
+
     @media (max-width: 1232px) {
         padding-inline: 16px;
         padding-bottom: 16px;
@@ -24,12 +26,12 @@ const Smain = styled.main`
         height: calc(100vh - 54px);
         padding: 0;
         gap: 0px;
+        margin-top: 54px;
     }
 `;
 
 const SanalysTitle = styled.h1`
     margin-top: 36px;
-    margin-bottom: 32px;
     font-weight: 700;
     font-size: 32px;
     line-height: 150%;
@@ -39,12 +41,10 @@ const SanalysTitle = styled.h1`
     @media (max-width: 1100px) {
         font-size: 28px;
         margin-top: 28px;
-        margin-bottom: 0px;
     }
     @media (max-width: 767px) {
         font-size: 24px;
         margin-top: 24px;
-        margin-bottom: 0px;
         padding: 0 16px;
     }
 `;

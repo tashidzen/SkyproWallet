@@ -10,7 +10,7 @@ export const SAuthHeader = styled.header`
   align-items: center;
 
   @media (max-width: 767px) {
-    padding: 0 20px;
+    padding: 0 20px; 
     background: #F4F5F6; 
   }
 

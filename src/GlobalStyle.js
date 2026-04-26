@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
     *{
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
+        box-sizing: border-box; 
     }
   
     body {
@@ -13,12 +13,13 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #f4f5f6;
         color: #000000; 
          
-    @media (max-width: 767px) {
-     background-color: #ffffff;
-    }
+         
+        @media (max-width: 767px) {
+         background-color: #ffffff; 
+        }
     }
     
     table {
         border-radius: 30px;
-        background-color: #FFFFFF;
+        background-color: #FFFFFF; 
     }`;
