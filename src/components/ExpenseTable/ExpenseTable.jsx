@@ -104,6 +104,10 @@ function ExpenseTable({
                                         isMobile && selectedRow === item._id
                                             ? "#7334EA"
                                             : "#000",
+                                    boxShadow:
+                                        isMobile && selectedRow === item._id
+                                            ? "0 7px 0 0 #F1EBFD, 0 -7px 0 0 #F1EBFD"
+                                            : "none",
                                 }}
                             >
                                 <td>{item.description}</td>
