@@ -22,13 +22,14 @@ export const SmobileTitle = styled.div`
         gap: 58px;
         flex-direction: row; 
         background-color: #FFFFFF;
+        justify-content: space-between;
     } 
          
      @media (min-width: 768px) and (max-width: 1023px) {
         display: flex;
         flex-wrap: nowrap;
         gap: 58px;
-        flex-direction: row; 
+        flex-direction: row;
     }
 `; 
  
@@ -119,6 +120,7 @@ export const SNewExpenseFormLink = styled.a`
     display: flex;
     gap: 6px;
     margin-top: 32px;
+    margin-right: 14px;
     margin-bottom: 25px;
     font-size: 12px;
     font-weight: 600;

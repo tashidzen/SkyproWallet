@@ -203,7 +203,7 @@ export const SHeaderDropdownLink = styled(NavLink)`
   color: #000000; 
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px; 
+  font-size: 10px; 
   font-weight: 400; 
   text-decoration: none;
   transition: all 0.3s ease;
