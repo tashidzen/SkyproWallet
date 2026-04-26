@@ -90,9 +90,8 @@ export const CategoriesContainer = styled.div`
   gap: 6px;
   box-sizing: border-box;
 
-  @media (min-width: 1024px) and (max-width: 1439px) {
+  @media (min-width: 1024px) and (max-width: 1232px) {
     width: 100%;
-    padding-bottom: 20px;
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
