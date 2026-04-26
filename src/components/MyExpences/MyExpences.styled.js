@@ -5,7 +5,12 @@ export const Swrapper = styled.div`
     width: 100vw;
     min-height: 100vh;
     overflow: hidden;
-    position: relative;
+    position: relative; 
+    padding-top: 64px; 
+     
+    @media (max-width: 767px) {
+        padding-top: 54px; 
+    }
 
     @media (min-width: 768px) and (max-width: 1023px) {
         overflow: visible; 
@@ -132,7 +137,7 @@ export const SExpenseTableLink = styled.a`
     margin-top: 32px;
     margin-bottom: 25px;
     font-size: 12px;
-    color: #000000;
+    color: #999999;
     text-decoration: none;
     align-items: center; 
      
@@ -151,7 +156,7 @@ export const TablesContainer = styled.div`
     max-width: 1200px;
     margin: 0 auto; /* Центрирование контейнера */ 
      
-    @media (min-width: 1024px) and (max-width: 1439px) {
+    @media (min-width: 1024px) and (max-width: 1232px) {
      margin: 0 16px;
     } 
    `;   

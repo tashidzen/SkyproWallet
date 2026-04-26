@@ -14,7 +14,9 @@ const Smain = styled.main`
     padding-bottom: 80px;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 32px; 
+    margin-top: 64px; 
+
     @media (max-width: 1232px) {
         padding-inline: 16px;
         padding-bottom: 16px;

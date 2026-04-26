@@ -6,6 +6,8 @@ export const SHeader = styled.header`
   width: 100%;
   margin: 0 auto;
   background-color: #FFFFFF; 
+  position: fixed; 
+  z-index: 1000; 
 `;
 
 export const SHeaderContainer = styled.div`
@@ -146,7 +148,7 @@ export const SHeaderMenuButton = styled.button`
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    color: #7334EA; 
+    color: #7334EA;  
     gap: 8px;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -202,7 +204,7 @@ export const SHeaderDropdownLink = styled(NavLink)`
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   font-size: 12px; 
-  font-weight: 400;
+  font-weight: 400; 
   text-decoration: none;
   transition: all 0.3s ease;
   white-space: nowrap;

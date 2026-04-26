@@ -10,11 +10,11 @@ export const SPageBackground = styled.div`
   align-items: center;
 
   @media (max-width: 767px) {
-    background-color: #FFFFFF; 
-    padding: 0 16px; 
+    background-color: #ffffff;
+    padding: 0 16px;
   }
 
-  @media (min-width: 768px) and (max-width: 1023px) { 
+  @media (min-width: 768px) and (max-width: 1023px) {
     min-height: calc(100vh - 70px);
     padding: 20px;
   }
@@ -30,23 +30,23 @@ export const SWrapper = styled.div`
   border: 0.7px solid #d4dbe5;
   border-radius: 30px;
   padding: 32px;
-  box-shadow: 0px 4px 67px -12px #00000021;
+  box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  gap: 24px 0px;
+  gap: 24px 0;
   min-height: fit-content;
   transform: translateY(-32px);
 
   @media (max-width: 767px) {
-    width: 343px; 
-    border: none; 
-    box-shadow: none; 
-    padding: 0;  
-  } 
-     
-  @media (min-width: 768px) and (max-width: 1023px) { 
+    width: 343px;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
     transform: translateY(-32px);
   }
 
@@ -54,7 +54,7 @@ export const SWrapper = styled.div`
     width: 379px;
     padding: 32px;
     transform: translateY(-32px);
-    margin: 0 auto; 
+    margin: 0 auto;
   }
 `;
 
@@ -63,65 +63,27 @@ export const STitle = styled.p`
   font-weight: 700;
 `;
 
-export const SForm = styled.form``;
+export const SForm = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const SInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 24px;
-
-  @media (max-width: 767px) {
-    width: 343px; 
-  }
-`;
-
-export const InputWrapper = styled.div`
-  position: relative;
-  ${(props) =>
-    props.$hasError &&
-    `
-    background-color: #ffe6e6; 
-    border: 1px solid #cc0000; 
-    border-radius: 8px;
-    padding: 4px;
-  `}
-
-  @media (max-width: 767px) {
-    width: 343px; 
-  }
-`;
-
-export const SInput = styled.input`
   width: 100%;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  outline: none;
-  transition: all 0.3s ease;
-  background: transparent;
 
-  /* Стиль для состояния ошибки */
-  ${(props) =>
-    props.$hasError &&
-    `
-    background-color: transparent;
-    color: #333;
-  `}
-
-  &:focus {
-    ${(props) =>
-      !props.$hasError &&
-      `
-      background-color: #f9f9f9;
-      border: 1px solid #7334EA;
-    `}
+  @media (min-width: 375px) and (max-width: 767px) {
+    width: 343px;
+  }  
+     
+  @media (max-width: 374px) {
+    width: 303px;
   }
 
-  @media (max-width: 767px) {
-    width: 343px; 
-  }
 `;
 
 export const SFooterWrapper = styled.div`
@@ -134,7 +96,7 @@ export const SFooterWrapper = styled.div`
   margin-top: 24px;
 
   @media (max-width: 767px) {
-    width: 343px; 
+    width: 343px;
   }
 `;
 
@@ -158,10 +120,8 @@ export const SErrorMessageText = styled.p`
   color: #cc0000;
   text-align: center;
   line-height: 150%;
-  margin: 0;
+  margin: 0 0 24px 0;
   padding: 0;
-  background: none;
-  border: none;
   max-width: 315px;
   word-wrap: break-word;
 `;

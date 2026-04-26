@@ -9,9 +9,9 @@ import {
   SFooterWrapper,
   SFooterText,
   SFooterLink,
-  SErrorMessageText
+  SErrorMessageText,
 } from "./AuthForm.styled";
-import { InputWrapper, SInput } from "../Input/Input.styled";
+import { Input } from "../Input/Input";
 import { Button } from "../button/Button";
 import { useAuth } from '../../hooks/useAuth';
 
@@ -27,12 +27,13 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [showGeneralError, setShowGeneralError] = useState(false);
 
+  // Валидация для показа ошибок после отправки
   const validate = () => {
     const newErrors = {};
 
     if (isSignUp && !formData.name.trim()) {
-      newErrors.name = true; 
-          }
+      newErrors.name = true;
+    }
 
     if (!formData.login.trim()) {
       newErrors.login = true;
@@ -70,16 +71,12 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
       return;
     }
 
-    console.log('Отправляем данные формы:', formData);
-
     try {
       if (isSignUp) {
         await register(formData);
-        console.log('Регистрация успешна, перенаправляем на /login');
         navigate('/login', { replace: true });
       } else {
         await login(formData);
-        console.log('Вход успешен, перенаправляем на / (Мои расходы)');
         navigate('/', { replace: true });
       }
       onSuccess?.();
@@ -89,73 +86,84 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
     }
   };
 
+  // Реальная валидация для подсветки полей (даже до отправки)
+  const isFieldValid = (fieldName) => {
+    const value = formData[fieldName];
+
+    // Пустое поле — не валидно
+    if (!value) return false;
+
+    if (fieldName === 'name' && isSignUp) {
+      return value.trim().length > 0;
+    }
+
+    if (fieldName === 'login') {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    if (fieldName === 'password') {
+      return value.length >= 6;
+    }
+
+    return false;
+  };
+
   const validationErrors = validate();
-  const hasValidationErrors = Object.keys(validationErrors).length > 0;
 
   return (
     <SPageBackground>
       <SWrapper>
         <STitle>{isSignUp ? "Регистрация" : "Вход"}</STitle>
-        <SForm id="form" onSubmit={handleSubmit}>
+        <SForm onSubmit={handleSubmit}>
           <SInputWrapper>
             {isSignUp && (
-              <InputWrapper $hasError={!!validationErrors.name && hasSubmitted}>
-                <SInput
-                  type="text"
-                  placeholder="Имя"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  $hasError={!!validationErrors.name && hasSubmitted}
-                />
-              </InputWrapper>
-            )}
-            <InputWrapper $hasError={!!validationErrors.login && hasSubmitted}>
-              <SInput
+              <Input
                 type="text"
-                placeholder="Эл. почта"
-                name="login"
-                value={formData.login}
+                placeholder="Имя"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
-                $hasError={!!validationErrors.login && hasSubmitted}
+                $hasError={!!validationErrors.name && hasSubmitted}
+                $isValid={isFieldValid("name")}
               />
-            </InputWrapper>
-            <InputWrapper $hasError={!!validationErrors.password && hasSubmitted}>
-              <SInput
-                type="password"
-                placeholder="Пароль"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                $hasError={!!validationErrors.password && hasSubmitted}
-              />
-            </InputWrapper>
+            )}
+            <Input
+              type="text"
+              placeholder="Эл. почта"
+              name="login"
+              value={formData.login}
+              onChange={handleChange}
+              $hasError={!!validationErrors.login && hasSubmitted}
+              $isValid={isFieldValid("login")}
+            />
+            <Input
+              type="password"
+              placeholder="Пароль"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              $hasError={!!validationErrors.password && hasSubmitted}
+              $isValid={isFieldValid("password")}
+            />
           </SInputWrapper>
 
           {(showGeneralError || authError) && (
-            <SErrorMessageText
-              style={{
-                marginTop: '12px',
-                marginBottom: '24px'
-              }}
-            >
-              {authError || "Упс! Введённые вами данные некорректны. Введите данные корректно и повторите попытку."}
+            <SErrorMessageText>
+              {authError || "Упс Введённые вами данные некорректны. Введите данные корректно и повторите попытку."}
             </SErrorMessageText>
           )}
 
           <Button
             text={isSignUp ? "Зарегистрироваться" : "Войти"}
             type="primary"
-            disabled={isLoading || showGeneralError}
+            disabled={isLoading || (hasSubmitted && Object.keys(validationErrors).length > 0)}
             isLoading={isLoading}
           />
 
           {!isSignUp && (
             <SFooterWrapper>
               <SFooterText>Нужно зарегистрироваться?</SFooterText>
-              <SFooterLink to="/registration">
-                Регистрируйтесь здесь
-              </SFooterLink>
+              <SFooterLink to="/registration">Регистрируйтесь здесь</SFooterLink>
             </SFooterWrapper>
           )}
 

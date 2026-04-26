@@ -15,52 +15,27 @@ export const SButton = styled.button`
   line-height: 21px;
   letter-spacing: -0.14px;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #FFFFFF;
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  font-size: 12px;
+  font-weight: 600; 
+  color: #ffffff;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ $type, disabled }) =>
-    disabled ? '#CCCCCC' : colors[$type]
-  };
+  background-color: ${(props) =>
+    props.disabled ? "#999999" : colors[props.$type] || colors.primary}; 
+  margin-top: 24px;
   transition: background-color 0.2s ease;
 
   &:hover:not(:disabled) {
-    background-color: #7334EA;
+    background-color: #7334ea;
   }
 
-  @media (max-width: 767px) {
+  @media (min-width: 375px) and (max-width: 767px) {
     width: 343px;
-  }
-`;
-
-export const PrimaryButton = styled(SButton)`
-  background-color: ${({ disabled }) => disabled ? '#CCCCCC' : '#7334EA'};
-  width: ${({ width }) => width};
-
-  &:hover:not(:disabled) {
-    background-color: #7334EA;
-  }
-
-  @media (max-width: 767px) {
-    width: 343px; 
-  }
-`;
-
-export const SecondaryButton = styled(SButton)`
-  background-color: ${({ disabled }) => disabled ? 'transparent' : 'transparent'};
-  color: ${({ disabled }) => disabled ? '#94A6BE' : '#7334EA'};
-  border: ${({ disabled }) => disabled ? '0.7px solid #94A6BE' : '0.7px solid #7334EA'};
-  width: ${({ width }) => width};
-
-  &:hover:not(:disabled) {
-    background-color: #7334EA;
-    color: #FFFFFF;
-  }
-
-  @media (max-width: 767px) {
-    width: 343px;
+  }  
+     
+  @media (max-width: 374px) {
+    width: 303px;
   }
 `;
