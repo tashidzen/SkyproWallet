@@ -12,7 +12,7 @@ import {
   SErrorMessageText,
 } from "./AuthForm.styled";
 import { Input } from "../Input/Input";
-import { Button } from "../button/Button";
+import { Button } from "../Button/Button";
 import { useAuth } from '../../hooks/useAuth';
 
 export const AuthForm = ({ isSignUp, onSuccess }) => {

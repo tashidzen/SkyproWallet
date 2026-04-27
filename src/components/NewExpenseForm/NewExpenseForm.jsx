@@ -5,10 +5,10 @@ import {
   FieldLabel,
   CategoriesContainer,
   SFixedBottom,
-} from "./NewExpenseForm.styled.js";
-import { EXPENSE_CATEGORIES } from "../../constants/categories.jsx";
+} from "./NewExpenseForm.styled";
+import { EXPENSE_CATEGORIES } from "../../constants/categories";
 import  Input  from "../Input/Input";     
-import Button  from "../Button/Button"; 
+import Button  from "../Button/Button";
 
 const NewExpenseForm = ({ editData, onSubmit, onCancel, isSubmitting = false }) => {
   const [formData, setFormData] = useState({

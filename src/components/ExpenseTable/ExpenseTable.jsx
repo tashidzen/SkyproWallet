@@ -4,11 +4,11 @@ import {
     Stable,
     StBody,
     SButtonContainer,
-} from "./ExpenseTable.styled.js";
-import { EXPENSE_CATEGORIES } from "../../constants/categories.jsx";
+} from "./ExpenseTable.styled";
+import { EXPENSE_CATEGORIES } from "../../constants/categories";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { useState } from "react";
-import Button from "../button/Button.jsx";
+import Button from "../Button/Button";
 
 function ExpenseTable({
     transactions = [],

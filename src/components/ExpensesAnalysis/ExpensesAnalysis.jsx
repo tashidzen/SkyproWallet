@@ -1,6 +1,6 @@
 import Calendar from "../Calendar/Calendar";
 import Diagram from "../Diagram/Diagram";
-import Button from "../button/Button";
+import Button from "../Button/Button";
 import {
     SanalysTitle,
     SbuttonWrapper,
