@@ -42,7 +42,6 @@ function MyExpenses() {
             });
             setTransactions(allTransactions);
         } catch (error) {
-            console.error("Ошибка при загрузке задач:", error);
             alert("Ошибка при загрузке задач");
         } finally {
             setLoading(false);
@@ -66,9 +65,7 @@ function MyExpenses() {
                     const day = date.getDate();
                     const year = date.getFullYear();
                     dateForApi = `${month}-${day}-${year}`;
-                } else {
-                    console.error("Некорректная дата:", transactionData.date);
-                }
+                } 
             }
 
             // Преобразуем выбранную категорию в формат для API
@@ -82,16 +79,13 @@ function MyExpenses() {
                 date: dateForApi,
                 sum: parseFloat(transactionData.amount),
             };
-            console.log("Отправляем:", newTransaction);
 
             const updatedTransaction = await postTransaction({
                 token,
                 transaction: newTransaction,
             });
-            console.log("Ответ от сервера:", updatedTransaction);
             setTransactions(updatedTransaction.transactions);
         } catch (error) {
-            console.error("Ошибка при добавлении транзакции:", error);
             alert("Ошибка при добавлении транзакции");
         } finally {
             setIsAdding(false);
@@ -166,7 +160,6 @@ function MyExpenses() {
             );
             setTransactions(newTransactions);
         } catch (error) {
-            console.error("Ошибка при удалении транзакции:", error);
             alert("Ошибка при удалении транзакции");
         }
       };

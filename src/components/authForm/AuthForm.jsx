@@ -27,7 +27,6 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [showGeneralError, setShowGeneralError] = useState(false);
 
-  // Валидация для показа ошибок после отправки
   const validate = () => {
     const newErrors = {};
 
@@ -81,7 +80,6 @@ export const AuthForm = ({ isSignUp, onSuccess }) => {
       }
       onSuccess?.();
     } catch (err) {
-      console.error('Ошибка в handleSubmit:', err.message);
       setShowGeneralError(true);
     }
   };

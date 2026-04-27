@@ -148,8 +148,6 @@ export const SExpenseTableLink = styled.a`
 export const TablesContainer = styled.div`
     display: flex;
     gap: 34px; /* Расстояние между таблицами */
-    /* padding-left: 120px;
-  padding-right: 120px; */
     box-sizing: border-box;
     max-width: 1200px;
     margin: 0 auto; /* Центрирование контейнера */ 

@@ -20,7 +20,7 @@ export default function Header() {
   const location = useLocation();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
-
+ 
   // Закрытие меню при клике вне его области
   useEffect(() => {
     const handleClickOutside = (event) => {

@@ -73,7 +73,6 @@ export async function getTransactionsInPeriod({ token, period }) {
         });
         return response.data;
     } catch (error) {
-        console.error("Error fetching transactions in period:", error);
         throw error;
     }
 }

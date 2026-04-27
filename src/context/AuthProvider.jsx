@@ -54,7 +54,6 @@ export const AuthProvider = ({ children }) => {
       });
       return data;
     } catch (err) {
-      console.error('Ошибка входа:', err.message);
       setError(err.message);
       throw err;
     } finally {
@@ -75,7 +74,6 @@ export const AuthProvider = ({ children }) => {
       });
       return data;
     } catch (err) {
-      console.error('Ошибка регистрации:', err.message);
       setError(err.message);
       throw err;
     } finally {

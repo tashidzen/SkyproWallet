@@ -101,7 +101,7 @@ const ExpensesAnalysis = () => {
             });
     }, []);
 
-    //определение ранней записи для календаря, чтобы пользователь не мог выбрать дату раньше, чем есть в данных, полученных из API  earlyRecord = currentDate;
+    // определение ранней записи для календаря, чтобы пользователь не мог выбрать дату раньше, чем есть в данных, полученных из API  earlyRecord = currentDate;
     const earlyRecord =
         data.length > 0
             ? data.reduce((earliest, current) => {

@@ -253,7 +253,6 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel, isSubmitting = false }) 
                 onClick={handleSubmit}
                 disabled={isSubmitDisabled || isSubmitting}
                 isLoading={isSubmitting}
-                // style={{ width: "100%", marginBottom: "8px", height: "36px" }}
               />
               {editData && (
                 <Button
@@ -290,7 +289,6 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel, isSubmitting = false }) 
           onClick={handleSubmit}
           disabled={isSubmitDisabled || isSubmitting}
           isLoading={isSubmitting}
-          style={{ width: "100%", marginBottom: "8px", height: "36px" }}
         />
         {editData && (
           <Button
@@ -298,13 +296,6 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel, isSubmitting = false }) 
             onClick={onCancel}
             type="secondary"
             disabled={isSubmitting}
-            style={{
-              width: "100%",
-              height: "36px",
-              background: "#fff",
-              color: "#333",
-              border: "0.5px solid #999999",
-            }}
           />
         )}
       </SFixedBottom>

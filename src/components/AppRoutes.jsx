@@ -10,7 +10,7 @@ function AppRoutes() {
   const { token, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div>Загрузка...</div>;
+    return <div> Загрузка...</div>;
   }
 
   return (
