@@ -285,7 +285,10 @@ const NewExpenseForm = ({ editData, onSubmit, onCancel, isSubmitting = false }) 
               : editData
               ? "Сохранить редактирование"
               : "Добавить новый расход"
-          }
+          } 
+          style={{
+              margin: "0 auto"
+          }}
           onClick={handleSubmit}
           disabled={isSubmitDisabled || isSubmitting}
           isLoading={isSubmitting}

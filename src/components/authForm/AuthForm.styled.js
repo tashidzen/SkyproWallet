@@ -37,9 +37,16 @@ export const SWrapper = styled.div`
   align-items: center;
   gap: 24px 0;
   min-height: fit-content;
-  transform: translateY(-32px);
+  transform: translateY(-32px); 
+   
+  @media (max-width: 374px) {
+   width: 303px; 
+   border: none;
+   box-shadow: none;
+   padding: 0; 
+  }
 
-  @media (max-width: 767px) {
+  @media (min-width: 375px) and (max-width: 767px) {
     width: 343px;
     border: none;
     box-shadow: none;
