@@ -31,11 +31,4 @@ export const SButton = styled.button`
     background-color: #7334ea;
   }
 
-  @media (min-width: 375px) and (max-width: 767px) {
-    width: 343px;
-  }  
-     
-  @media (max-width: 374px) {
-    width: 303px;
-  }
 `;
