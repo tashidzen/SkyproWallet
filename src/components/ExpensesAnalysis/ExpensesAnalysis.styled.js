@@ -63,6 +63,7 @@ const SbuttonWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 12px 16px;
     background-color: #fff;
     height: 87px;
     box-shadow: 0 -20px 67px -12px rgba(0, 0, 0, 0.13);

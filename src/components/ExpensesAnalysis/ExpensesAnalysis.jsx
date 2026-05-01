@@ -119,7 +119,6 @@ const ExpensesAnalysis = () => {
                 period,
             });
             setPartialData(newData);
-            console.log("Fetched data:", newData);
         } catch (e) {
             if (e.response && e.response.data && e.response.data.error) {
                 setError(e.response.data.error);
