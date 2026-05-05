@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import {
   SHeader,
@@ -15,12 +15,12 @@ import {
 } from './Header.styled';
 
 export default function Header() {
-  const { token, isLoading, clearAuth } = useAuth();
+  const { isLoading, clearAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
-
+ 
   // Закрытие меню при клике вне его области
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -71,8 +71,10 @@ export default function Header() {
     <SHeader>
       <SHeaderContainer>
         <SHeaderBlock>
-          {/* Логотип — теперь просто изображение, без ссылки */}
-          <SHeaderLogoLight src="images/logo.svg" alt="logo" />
+          {/* Логотип — теперь ссылка на главную страницу */}
+          <NavLink to="/">
+            <SHeaderLogoLight src="images/logo.svg" alt="logo" />
+          </NavLink>
 
           {/* Меню для десктопа и планшетов (видно на экранах ≥ 768px) — только две ссылки */}
           <SHeaderWrapper>

@@ -2,36 +2,31 @@ import styled from "styled-components";
 
 const borderColors = {
   standard: "rgba(148, 166, 190, 0.4)",
-  error: "rgba(204, 0, 0, 1)", // тёмно‑красная обводка
+  error: "rgba(204, 0, 0, 1)",
 };
 
 const backgroundColors = {
-  standard: "#ffffff", // белый фон
-  error: "#ffe6e6", // светло‑красный фон
+  standard: "#ffffff",
+  error: "#ffe6e6",
+  valid: "#F1EBFD",
 };
 
 const textColors = {
-  standard: "#333333", // стандартный цвет текста
-  error: "#cc0000", // цвет текста при ошибке
+  standard: "#000000", 
+  error: "#cc0000",
 };
 
-// Контейнер для input + звёздочка
 export const InputWrapper = styled.div`
   position: relative;
   display: inline-block;
-  width: 313px;
+  width: 100%;
 
-  @media (max-width: 767px) {
-    width: 343px; 
-  }
-
-  /* Стили для звёздочки */
   &::after {
-    content: "${props => props.$hasError ? '*' : ''}";
+    content: "${(props) => (props.$hasError ? "*" : "")}";
     color: ${borderColors.error};
     position: absolute;
     right: 12px;
-    top: 50%;
+    top: 30%;
     transform: translateY(-50%);
     font-weight: bold;
     font-size: 18px;
@@ -48,32 +43,76 @@ export const SInput = styled.input`
   border-radius: 8px;
   background-color: ${backgroundColors.standard};
   color: ${textColors.standard};
-  font-size: 16px;
+  font-size: 12px; 
+  font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
   transition: all 0.2s ease-in-out;
+  outline: none;
+  box-shadow: none;    
 
-  /* Стили для ошибки */
-  ${props => props.$hasError && `
-    background-color: ${backgroundColors.error};
-    border-color: ${borderColors.error};
-    color: ${textColors.error};
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: ${textColors.standard} !important;
+    caret-color: ${textColors.standard} !important;
+    -webkit-box-shadow: 0 0 0 30px ${backgroundColors.standard} inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  &:-internal-autofill-selected {
+    background-color: ${backgroundColors.standard} !important;
+    background-image: none !important;
+    color: ${textColors.standard} !important;
+  }
+
+  ${(props) =>
+    props.$hasError &&
+    `
+    && {
+      background-color: ${backgroundColors.error} !important;
+      border-color: ${borderColors.error} !important;
+      color: ${textColors.error} !important;
+    }
+
+    &:focus,
+    &:-webkit-autofill:focus {
+      border-color: ${borderColors.error} !important;
+      background-color: ${backgroundColors.error} !important;
+      -webkit-box-shadow: 0 0 0 30px ${backgroundColors.error} inset !important;
+    }
   `}
 
-  /* Фокус */
-  &:focus {
-    outline: none;
-    border-color: #6699cc;
-    box-shadow: 0 0 0 2px rgba(102, 153, 204, 0.2);
-  }
+  ${(props) =>
+    !props.$hasError &&
+    props.$isValid &&
+    `
+    && {
+      background-color: ${backgroundColors.valid} !important;
+      border-color: #7334EA !important;
+      color: ${textColors.standard} !important;
+    }
 
-  /* Неактивное состояние */
-  &:disabled {
-    background-color: #f5f5f5;
-    color: #999999;
-    cursor: not-allowed;
-  }
+    &:focus,
+    &:-webkit-autofill:focus {
+      border-color: #7334EA !important;
+      background-color: ${backgroundColors.valid} !important;
+      -webkit-box-shadow: 0 0 0 30px ${backgroundColors.valid} inset !important;
+    }
 
-  @media (max-width: 767px) {
-    width: 343px; 
+    &:not(:focus),
+    &:-webkit-autofill:not(:focus) {
+      border-color: #7334EA !important;
+      background-color: ${backgroundColors.valid} !important;
+      -webkit-box-shadow: 0 0 0 30px ${backgroundColors.valid} inset !important;
+    }
+  `}
+
+  &:focus:not([data-has-error='true']):not([data-is-valid='true']),
+  &:-webkit-autofill:focus:not([data-has-error='true']):not([data-is-valid='true']) {
+    border-color: #7334EA !important;
+    background-color: ${backgroundColors.standard} !important;
+    -webkit-box-shadow: 0 0 0 30px ${backgroundColors.standard} inset !important;
+    box-shadow: 0 0 0 2px rgba(115, 52, 234, 0.2);
   }
 `;

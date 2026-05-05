@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import MyExpences from '../components/MyExpences/MyExpences';
+import MyExpenses from '../pages/MyExpenses';
 import ExpensesAnalysis from '../pages/ExpensesAnalysis';
 import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
@@ -10,18 +10,18 @@ function AppRoutes() {
   const { token, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div>Загрузка...</div>;
+    return <div> Загрузка...</div>;
   }
 
   return (
     <Routes>
       <Route
         path="/"
-        element={token ? <MyExpences /> : <Navigate to="/login" replace />}
+        element={token ? <MyExpenses /> : <Navigate to="/login" replace />}
       />  
        <Route
         path="/new-expense"
-        element={token ? <MyExpences /> : <Navigate to="/login" replace />}
+        element={token ? <MyExpenses /> : <Navigate to="/login" replace />}
       /> 
       <Route
         path="/analysis"

@@ -2,15 +2,21 @@ import styled, { keyframes } from "styled-components";
 
 const SSection = styled.section`
     border-radius: 30px;
-    max-height: calc(100vh - 260px);
     box-shadow: 0 20px 67px -12px rgba(0, 0, 0, 0.13);
     background-color: #fff;
-    grid-column: span 4;
-    width: 100%;
+    flex: 0 0 379px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     overflow: clip;
     position: relative;
+    @media (max-width: 767px) {
+        box-shadow: none;
+        border-radius: 0px;
+        gap: 24px;
+        flex: 0 1 375px;
+        margin: 0 auto;
+    }
 `;
 
 const SCalendarOverlay = styled.div`
@@ -60,6 +66,11 @@ const SCalendarHeader = styled.div`
     width: 100%;
     border-bottom: 1px solid #999;
     padding: 32px 32px 0px 32px;
+    @media (max-width: 767px) {
+        border-radius: 0px;
+        padding: 0 16px;
+        height: auto;
+    }
 `;
 
 const SCalendarTitle = styled.h2`
@@ -68,10 +79,24 @@ const SCalendarTitle = styled.h2`
     color: #000;
 `;
 
+const SCalendarLink = styled.a`
+    display: flex;
+    gap: 6px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: #999999;
+    text-decoration: none;
+`;
+
 const SCalendarDayNames = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 24px;
+    @media (max-width: 767px) {
+        margin-top: 16px;
+        gap: 6px;
+    }
 `;
 
 const SCalendarDayName = styled.div`
@@ -83,6 +108,9 @@ const SCalendarDayName = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 767px) {
+        width: 44px;
+    }
 `;
 
 const SCalendarMonths = styled.div`
@@ -107,6 +135,9 @@ const SCalendarMonths = styled.div`
         border-radius: 30px;
         /* min-height: 100px; */
     }
+    @media (max-width: 767px) {
+        padding: 0 10px;
+    }
 `;
 
 const SCalendarMonth = styled.div`
@@ -121,10 +152,16 @@ const SCalendarMonthTitle = styled.h3`
 `;
 
 const SCalendarMonthDays = styled.div`
-    display: flex;
+    //display: flex;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     justify-content: flex-start;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     gap: 6px;
+    @media (max-width: 767px) {
+        gap: 5px;
+        justify-content: space-between;
+    }
 `;
 
 const SCalendarMonthDay = styled.div`
@@ -141,6 +178,11 @@ const SCalendarMonthDay = styled.div`
     opacity: ${(props) => (props.$isOtherMonth ? 0 : 1)};
     cursor: ${(props) => (props.$isOtherMonth ? "default" : "pointer")};
     pointer-events: ${(props) => (props.$isOtherMonth ? "none" : "auto")};
+    @media (max-width: 767px) {
+        width: auto;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
 `;
 
 export {
@@ -158,4 +200,5 @@ export {
     SCalendarOverlayError,
     SCalendarOverlayLoading,
     SCalendarOverlayLoadingSpan,
+    SCalendarLink,
 };
